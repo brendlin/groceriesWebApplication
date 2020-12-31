@@ -80,7 +80,8 @@ single_ingredients_children.append(tmp)
 single_ingredients_children.append(html.Div('No Extra Items',style={'marginTop':'10px'}))
 
 final_list_children = []
-final_list_children.append(html.Label('Shopping List: ',style={'width': '100%','display': 'inline-block','verticalAlign':'middle'}))
+final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
+final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
