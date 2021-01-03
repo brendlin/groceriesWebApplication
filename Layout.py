@@ -1,6 +1,9 @@
 
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output, State
+
+from app import app
 
 recipes_dropdown_style_wrapdiv = {'width':'80%','display': 'inline-block'}
 recipes_dropdown_style = {'width':'100%','display': 'inline-block','verticalAlign':'middle'}
@@ -61,7 +64,7 @@ single_ingredients_children.append(html.Label('Single Ingredient: ',style={'marg
 single_ingredients_children.append(html.Label('Amount:',style={'marginTop':'10px','width': '17%','display': 'inline-block','marginRight':'0%','marginLeft':'0%','verticalAlign':'middle'}))
 single_ingredients_children.append(html.Label('Unit:',style={'marginTop':'10px','width': '17%','display': 'inline-block','marginRight':'0%','marginLeft':'0%','verticalAlign':'middle'}))
 tmp = html.Div(dcc.Dropdown(id='single-ingredient',placeholder='Add single ingredient',
-                            options=list({'label':i,'value':i} for i in ['Toast Twins']),
+                            options=list({'label':i,'value':i} for i in ['Toast Twins','Tomatoes']),
                             style=single_ingredients_dropdown_style,
                             searchable=True),
                style={'width':'61%','display': 'inline-block'})
@@ -106,3 +109,8 @@ layout = html.Div( # Main Div
         ), # Row Div End
     ], # Main Div children End
 ) # Main Div End
+
+@app.callback(Output('shopping-list', 'children'), Input('single-ingredient', 'value'))
+def compute_value(value):
+    # compute value and send a signal when done
+    return value
