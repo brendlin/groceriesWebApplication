@@ -2,6 +2,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+import dash_table
 
 from app import app
 
@@ -19,6 +20,11 @@ single_ingredients_other_style = {'width': '100%','display': 'inline-block','ali
 
 serves = html.Label('Serves: ',style={'marginTop':'10px','width': '15%','display': 'inline-block','marginRight':'5%','marginLeft':'0%','verticalAlign':'middle'})
 weekly_x_style = {'marginTop':'10px','width': '80%','display': 'inline-block','verticalAlign':'middle'}
+
+storage = [
+    # full string summary of state
+    html.Div(id='full-string-summary' ,style={'display': 'none'},children=None),
+]
 
 dinners_children = []
 dinners_children.append(html.Label('Weekly Dinners: ',style=weekly_x_style))
@@ -59,32 +65,43 @@ for day in ['monday','tuesday','wednesday','thursday','friday'] :
     tmp = dcc.Input(id='portions-lunch-%s'%(day), value='2', type='text',style=portions_style)
     lunches_children.append(tmp)
 
-single_ingredients_children = []
-single_ingredients_children.append(html.Label('Single Ingredient: ',style={'marginTop':'10px','width': '61%','display': 'inline-block','verticalAlign':'middle'}))
-single_ingredients_children.append(html.Label('Amount:',style={'marginTop':'10px','width': '17%','display': 'inline-block','marginRight':'0%','marginLeft':'0%','verticalAlign':'middle'}))
-single_ingredients_children.append(html.Label('Unit:',style={'marginTop':'10px','width': '17%','display': 'inline-block','marginRight':'0%','marginLeft':'0%','verticalAlign':'middle'}))
-tmp = html.Div(dcc.Dropdown(id='single-ingredient',placeholder='Add single ingredient',
-                            options=list({'label':i,'value':i} for i in ['Toast Twins','Tomatoes']),
-                            style=single_ingredients_dropdown_style,
-                            searchable=True),
-               style={'width':'61%','display': 'inline-block'})
-single_ingredients_children.append(tmp)
-tmp = dcc.Input(id='single-ingredient-amount', value='1', type='text',
-                style={'width':'17%','display': 'inline-block','verticalAlign':'middle'})
-single_ingredients_children.append(tmp)
-tmp = html.Div(dcc.Dropdown(id='single-ingredient-unit',placeholder='Unit',
-                   options=list({'label':i,'value':i} for i in ['None','g']),
-                   style=single_ingredients_other_style,
-                   searchable=True),
-               style={'width':'17%','display': 'inline-block'})
-single_ingredients_children.append(tmp)
-tmp = html.Button('Add Item', id='add-item-button',style={'width':'95%'}, n_clicks=0)
-single_ingredients_children.append(tmp)
-single_ingredients_children.append(html.Div('No Extra Items',style={'marginTop':'10px'}))
-
 final_list_children = []
 final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
 final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
+
+single_ingredients_table = dash_table.DataTable(
+    id='table-single-ingredients',
+    row_deletable=True,
+    data=[{'Ingredient':'','Amount':None,'Unit':None},],
+
+    style_cell={'textAlign': 'left','padding':'5px','fontWeight':'bold'},
+    style_cell_conditional=[
+        {'if': {'column_id': 'Amount'},'textAlign': 'right'},
+        {'if': {'column_id': 'Ingredient'},'width': '65%'},
+        {'if': {'column_id': 'Amount'},    'width': '15%'},
+        {'if': {'column_id': 'Unit'},      'width': '20%'},
+    ],
+
+    columns=[
+        {'id': 'Ingredient', 'name': 'Ingredient', 'presentation': 'dropdown'},
+        {'id': 'Amount', 'name': 'Amount'},
+        {'id': 'Unit', 'name': 'Unit', 'presentation': 'dropdown'},
+    ],
+    editable=True,
+    dropdown={
+        'Ingredient': {
+            'options': [
+                {'label': i, 'value': i}
+                for i in ['Toast Twins','Tomatoes']
+            ]
+        },
+        'Unit': {
+            'options': [
+                {'label': i, 'value': i}
+                for i in ['g','pc']
+            ]
+        }
+    })
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
@@ -95,7 +112,10 @@ layout = html.Div( # Main Div
                          className='four columns',
                          style={'border-right':'1px solid #adadad','height':'90vh','margin-left':'1%','margin-right':'1%'},
                          ),
-                html.Div([html.Div(single_ingredients_children)],
+                html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
+                          html.Button('Add Row', id='editing-rows-button', n_clicks=0),
+                          html.Div('No Extra Items',style={'marginTop':'10px'}),
+                          ],
                          className='four columns',
                          style={'border-right':'1px solid #adadad','height':'90vh','margin-left':'1%','margin-right':'1%'},
                          ),
@@ -103,6 +123,9 @@ layout = html.Div( # Main Div
                          className='four columns',
                          style={'margin-left':'1%','margin-right':'1%'},
                         ),
+
+                # here is where all the hidden components get added
+                *storage,
             ],
             className='row',
             style={'height':'100%'},
@@ -110,7 +133,13 @@ layout = html.Div( # Main Div
     ], # Main Div children End
 ) # Main Div End
 
-@app.callback(Output('shopping-list', 'children'), Input('single-ingredient', 'value'))
-def compute_value(value):
-    # compute value and send a signal when done
-    return value
+# Add Row Callback
+@app.callback(
+    Output('table-single-ingredients', 'data'),
+    Input('editing-rows-button', 'n_clicks'),
+    State('table-single-ingredients', 'data'),
+    State('table-single-ingredients', 'columns'))
+def add_row(n_clicks, rows, columns):
+    if n_clicks > 0:
+        rows.append({c['id']: '' for c in columns})
+    return rows
