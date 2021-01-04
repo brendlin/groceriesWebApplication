@@ -69,12 +69,73 @@ final_list_children = []
 final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
 final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
 
+days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
+weekdays = ['monday','tuesday','wednesday','thursday','friday']
+weekends = ['sunday','saturday']
+
+data_entries = [{'Meal':'%s-dinner'%(day),'Serves':2} for day in days]
+data_entries += [{'Meal':'Breakfasts','Serves':''}]
+data_entries += [{'Meal':'%s-breakfast'%(day),'Serves':2} for day in weekends]
+data_entries += [{'Meal':'Lunches','Serves':''}]
+data_entries += [{'Meal':'%s-lunch'%(day),'Serves':2} for day in weekdays]
+
+meals_table = dash_table.DataTable(
+    id = 'table-meals',
+    row_deletable=False,
+    editable=True,
+    style_cell={'textAlign':'left','padding-left':'15px'},
+    style_cell_conditional=[
+        {'if': {'column_id': 'Meal'}  ,'width': '80%'},
+        {'if': {'column_id': 'Serves'},'width': '20%'},
+    ],
+    style_data_conditional=[
+        {'if': {'filter_query': '{Serves} > 2','column_id': 'Serves'},
+         'fontWeight': 'bold','backgroundColor':'pink'},
+        {'if': {'filter_query': '{Serves} < 2','column_id': 'Serves'},
+         'fontWeight': 'bold','backgroundColor':'pink'},
+        {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa',},
+        {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa',},
+        {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa',},
+    ],
+
+    data=data_entries,
+
+    columns=[
+        {'id': 'Meal', 'name': 'Dinners', 'presentation': 'dropdown'},
+        {'id': 'Serves', 'name': 'Serves', 'presentation': 'dropdown'},
+    ],
+
+    dropdown_data=[
+        {'Meal': {'options':[{'label': '%s Dinner'%(day.capitalize()),
+                              'value': '%s-dinner'%(day)}]
+                  ,'clearable':True},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)]
+                 ,'clearable':False}
+         } for day in days
+    ] + [{}] + [
+        {'Meal': {'options':[{'label': '%s Breakfast'%(day.capitalize()),
+                              'value': '%s-breakfast'%(day)}]
+                  ,'clearable':True},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)]
+                 ,'clearable':False}
+         } for day in weekends
+    ] + [{}] + [
+        {'Meal': {'options':[{'label': '%s Lunch'%(day.capitalize()),
+                              'value': '%s-lunch'%(day)}]
+                  ,'clearable':True},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)]
+                 ,'clearable':False}
+         } for day in weekdays
+    ],
+)
+
 single_ingredients_table = dash_table.DataTable(
     id='table-single-ingredients',
     row_deletable=True,
     data=[{'Ingredient':'','Amount':None,'Unit':None},],
+    editable=True,
 
-    style_cell={'textAlign': 'left','padding':'5px','fontWeight':'bold'},
+    style_cell={'textAlign': 'left','padding':'5px'},
     style_cell_conditional=[
         {'if': {'column_id': 'Amount'},'textAlign': 'right'},
         {'if': {'column_id': 'Ingredient'},'width': '65%'},
@@ -87,7 +148,7 @@ single_ingredients_table = dash_table.DataTable(
         {'id': 'Amount', 'name': 'Amount'},
         {'id': 'Unit', 'name': 'Unit', 'presentation': 'dropdown'},
     ],
-    editable=True,
+
     dropdown={
         'Ingredient': {
             'options': [
@@ -108,7 +169,7 @@ layout = html.Div( # Main Div
         html.H5(children='Welcome, Sarah, to the Grocery List App!'),
         html.Div( # Row Div
             children=[
-                html.Div(dinners_children + breakfasts_children + lunches_children,
+                html.Div(html.Div(meals_table,style={'width':'95%'}),
                          className='four columns',
                          style={'border-right':'1px solid #adadad','height':'90vh','margin-left':'1%','margin-right':'1%'},
                          ),
