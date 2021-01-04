@@ -26,45 +26,6 @@ storage = [
     html.Div(id='full-string-summary' ,style={'display': 'none'},children=None),
 ]
 
-dinners_children = []
-dinners_children.append(html.Label('Weekly Dinners: ',style=weekly_x_style))
-dinners_children.append(serves)
-for day in ['saturday','sunday','monday','tuesday','wednesday','thursday','friday'] :
-    tmp = html.Div(dcc.Dropdown(id='recipes-dropdown-dinner-%s'%(day),placeholder='%s Dinner'%(day.capitalize()),
-                                options=list({'label':i,'value':i} for i in ['Recipe 1','Recipe 2','Recipe 3']),
-                                style=recipes_dropdown_style,
-                                searchable=True),
-                   style=recipes_dropdown_style_wrapdiv,)
-    dinners_children.append(tmp)
-    tmp = dcc.Input(id='portions-dinner-%s'%(day), value='2', type='text',style=portions_style)
-    dinners_children.append(tmp)
-
-breakfasts_children = []
-breakfasts_children.append(html.Label('Weekend Breakfasts: ',style=weekly_x_style))
-breakfasts_children.append(serves)
-for day in ['sunday','saturday'] :
-    tmp = html.Div(dcc.Dropdown(id='recipes-dropdown-breakfast-%s'%(day),placeholder='%s Breakfast'%(day.capitalize()),
-                                options=list({'label':i,'value':i} for i in ['Recipe 1','Recipe 2','Recipe 3']),
-                                style=recipes_dropdown_style,
-                                searchable=True),
-                   style=recipes_dropdown_style_wrapdiv,)
-    breakfasts_children.append(tmp)
-    tmp = dcc.Input(id='portions-breakfast-%s'%(day), value='2', type='text',style=portions_style)
-    breakfasts_children.append(tmp)
-
-lunches_children = []
-lunches_children.append(html.Label('Weekend Lunches: ',style=weekly_x_style))
-lunches_children.append(serves)
-for day in ['monday','tuesday','wednesday','thursday','friday'] :
-    tmp = html.Div(dcc.Dropdown(id='recipes-dropdown-lunch-%s'%(day),placeholder='%s Lunch'%(day.capitalize()),
-                                options=list({'label':i,'value':i} for i in ['Recipe 1','Recipe 2','Recipe 3']),
-                                style=recipes_dropdown_style,
-                                searchable=True),
-                   style=recipes_dropdown_style_wrapdiv,)
-    lunches_children.append(tmp)
-    tmp = dcc.Input(id='portions-lunch-%s'%(day), value='2', type='text',style=portions_style)
-    lunches_children.append(tmp)
-
 final_list_children = []
 final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
 final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
