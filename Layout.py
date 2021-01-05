@@ -50,13 +50,13 @@ meals_table = dash_table.DataTable(
         {'if': {'column_id': 'Serves'},'width': '20%'},
     ],
     style_data_conditional=[
-        {'if': {'filter_query': '{Serves} > 2','column_id': 'Serves'},
-         'fontWeight': 'bold','backgroundColor':'pink'},
-        {'if': {'filter_query': '{Serves} < 2','column_id': 'Serves'},
-         'fontWeight': 'bold','backgroundColor':'pink'},
-        {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa',},
-        {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa',},
-        {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa',},
+        {'if': {'filter_query': '{Serves} > 2'},
+         'fontWeight':'bold','fontSize':15},
+        {'if': {'filter_query': '{Serves} < 2'},
+         'fontWeight': 'bold','fontSize':15},
+        {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
+        {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
+        {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
     ],
 
     data=data_entries,
@@ -123,27 +123,52 @@ single_ingredients_table = dash_table.DataTable(
                 for i in ['g','pc']
             ]
         }
-    })
+    }
+)
+
+tags = ['indian','vegetarian','asian','soup']
+tag_buttons = []
+for tag in tags :
+    tmp = html.Button(id='tag-%s-button'%(tag),children=tag,n_clicks=0,
+                      style={'display':'inline-block','verticalAlign':'middle'})
+    tag_buttons.append(tmp)
+
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
-        html.H5(children='Welcome, Sarah, to the Grocery List App!'),
+        html.Div( # Welcome and Filters
+            children=[
+                html.H5(children='Welcome, Sarah, to the Grocery List App!'),
+                html.Label('Filters: ',style={'display':'inline-block','verticalAlign':'middle','marginRight':'10px'},),
+                dcc.Dropdown(id='recipe-time-dropdown',placeholder='Recipe Time',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
+                dcc.Dropdown(id='cookbook-dropdown',placeholder='Cookbook',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
+                html.A('Link to recipe',id='cookbook-link',href='https://cern.ch/kurt', target='_blank',style={'display':'inline-block','verticalAlign':'middle','marginLeft':'10px','display':'none'},)
+            ],
+            style={'margin-left':'1%','margin-right':'1%','height':'80px'},
+        ),
+        html.Div( # Tags
+            children=[
+                html.Label('Tags: ',style={'display':'inline-block','verticalAlign':'middle','marginRight':'10px'},),
+                *tag_buttons,
+            ],
+            style={'margin-left':'1%','margin-right':'1%','height':'45px'},
+        ),
         html.Div( # Row Div
             children=[
                 html.Div(html.Div(meals_table,style={'width':'95%'}),
                          className='four columns',
-                         style={'border-right':'1px solid #adadad','height':'90vh','margin-left':'1%','margin-right':'1%'},
+                         style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
                           html.Button('Add Row', id='editing-rows-button', n_clicks=0),
                           html.Div('No Extra Items',style={'marginTop':'10px'}),
                           ],
                          className='four columns',
-                         style={'border-right':'1px solid #adadad','height':'90vh','margin-left':'1%','margin-right':'1%'},
+                         style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(final_list_children)],
                          className='four columns',
-                         style={'margin-left':'1%','margin-right':'1%'},
+                         style={'margin-left':'1%','margin-right':'1%','height':'80vh'},
                         ),
 
                 # here is where all the hidden components get added
