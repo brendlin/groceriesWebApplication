@@ -35,11 +35,14 @@ def GetResetMealTableData() :
     _weekdays = ['monday','tuesday','wednesday','thursday','friday']
     _weekends = ['sunday','saturday']
 
-    _data = [{'Meal':'%s-dinner'%(day),'Serves':2} for day in _days]
-    _data += [{'Meal':'Breakfasts','Serves':''}]
-    _data += [{'Meal':'%s-breakfast'%(day),'Serves':2} for day in _weekends]
-    _data += [{'Meal':'Lunches','Serves':''}]
-    _data += [{'Meal':'%s-lunch'%(day),'Serves':2} for day in _weekdays]
+    abbrev = {'saturday':'Sat','sunday':'Sun','monday':'Mon','tuesday':'Tue','wednesday':'Wed',
+              'thursday':'Thu','friday':'Fri'}
+
+    _data  = [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _days]
+    _data += [{'Day':''         ,'Meal':'Breakfasts','Serves':''}]
+    _data += [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _weekends]
+    _data += [{'Day':''         ,'Meal':'Lunches','Serves':''}]
+    _data += [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _weekdays]
 
     return _data
 
@@ -70,14 +73,16 @@ meals_table = dash_table.DataTable(
     editable=True,
     style_cell={'textAlign':'left','padding-left':'15px'},
     style_cell_conditional=[
-        {'if': {'column_id': 'Meal'}  ,'width': '80%'},
+        {'if': {'column_id': 'Meal'}  ,'width': '5%'},
+        {'if': {'column_id': 'Meal'}  ,'width': '75%'},
         {'if': {'column_id': 'Serves'},'width': '20%'},
+        {'if': {'column_id': 'Day'}   ,'padding-left': '5px','padding-right':'5px'},
     ],
     style_data_conditional=[
-        {'if': {'filter_query': '{Serves} > 2'},
-         'fontWeight':'bold','fontSize':15},
-        {'if': {'filter_query': '{Serves} < 2'},
-         'fontWeight': 'bold','fontSize':15},
+        {'if': {'filter_query': '{Serves} > 2','column_id': 'Serves'},
+         'fontWeight':'bold','fontSize':16},
+        {'if': {'filter_query': '{Serves} < 2','column_id': 'Serves'},
+         'fontWeight': 'bold','fontSize':16},
         {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
         {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
         {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
@@ -86,28 +91,26 @@ meals_table = dash_table.DataTable(
     data=[],
 
     columns=[
+        {'id': 'Day', 'name': ''},
         {'id': 'Meal', 'name': 'Dinners', 'presentation': 'dropdown'},
         {'id': 'Serves', 'name': 'Serves', 'presentation': 'dropdown'},
     ],
 
     dropdown_data=[
-        {'Meal': {'options':[{'label': '%s Dinner'%(day.capitalize()),
-                              'value': '%s-dinner'%(day)}] + dinner_recipes,
-                  'clearable':True},
+        {'Meal': {'options':dinner_recipes,
+                  'clearable':False},
          'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
                    'clearable':False}
          } for day in days
     ] + [{}] + [
-        {'Meal': {'options':[{'label': '%s Breakfast'%(day.capitalize()),
-                              'value': '%s-breakfast'%(day)}] + breakfast_recipes,
-                  'clearable':True},
+        {'Meal': {'options':breakfast_recipes,
+                  'clearable':False},
          'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
                    'clearable':False}
          } for day in weekends
     ] + [{}] + [
-        {'Meal': {'options':[{'label': '%s Lunch'%(day.capitalize()),
-                              'value': '%s-lunch'%(day)}] + lunch_recipes,
-                  'clearable':True},
+        {'Meal': {'options':lunch_recipes,
+                  'clearable':False},
          'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
                    'clearable':False}
          } for day in weekdays
@@ -187,7 +190,6 @@ layout = html.Div( # Main Div
                          ),
                 html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
                           html.Button('Add Row', id='add-rows-button', n_clicks=0),
-                          html.Div('No Extra Items',style={'marginTop':'10px'}),
                           ],
                          className='four columns',
                          style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
