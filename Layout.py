@@ -6,6 +6,8 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 import dash_table
 import json
+import os
+import time
 
 from .Components import sync_div
 
@@ -14,6 +16,9 @@ from app import app
 storage = [
     # full string summary of state
     html.Div(id='full-string-summary' ,style={'display': 'none'},children=None),
+    dcc.ConfirmDialog(id='confirm-reset',
+                      message='Are you sure you want to reset the list? This will delete the shopping list for all users.',
+                      ),
 ]
 
 final_list_children = []
@@ -24,11 +29,31 @@ days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
 weekdays = ['monday','tuesday','wednesday','thursday','friday']
 weekends = ['sunday','saturday']
 
-data_entries = [{'Meal':'%s-dinner'%(day),'Serves':2} for day in days]
-data_entries += [{'Meal':'Breakfasts','Serves':''}]
-data_entries += [{'Meal':'%s-breakfast'%(day),'Serves':2} for day in weekends]
-data_entries += [{'Meal':'Lunches','Serves':''}]
-data_entries += [{'Meal':'%s-lunch'%(day),'Serves':2} for day in weekdays]
+def GetResetMealTableData() :
+
+    _days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
+    _weekdays = ['monday','tuesday','wednesday','thursday','friday']
+    _weekends = ['sunday','saturday']
+
+    _data = [{'Meal':'%s-dinner'%(day),'Serves':2} for day in _days]
+    _data += [{'Meal':'Breakfasts','Serves':''}]
+    _data += [{'Meal':'%s-breakfast'%(day),'Serves':2} for day in _weekends]
+    _data += [{'Meal':'Lunches','Serves':''}]
+    _data += [{'Meal':'%s-lunch'%(day),'Serves':2} for day in _weekdays]
+
+    return _data
+
+def SetGlobalShoppingListJsonFile(_table_meals_data,_table_single_ingredients_data) :
+    _full_summary = [_table_meals_data,_table_single_ingredients_data]
+    _full_summary_dumps = json.dumps(_full_summary)
+
+    # If there was no sync,
+    with open('global_shopping_list.json', 'w') as f:
+        json.dump(_full_summary, f)
+
+    # Return this string summary, for comparing with file later
+    return _full_summary_dumps
+
 
 dummy_recipes = [
     {'label':'Recipe 1','value':'Recipe 1'},
@@ -58,7 +83,7 @@ meals_table = dash_table.DataTable(
         {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
     ],
 
-    data=data_entries,
+    data=[],
 
     columns=[
         {'id': 'Meal', 'name': 'Dinners', 'presentation': 'dropdown'},
@@ -181,12 +206,21 @@ layout = html.Div( # Main Div
     ], # Main Div children End
 ) # Main Div End
 
+# Confirm whether you really wanted to reset the shopping list
+@app.callback(Output('confirm-reset', 'displayed'),
+              Input('reset-button', 'n_clicks'))
+def reset_confirm(n_clicks):
+    if n_clicks > 0 :
+        return True
+    return False
+
 # Add Row Callback + Sync tables callback
 @app.callback([Output('table-meals','data'),
                Output('table-single-ingredients','data'),
                ],
               [Input('add-rows-button', 'n_clicks'),
                Input('sync-button','n_clicks'),
+               Input('confirm-reset','submit_n_clicks'),
                ],
               [State('full-string-summary','children'),
                State('table-single-ingredients', 'data'),
@@ -194,8 +228,8 @@ layout = html.Div( # Main Div
                State('table-meals','data'),
                ],
 )
-def syncTables(add_row_nclicks,sync_nclicks,full_string_summary,
-               si_rows,si_columns,meals_data) :
+def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
+               full_string_summary,si_rows,si_columns,meals_data) :
 
     ctx = dash.callback_context
 
@@ -212,7 +246,15 @@ def syncTables(add_row_nclicks,sync_nclicks,full_string_summary,
         table_single_ingredients = full_summary[1]
         return table_meals,table_single_ingredients
 
-    raise PreventUpdate
+    # Use "starting point" tables
+    default_meals_data = GetResetMealTableData()
+    default_single_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':None},]
+
+    # If this is a reset, then also remove the json file.
+    if ctx.triggered and 'confirm-reset' in ctx.triggered[0]['prop_id'] :
+        os.remove('global_shopping_list.json')
+
+    return default_meals_data,default_single_ingredients_data
 
 # Create local full string summary
 @app.callback(
@@ -229,25 +271,29 @@ def syncTables(add_row_nclicks,sync_nclicks,full_string_summary,
 def create_string_summary(table_meals,table_single_ingredients,
                           previous_string_summary,sync_div_style) :
 
+    # If we are just starting, then we need to set the previous string summary to check against
+    # the json file.
+    if previous_string_summary == None :
+        full_summary = [table_meals,table_single_ingredients]
+        previous_string_summary = json.dumps(full_summary)
+
     # Check if the previous string summary is the same
-    with open('global_shopping_list.json', 'r') as f:
-        txt = f.readlines()[0]
-        if txt == previous_string_summary :
-            #print('They are the same!')
-            pass
-        else :
-            #print('They are NOT the same!')
-            #print(' - Last local edit: ',previous_string_summary)
-            #print(' - From file......: ',txt)
-            sync_div_style['display'] = ''
-            return txt,sync_div_style
+    if os.path.exists('global_shopping_list.json') :
+        with open('global_shopping_list.json', 'r') as f:
+            txt = f.readlines()[0]
+            if txt == previous_string_summary :
+                #print('They are the same!')
+                pass
+            else :
+                #print('They are NOT the same!')
+                #print(' - Last local edit: ',previous_string_summary)
+                #print(' - From file......: ',txt)
+                sync_div_style['display'] = ''
+                return txt,sync_div_style
 
-    full_summary = [table_meals,table_single_ingredients]
-    full_summary_dumps = json.dumps(full_summary)
-
-    # If there was no sync,
-    with open('global_shopping_list.json', 'w') as f:
-        json.dump(full_summary, f)
-
+    # If the json file matches the previous state, then proceed
+    # (update the json file and make sure the sync div is hidden)
+    new_string_summary = SetGlobalShoppingListJsonFile(table_meals,table_single_ingredients)
     sync_div_style['display'] = 'none'
-    return full_summary_dumps,sync_div_style
+
+    return new_string_summary,sync_div_style
