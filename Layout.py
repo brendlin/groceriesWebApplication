@@ -1,25 +1,15 @@
 
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
 import dash_table
+import json
+
+from .Components import sync_div
 
 from app import app
-
-recipes_dropdown_style_wrapdiv = {'width':'80%','display': 'inline-block'}
-recipes_dropdown_style = {'width':'100%','display': 'inline-block','verticalAlign':'middle'}
-portions_style = {'width': '15%','display': 'inline-block','text-align': 'center',
-                  'marginRight':'5%',
-                  'marginLeft':'0%',
-                  'verticalAlign':'middle'}
-
-single_ingredients_dropdown_style = {'width':'100%','display': 'inline-block','verticalAlign':'middle'}
-single_ingredients_other_style = {'width': '100%','display': 'inline-block','align': 'left',
-                                  #'marginRight':'5%','marginLeft':'5%',
-                                  'verticalAlign':'middle'}
-
-serves = html.Label('Serves: ',style={'marginTop':'10px','width': '15%','display': 'inline-block','marginRight':'5%','marginLeft':'0%','verticalAlign':'middle'})
-weekly_x_style = {'marginTop':'10px','width': '80%','display': 'inline-block','verticalAlign':'middle'}
 
 storage = [
     # full string summary of state
@@ -39,6 +29,15 @@ data_entries += [{'Meal':'Breakfasts','Serves':''}]
 data_entries += [{'Meal':'%s-breakfast'%(day),'Serves':2} for day in weekends]
 data_entries += [{'Meal':'Lunches','Serves':''}]
 data_entries += [{'Meal':'%s-lunch'%(day),'Serves':2} for day in weekdays]
+
+dummy_recipes = [
+    {'label':'Recipe 1','value':'Recipe 1'},
+    {'label':'Recipe 2','value':'Recipe 2'},
+    {'label':'Recipe 3','value':'Recipe 3'},
+]
+dinner_recipes = dummy_recipes
+lunch_recipes = dummy_recipes
+breakfast_recipes = dummy_recipes
 
 meals_table = dash_table.DataTable(
     id = 'table-meals',
@@ -68,24 +67,24 @@ meals_table = dash_table.DataTable(
 
     dropdown_data=[
         {'Meal': {'options':[{'label': '%s Dinner'%(day.capitalize()),
-                              'value': '%s-dinner'%(day)}]
-                  ,'clearable':True},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)]
-                 ,'clearable':False}
+                              'value': '%s-dinner'%(day)}] + dinner_recipes,
+                  'clearable':True},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+                   'clearable':False}
          } for day in days
     ] + [{}] + [
         {'Meal': {'options':[{'label': '%s Breakfast'%(day.capitalize()),
-                              'value': '%s-breakfast'%(day)}]
-                  ,'clearable':True},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)]
-                 ,'clearable':False}
+                              'value': '%s-breakfast'%(day)}] + breakfast_recipes,
+                  'clearable':True},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+                   'clearable':False}
          } for day in weekends
     ] + [{}] + [
         {'Meal': {'options':[{'label': '%s Lunch'%(day.capitalize()),
-                              'value': '%s-lunch'%(day)}]
-                  ,'clearable':True},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)]
-                 ,'clearable':False}
+                              'value': '%s-lunch'%(day)}] + lunch_recipes,
+                  'clearable':True},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+                   'clearable':False}
          } for day in weekdays
     ],
 )
@@ -93,7 +92,7 @@ meals_table = dash_table.DataTable(
 single_ingredients_table = dash_table.DataTable(
     id='table-single-ingredients',
     row_deletable=True,
-    data=[{'Ingredient':'','Amount':None,'Unit':None},],
+    data=[{'Ingredient':'','Amount':1,'Unit':None},],
     editable=True,
 
     style_cell={'textAlign': 'left','padding':'5px'},
@@ -126,7 +125,7 @@ single_ingredients_table = dash_table.DataTable(
     }
 )
 
-tags = ['indian','vegetarian','asian','soup']
+tags = ['indian','spicy','vegetarian','asian','soup']
 tag_buttons = []
 for tag in tags :
     tmp = html.Button(id='tag-%s-button'%(tag),children=tag,n_clicks=0,
@@ -136,10 +135,12 @@ for tag in tags :
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
+        sync_div, # The full-screen sync message/button
         html.Div( # Welcome and Filters
             children=[
                 html.H5(children='Welcome, Sarah, to the Grocery List App!'),
-                html.Label('Filters: ',style={'display':'inline-block','verticalAlign':'middle','marginRight':'10px'},),
+                html.Button(id='reset-button',children='Reset all',n_clicks=0,style={'display':'inline-block','verticalAlign':'middle'}),
+                html.Label('Filters: ',style={'display':'inline-block','verticalAlign':'middle','marginRight':'10px','marginLeft':'10px'},),
                 dcc.Dropdown(id='recipe-time-dropdown',placeholder='Recipe Time',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
                 dcc.Dropdown(id='cookbook-dropdown',placeholder='Cookbook',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
                 html.A('Link to recipe',id='cookbook-link',href='https://cern.ch/kurt', target='_blank',style={'display':'inline-block','verticalAlign':'middle','marginLeft':'10px','display':'none'},)
@@ -160,7 +161,7 @@ layout = html.Div( # Main Div
                          style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
-                          html.Button('Add Row', id='editing-rows-button', n_clicks=0),
+                          html.Button('Add Row', id='add-rows-button', n_clicks=0),
                           html.Div('No Extra Items',style={'marginTop':'10px'}),
                           ],
                          className='four columns',
@@ -180,13 +181,73 @@ layout = html.Div( # Main Div
     ], # Main Div children End
 ) # Main Div End
 
-# Add Row Callback
+# Add Row Callback + Sync tables callback
+@app.callback([Output('table-meals','data'),
+               Output('table-single-ingredients','data'),
+               ],
+              [Input('add-rows-button', 'n_clicks'),
+               Input('sync-button','n_clicks'),
+               ],
+              [State('full-string-summary','children'),
+               State('table-single-ingredients', 'data'),
+               State('table-single-ingredients', 'columns'),
+               State('table-meals','data'),
+               ],
+)
+def syncTables(add_row_nclicks,sync_nclicks,full_string_summary,
+               si_rows,si_columns,meals_data) :
+
+    ctx = dash.callback_context
+
+    # Add rows to single ingredients
+    if ctx.triggered and 'add-rows-button' in ctx.triggered[0]['prop_id'] :
+        si_rows.append({c['id']: '' for c in si_columns})
+        return meals_data,si_rows
+
+    # Replace tables with the full string summary coming from the file
+    # (triggered by callback below)
+    elif ctx.triggered and 'sync-button' in ctx.triggered[0]['prop_id'] :
+        full_summary = json.loads(full_string_summary)
+        table_meals = full_summary[0]
+        table_single_ingredients = full_summary[1]
+        return table_meals,table_single_ingredients
+
+    raise PreventUpdate
+
+# Create local full string summary
 @app.callback(
-    Output('table-single-ingredients', 'data'),
-    Input('editing-rows-button', 'n_clicks'),
-    State('table-single-ingredients', 'data'),
-    State('table-single-ingredients', 'columns'))
-def add_row(n_clicks, rows, columns):
-    if n_clicks > 0:
-        rows.append({c['id']: '' for c in columns})
-    return rows
+    [Output('full-string-summary','children'),
+     Output('sync-div','style'),
+     ],
+    [Input('table-meals','data'),
+     Input('table-single-ingredients','data'),
+     ],
+    [State('full-string-summary','children'),
+     State('sync-div','style'),
+     ]
+)
+def create_string_summary(table_meals,table_single_ingredients,
+                          previous_string_summary,sync_div_style) :
+
+    # Check if the previous string summary is the same
+    with open('global_shopping_list.json', 'r') as f:
+        txt = f.readlines()[0]
+        if txt == previous_string_summary :
+            #print('They are the same!')
+            pass
+        else :
+            #print('They are NOT the same!')
+            #print(' - Last local edit: ',previous_string_summary)
+            #print(' - From file......: ',txt)
+            sync_div_style['display'] = ''
+            return txt,sync_div_style
+
+    full_summary = [table_meals,table_single_ingredients]
+    full_summary_dumps = json.dumps(full_summary)
+
+    # If there was no sync,
+    with open('global_shopping_list.json', 'w') as f:
+        json.dump(full_summary, f)
+
+    sync_div_style['display'] = 'none'
+    return full_summary_dumps,sync_div_style
