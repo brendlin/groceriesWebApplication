@@ -1,0 +1,4 @@
+
+.dash-spreadsheet-container .dash-spreadsheet-inner table {
+    --accent: #242b63 !important; /* Dropdown options; dropdown arrows during hover. */
+}

@@ -10,6 +10,7 @@ import os
 import time
 
 from .Components import sync_div
+from .HelperFunctions import CreateShoppingList
 
 from app import app
 
@@ -22,8 +23,8 @@ storage = [
 ]
 
 final_list_children = []
-final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
-final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
+final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle','font-weight':'bold'}))
+final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle','font-family':'monospace'}))
 
 days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
 weekdays = ['monday','tuesday','wednesday','thursday','friday']
@@ -71,7 +72,7 @@ meals_table = dash_table.DataTable(
     id = 'table-meals',
     row_deletable=False,
     editable=True,
-    style_cell={'textAlign':'left','padding-left':'15px'},
+    style_cell={'textAlign':'left','padding-left':'15px',},
     style_cell_conditional=[
         {'if': {'column_id': 'Meal'}  ,'width': '5%'},
         {'if': {'column_id': 'Meal'}  ,'width': '75%'},
@@ -86,6 +87,7 @@ meals_table = dash_table.DataTable(
         {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
         {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
         {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
+        {'if': {'state': 'selected'},'backgroundColor': '#dbe4ff','border': '1px solid blue',},
     ],
 
     data=[],
@@ -120,7 +122,7 @@ meals_table = dash_table.DataTable(
 single_ingredients_table = dash_table.DataTable(
     id='table-single-ingredients',
     row_deletable=True,
-    data=[{'Ingredient':'','Amount':1,'Unit':None},],
+    data=[{'Ingredient':'','Amount':1,'Unit':'x'},],
     editable=True,
 
     style_cell={'textAlign': 'left','padding':'5px'},
@@ -129,6 +131,9 @@ single_ingredients_table = dash_table.DataTable(
         {'if': {'column_id': 'Ingredient'},'width': '65%'},
         {'if': {'column_id': 'Amount'},    'width': '15%'},
         {'if': {'column_id': 'Unit'},      'width': '20%'},
+    ],
+    style_data_conditional=[
+        {'if': {'state': 'selected'},'backgroundColor': '#dbe4ff','border': '1px solid blue',},
     ],
 
     columns=[
@@ -142,13 +147,15 @@ single_ingredients_table = dash_table.DataTable(
             'options': [
                 {'label': i, 'value': i}
                 for i in ['Toast Twins','Tomatoes']
-            ]
+            ],
+            'clearable':False,
         },
         'Unit': {
             'options': [
                 {'label': i, 'value': i}
-                for i in ['g','pc']
-            ]
+                for i in ['x','g']
+            ],
+            'clearable':False,
         }
     }
 )
@@ -226,18 +233,17 @@ def reset_confirm(n_clicks):
                ],
               [State('full-string-summary','children'),
                State('table-single-ingredients', 'data'),
-               State('table-single-ingredients', 'columns'),
                State('table-meals','data'),
                ],
 )
 def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
-               full_string_summary,si_rows,si_columns,meals_data) :
+               full_string_summary,si_rows,meals_data) :
 
     ctx = dash.callback_context
 
     # Add rows to single ingredients
     if ctx.triggered and 'add-rows-button' in ctx.triggered[0]['prop_id'] :
-        si_rows.append({c['id']: '' for c in si_columns})
+        si_rows.append({'Ingredient':'','Amount':1,'Unit':'x'})
         return meals_data,si_rows
 
     # Replace tables with the full string summary coming from the file
@@ -250,7 +256,7 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
 
     # Use "starting point" tables
     default_meals_data = GetResetMealTableData()
-    default_single_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':None},]
+    default_single_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':'x'},]
 
     # If this is a reset, then also remove the json file.
     if ctx.triggered and 'confirm-reset' in ctx.triggered[0]['prop_id'] :
@@ -262,16 +268,18 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
 @app.callback(
     [Output('full-string-summary','children'),
      Output('sync-div','style'),
+     Output('shopping-list','children'),
      ],
     [Input('table-meals','data'),
      Input('table-single-ingredients','data'),
      ],
     [State('full-string-summary','children'),
      State('sync-div','style'),
+     State('shopping-list','children'),
      ]
 )
 def create_string_summary(table_meals,table_single_ingredients,
-                          previous_string_summary,sync_div_style) :
+                          previous_string_summary,sync_div_style,current_shopping_list) :
 
     # If we are just starting, then we need to set the previous string summary to check against
     # the json file.
@@ -291,11 +299,14 @@ def create_string_summary(table_meals,table_single_ingredients,
                 #print(' - Last local edit: ',previous_string_summary)
                 #print(' - From file......: ',txt)
                 sync_div_style['display'] = ''
-                return txt,sync_div_style
+                return txt,sync_div_style,current_shopping_list
 
     # If the json file matches the previous state, then proceed
     # (update the json file and make sure the sync div is hidden)
     new_string_summary = SetGlobalShoppingListJsonFile(table_meals,table_single_ingredients)
     sync_div_style['display'] = 'none'
 
-    return new_string_summary,sync_div_style
+    # Create the shopping list
+    shopping_list = CreateShoppingList(table_meals,table_single_ingredients)
+
+    return new_string_summary,sync_div_style,shopping_list
