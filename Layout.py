@@ -119,46 +119,50 @@ meals_table = dash_table.DataTable(
     ],
 )
 
-single_ingredients_table = dash_table.DataTable(
-    id='table-single-ingredients',
-    row_deletable=True,
-    data=[{'Ingredient':'','Amount':1,'Unit':'x'},],
-    editable=True,
+def MakeIngredientsTable(id) :
+    return dash_table.DataTable(
+        id=id,
+        row_deletable=True,
+        data=[{'Ingredient':'','Amount':1,'Unit':'x'},],
+        editable=True,
 
-    style_cell={'textAlign': 'left','padding':'5px'},
-    style_cell_conditional=[
-        {'if': {'column_id': 'Amount'},'textAlign': 'right'},
-        {'if': {'column_id': 'Ingredient'},'width': '65%'},
-        {'if': {'column_id': 'Amount'},    'width': '15%'},
-        {'if': {'column_id': 'Unit'},      'width': '20%'},
-    ],
-    style_data_conditional=[
-        {'if': {'state': 'selected'},'backgroundColor': '#dbe4ff','border': '1px solid blue',},
-    ],
+        style_cell={'textAlign': 'left','padding':'5px'},
+        style_cell_conditional=[
+            {'if': {'column_id': 'Amount'},'textAlign': 'right'},
+            {'if': {'column_id': 'Ingredient'},'width': '65%'},
+            {'if': {'column_id': 'Amount'},    'width': '15%'},
+            {'if': {'column_id': 'Unit'},      'width': '20%'},
+        ],
+        style_data_conditional=[
+            {'if': {'state': 'selected'},'backgroundColor': '#dbe4ff','border': '1px solid blue',},
+        ],
 
-    columns=[
-        {'id': 'Ingredient', 'name': 'Ingredient', 'presentation': 'dropdown'},
-        {'id': 'Amount', 'name': 'Amount'},
-        {'id': 'Unit', 'name': 'Unit', 'presentation': 'dropdown'},
-    ],
+        columns=[
+            {'id': 'Ingredient', 'name': 'Ingredient', 'presentation': 'dropdown'},
+            {'id': 'Amount', 'name': 'Amount'},
+            {'id': 'Unit', 'name': 'Unit', 'presentation': 'dropdown'},
+        ],
 
-    dropdown={
-        'Ingredient': {
-            'options': [
-                {'label': i, 'value': i}
-                for i in ['Toast Twins','Tomatoes']
-            ],
-            'clearable':False,
-        },
-        'Unit': {
-            'options': [
-                {'label': i, 'value': i}
-                for i in ['x','g']
-            ],
-            'clearable':False,
+        dropdown={
+            'Ingredient': {
+                'options': [
+                    {'label': i, 'value': i}
+                    for i in ['Toast Twins','Tomatoes']
+                ],
+                'clearable':False,
+            },
+            'Unit': {
+                'options': [
+                    {'label': i, 'value': i}
+                    for i in ['x','g']
+                ],
+                'clearable':False,
+            }
         }
-    }
-)
+    )
+
+single_ingredients_table = MakeIngredientsTable('table-single-ingredients')
+recipe_ingredients_table = MakeIngredientsTable('table-recipe-ingredients')
 
 tags = ['indian','spicy','vegetarian','asian','soup']
 tag_buttons = []
@@ -167,6 +171,32 @@ for tag in tags :
                       style={'display':'inline-block','verticalAlign':'middle'})
     tag_buttons.append(tmp)
 
+new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'marginTop':'20px',}),
+                               dcc.Input(id='new-ingredient',type='text',
+                                         placeholder='Insert new ingredient name',
+                                         style={'width':'300px'}),
+                               html.Button('Add', id='add-ingredient-button', n_clicks=0),
+                               ])
+
+new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':'20px',}),
+                           dcc.Input(id='new-recipe-name',type='text',
+                                     placeholder='Recipe name',
+                                     style={'width':'250px','marginRight':'10px'}),
+                           dcc.Input(id='new-recipe-cooktime',type='number',
+                                     placeholder='time',style={'width':'80px'}),
+                           html.Label('min',style={'display':'inline-block',
+                                                   'verticalAlign':'middle',
+                                                   'marginLeft':'10px'},),
+                           dcc.Input(id='new-cookbook',type='text',
+                                     placeholder='Cookbook name',
+                                     style={'width':'300px'}),
+                           html.Br(),
+                           html.Div(recipe_ingredients_table,style={'width':'95%'}),
+                           html.Button('Add Row', id='add-recipe-ingredient-row-button', n_clicks=0),
+                           html.Br(),
+                           html.Div(html.Button('Add Recipe', id='add-recipe-button', n_clicks=0),
+                                    style={'text-align':'right','width':'95%'}),
+                           ])
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
@@ -197,6 +227,8 @@ layout = html.Div( # Main Div
                          ),
                 html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
                           html.Button('Add Row', id='add-rows-button', n_clicks=0),
+                          new_ingredient_div,
+                          new_recipe_div,
                           ],
                          className='four columns',
                          style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
@@ -222,6 +254,17 @@ def reset_confirm(n_clicks):
     if n_clicks > 0 :
         return True
     return False
+
+# Add Row to recipe ingredients table
+@app.callback(
+    Output('table-recipe-ingredients', 'data'),
+    Input('add-recipe-ingredient-row-button', 'n_clicks'),
+    State('table-recipe-ingredients', 'data'),
+    State('table-recipe-ingredients', 'columns'))
+def add_row(n_clicks, rows, columns):
+    if n_clicks > 0:
+        rows.append({c['id']: '' for c in columns})
+    return rows
 
 # Add Row Callback + Sync tables callback
 @app.callback([Output('table-meals','data'),
