@@ -143,22 +143,6 @@ def MakeIngredientsTable(id) :
             {'id': 'Unit', 'name': 'Unit', 'presentation': 'dropdown'},
         ],
 
-        dropdown={
-            'Ingredient': {
-                'options': [
-                    {'label': i, 'value': i}
-                    for i in ['Toast Twins','Tomatoes']
-                ],
-                'clearable':False,
-            },
-            'Unit': {
-                'options': [
-                    {'label': i, 'value': i}
-                    for i in ['x','g']
-                ],
-                'clearable':False,
-            }
-        }
     )
 
 single_ingredients_table = MakeIngredientsTable('table-single-ingredients')
@@ -410,3 +394,36 @@ def create_string_summary(table_meals,table_single_ingredients,
     shopping_list = CreateShoppingList(table_meals,table_single_ingredients)
 
     return new_string_summary,sync_div_style,shopping_list
+
+
+# Create local full string summary
+@app.callback([Output('table-single-ingredients','dropdown'),
+               Output('table-recipe-ingredients','dropdown'),
+               Output('new-ingredient','value'),
+               ],
+              [Input('add-ingredient-button','n_clicks'),
+               ],
+              [State('new-ingredient','value'),
+               State('table-single-ingredients','dropdown')
+               ]
+              )
+def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredients) :
+
+    ctx = dash.callback_context
+
+    # Add ingredient
+    if ctx.triggered and 'add-ingredient' in ctx.triggered[0]['prop_id'] :
+        i = new_ingredient
+        existing_ingredients['Ingredient']['options'].append({'label':i,'value':i})
+        return existing_ingredients,existing_ingredients,''
+
+    # Start-up behavior
+    unit_options = [{'label': i, 'value': i} for i in ['x','g']]
+    ingredient_options = [{'label': i, 'value': i} for i in ['Toast Twins','Tomatoes']]
+
+    dropdown={
+        'Ingredient': {'options': ingredient_options,'clearable':False,},
+        'Unit': {'options': unit_options,'clearable':False,}
+    }
+
+    return dropdown,dropdown,''
