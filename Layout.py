@@ -87,7 +87,7 @@ meals_table = dash_table.DataTable(
         {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
         {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
         {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
-        {'if': {'state': 'selected'},'backgroundColor': '#dbe4ff','border': '1px solid blue',},
+        {'if': {'state': 'selected'},'backgroundColor': '#FAFAFA','border': '1px dark gray',},
     ],
 
     data=[],
@@ -134,7 +134,7 @@ def MakeIngredientsTable(id) :
             {'if': {'column_id': 'Unit'},      'width': '20%'},
         ],
         style_data_conditional=[
-            {'if': {'state': 'selected'},'backgroundColor': '#dbe4ff','border': '1px solid blue',},
+            {'if': {'state': 'selected'},'backgroundColor': '#FAFAFA','border': '1px dark gray',},
         ],
 
         columns=[
@@ -176,7 +176,8 @@ new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'mar
                                          placeholder='Insert new ingredient name',
                                          style={'width':'300px'}),
                                html.Button('Add', id='add-ingredient-button', n_clicks=0),
-                               ])
+                               ],
+                              style={'backgroundColor':'#f0e9e9'})
 
 new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':'20px',}),
                            dcc.Input(id='new-recipe-name',type='text',
@@ -187,16 +188,40 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                            html.Label('min',style={'display':'inline-block',
                                                    'verticalAlign':'middle',
                                                    'marginLeft':'10px'},),
-                           dcc.Input(id='new-cookbook',type='text',
-                                     placeholder='Cookbook name',
-                                     style={'width':'300px'}),
+                           html.Div(id='existing-cookbook-div',
+                                    children=[
+                                        dcc.Dropdown(id='new-recipe-cookbook',
+                                                     placeholder='Cookbook',
+                                                     options=[
+                                                         {'label': 'Chris Kochtute', 'value': 'chris kochtute'},
+                                                         {'label': 'No Cookbook', 'value': 'no cookbook'},
+                                                     ],
+                                                     style={'width':'200px','display':'inline-block',
+                                                            'verticalAlign':'middle'}),
+                                        html.Button('Add New', id='switch-new-cookbook-button', n_clicks=0),
+                                    ],
+                                    ),
+                           html.Div(id='new-cookbook-div',
+                                    style={'display':'none'},
+                                    children=[
+                                        dcc.Input(id='new-recipe-new-cookbook-short',type='text',
+                                                  placeholder='Cookbook name',
+                                                  style={'width':'300px'}),
+                                        dcc.Input(id='new-recipe-new-cookbook-long',type='text',
+                                                  placeholder='url/description',
+                                                  style={'width':'300px'}),
+                                        html.Button('cancel', id='switch-existing-cookbook-button', n_clicks=0),
+                                    ]
+                                    ),
                            html.Br(),
                            html.Div(recipe_ingredients_table,style={'width':'95%'}),
                            html.Button('Add Row', id='add-recipe-ingredient-row-button', n_clicks=0),
                            html.Br(),
                            html.Div(html.Button('Add Recipe', id='add-recipe-button', n_clicks=0),
                                     style={'text-align':'right','width':'95%'}),
-                           ])
+                           ],
+                          style={'backgroundColor':'#e9eaf0'},
+)
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
@@ -254,6 +279,24 @@ def reset_confirm(n_clicks):
     if n_clicks > 0 :
         return True
     return False
+
+# Switch to/from adding a new cookbook
+@app.callback([Output('existing-cookbook-div', 'style'),
+               Output('new-cookbook-div', 'style'),
+               ],
+              [Input('switch-new-cookbook-button', 'n_clicks'),
+               Input('switch-existing-cookbook-button', 'n_clicks'),
+               ])
+def switch_new_cookbook(n_clicks_new,n_clicks_exising):
+
+    ctx = dash.callback_context
+    if ctx.triggered and 'switch-new' in ctx.triggered[0]['prop_id'] :
+        return {'display':'none'},{}
+    if ctx.triggered and 'switch-existing' in ctx.triggered[0]['prop_id'] :
+        return {},{'display':'none'}
+
+    return {},{'display':'none'}
+
 
 # Add Row to recipe ingredients table
 @app.callback(
