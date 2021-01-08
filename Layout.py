@@ -198,7 +198,8 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                                                      ],
                                                      style={'width':'200px','display':'inline-block',
                                                             'verticalAlign':'middle'}),
-                                        html.Button('Add New', id='switch-new-cookbook-button', n_clicks=0),
+                                        html.Button('Add New', id='switch-new-cookbook-button', n_clicks=0,
+                                                    style={'display':'inline-block','verticalAlign':'middle'}),
                                     ],
                                     ),
                            html.Div(id='new-cookbook-div',
@@ -213,6 +214,19 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                                         html.Button('cancel', id='switch-existing-cookbook-button', n_clicks=0),
                                     ]
                                     ),
+                           html.Label('Tags: ',style={'display':'inline-block'
+                                                      ,'verticalAlign':'middle'
+                                                      ,'marginRight':'10px'},),
+                           dcc.Input(id='new-recipe-tags',type='text',
+                                     placeholder='(comma-separated)',
+                                     style={'width':'300px'}),
+                           html.Br(),
+                           html.Label('Mealtime(s): ',style={'display':'inline-block'
+                                                             ,'verticalAlign':'middle'
+                                                             ,'marginRight':'10px'},),
+                           dcc.Input(id='new-recipe-mealtimes',type='text',
+                                     placeholder='(comma-separated)',
+                                     style={'width':'300px'}),
                            html.Br(),
                            html.Div(recipe_ingredients_table,style={'width':'95%'}),
                            html.Button('Add Row', id='add-recipe-ingredient-row-button', n_clicks=0),
