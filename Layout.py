@@ -17,6 +17,7 @@ from app import app
 storage = [
     # full string summary of state
     html.Div(id='full-string-summary' ,style={'display': 'none'},children=None),
+    html.Div(id='filter-string-csv' ,style={'display': 'none'},children=None),
     dcc.ConfirmDialog(id='confirm-reset',
                       message='Are you sure you want to reset the list? This will delete the shopping list for all users.',
                       ),
@@ -124,12 +125,34 @@ def MakeIngredientsTable(id) :
 single_ingredients_table = MakeIngredientsTable('table-single-ingredients')
 recipe_ingredients_table = MakeIngredientsTable('table-recipe-ingredients')
 
-tags = ['indian','spicy','vegetarian','asian','soup']
+tags = ['indian','spicy','vegetarian','asian','soup','pasta']
 tag_buttons = []
 for tag in tags :
     tmp = html.Button(id='tag-%s-button'%(tag),children=tag,n_clicks=0,
                       style={'display':'inline-block','verticalAlign':'middle'})
     tag_buttons.append(tmp)
+
+# Make filter string from button inputs
+@app.callback([Output('tag-{}-button'.format(tag), 'style') for tag in tags]
+              + [Output('filter-string-csv', 'children')],
+              [Input('tag-{}-button'.format(tag), 'n_clicks') for tag in tags],
+              [State('tag-{}-button'.format(tag), 'children') for tag in tags],
+)
+def make_filter_string(*click_info):
+
+    out_str = []
+    styles = []
+
+    for n_click,val in zip(click_info[:len(click_info)//2],click_info[len(click_info)//2:]) :
+        if (n_click % 2) :
+            out_str.append(val)
+            styles.append({'display':'inline-block','verticalAlign':'middle',
+                           'background-color':'#bfd8ff'})
+        else :
+            styles.append({'display':'inline-block','verticalAlign':'middle',})
+
+    return *styles,','.join(out_str)
+
 
 new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'marginTop':'20px',}),
                                dcc.Input(id='new-ingredient',type='text',
