@@ -175,10 +175,7 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                                     children=[
                                         dcc.Dropdown(id='new-recipe-cookbook',
                                                      placeholder='Cookbook',
-                                                     options=[
-                                                         {'label': 'Chris Kochtute', 'value': 'chris kochtute'},
-                                                         {'label': 'No Cookbook', 'value': 'no cookbook'},
-                                                     ],
+                                                     options=[],
                                                      style={'width':'200px','display':'inline-block',
                                                             'verticalAlign':'middle'}),
                                         html.Button('New cookbook', id='switch-new-cookbook-button', n_clicks=0,
@@ -228,7 +225,10 @@ layout = html.Div( # Main Div
                 html.H5(children='Welcome, Sarah, to the Grocery List App!'),
                 html.Button(id='reset-button',children='Reset all',n_clicks=0,style={'display':'inline-block','verticalAlign':'middle'}),
                 html.Label('Filters: ',style={'display':'inline-block','verticalAlign':'middle','marginRight':'10px','marginLeft':'10px'},),
-                dcc.Dropdown(id='recipe-time-dropdown',placeholder='Recipe Time',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
+                dcc.Input(id='recipe-time-min',placeholder='min-time',type='number',style={'width':'100px','display':'inline-block','verticalAlign':'middle'}),
+                html.Label('-',style={'display':'inline-block','verticalAlign':'middle','marginRight':'5px','marginLeft':'5px'},),
+                dcc.Input(id='recipe-time-max',placeholder='max-time',type='number',style={'width':'100px','display':'inline-block','verticalAlign':'middle'}),
+                html.Label('min',style={'display':'inline-block','verticalAlign':'middle','marginRight':'30px','marginLeft':'10px'},),
                 dcc.Dropdown(id='cookbook-dropdown',placeholder='Cookbook',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
                 html.A('Link to recipe',id='cookbook-link',href='https://cern.ch/kurt', target='_blank',style={'display':'inline-block','verticalAlign':'middle','marginLeft':'10px','display':'none'},)
             ],
@@ -490,6 +490,8 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
 
 # Add a recipe / update the list of available recipes
 @app.callback([Output('table-meals','dropdown_data'),
+               Output('cookbook-dropdown','options'),
+               Output('new-recipe-cookbook','options'),
                ],
               [Input('confirm-new-recipe','submit_n_clicks'),
                ],
@@ -563,4 +565,9 @@ def update_recipes(confirm_new_recipe_nclicks,
          } for day in weekdays
     ]
 
-    return [dropdown_data]
+    cookbook_options = [
+        {'label': 'Chris Kochtute', 'value': 'chris kochtute'},
+        {'label': 'No Cookbook', 'value': 'no cookbook'},
+    ]
+
+    return dropdown_data,cookbook_options,cookbook_options
