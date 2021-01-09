@@ -20,9 +20,8 @@ storage = [
     dcc.ConfirmDialog(id='confirm-reset',
                       message='Are you sure you want to reset the list? This will delete the shopping list for all users.',
                       ),
-    dcc.ConfirmDialog(id='confirm-new-recipe',
-                      message='Adding new recipe -- please confirm.',
-                      ),
+    dcc.ConfirmDialog(id='confirm-new-recipe',message='',),
+    dcc.ConfirmDialog(id='confirm-recipe-mistake',message='',),
 ]
 
 final_list_children = []
@@ -159,7 +158,7 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                                                      ],
                                                      style={'width':'200px','display':'inline-block',
                                                             'verticalAlign':'middle'}),
-                                        html.Button('Add New', id='switch-new-cookbook-button', n_clicks=0,
+                                        html.Button('New cookbook', id='switch-new-cookbook-button', n_clicks=0,
                                                     style={'display':'inline-block','verticalAlign':'middle'}),
                                     ],
                                     ),
@@ -256,12 +255,65 @@ def reset_confirm(n_clicks):
     return False
 
 # Confirm whether you really wanted to add a new recipe
-@app.callback(Output('confirm-new-recipe', 'displayed'),
-              Input('add-recipe-button', 'n_clicks'))
-def new_recipe_confirm(n_clicks):
-    if n_clicks > 0 :
-        return True
-    return False
+@app.callback([Output('confirm-new-recipe', 'displayed'),
+               Output('confirm-new-recipe','message'),
+               Output('confirm-recipe-mistake', 'displayed'),
+               Output('confirm-recipe-mistake','message'),
+               ],
+              Input('add-recipe-button', 'n_clicks'),
+              [State('new-recipe-name','value'),
+               State('new-recipe-cooktime','value'),
+               State('new-recipe-cookbook','value'),
+               State('new-recipe-new-cookbook-short','value'),
+               State('new-recipe-new-cookbook-long','value'),
+               State('new-cookbook-div','style'),
+               State('new-recipe-tags','value'),
+               State('new-recipe-mealtimes','value'),
+               ]
+              )
+def new_recipe_confirm(n_clicks,
+                       new_recipe_name,
+                       new_recipe_cooktime,
+                       new_recipe_cookbook,
+                       new_recipe_new_cookbook_short,
+                       new_recipe_new_cookbook_long,
+                       new_cookbook_div,
+                       new_recipe_tags,
+                       new_recipe_mealtimes,
+                       ):
+    if n_clicks <= 0 :
+        return False,'',False,''
+
+    err_msg = 'There is a mistake in your recipe ({}) - please check.'
+    confirm_msg = 'Adding new recipe \"{}\" -- please confirm.'
+
+    if new_recipe_name == None :
+        return False,'',True,err_msg.format('no name given')
+
+    if new_recipe_cooktime == None :
+        return False,'',True,err_msg.format('no cooktime given')
+
+    # If new cookbook div is active:
+    if ('display' not in new_cookbook_div.keys()) or (new_cookbook_div['display'] != 'none') :
+        if new_recipe_new_cookbook_short == None :
+            return False,'',True,err_msg.format('no new cookbook name given')
+        if new_recipe_new_cookbook_long == None :
+            return False,'',True,err_msg.format('no new cookbook description given')
+    else :
+        if new_recipe_cookbook == None :
+            return False,'',True,err_msg.format('no cookbook given')
+
+    if new_recipe_tags == None :
+        return False,'',True,err_msg.format('no tags given')
+
+    if new_recipe_mealtimes == None :
+        return False,'',True,err_msg.format('no mealtimes given')
+
+    for meal in new_recipe_mealtimes.split(',') :
+        if meal.lstrip().rstrip().lower() not in ['breakfast','lunch','dinner'] :
+            return False,'',True,err_msg.format('Did not recognize mealtime \"{}\"').format(meal)
+
+    return True,confirm_msg.format(new_recipe_name),False,''
 
 # Switch to/from adding a new cookbook
 @app.callback([Output('existing-cookbook-div', 'style'),
@@ -414,18 +466,49 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
     return dropdown,dropdown,''
 
 # Add a recipe / update the list of available recipes
-@app.callback([Output('table-meals','dropdown_data')
+@app.callback([Output('table-meals','dropdown_data'),
                ],
               [Input('confirm-new-recipe','submit_n_clicks'),
                ],
+              [State('new-recipe-name','value'),
+               State('new-recipe-cooktime','value'),
+               State('new-recipe-cookbook','value'),
+               State('new-recipe-new-cookbook-short','value'),
+               State('new-recipe-new-cookbook-long','value'),
+               State('new-cookbook-div','style'),
+               State('new-recipe-tags','value'),
+               State('new-recipe-mealtimes','value'),
+               ]
               )
-def update_recipes(confirm_new_recipe_nclicks) :
+def update_recipes(confirm_new_recipe_nclicks,
+                   new_recipe_name,
+                   new_recipe_cooktime,
+                   new_recipe_cookbook,
+                   new_recipe_new_cookbook_short,
+                   new_recipe_new_cookbook_long,
+                   new_cookbook_div,
+                   new_recipe_tags,
+                   new_recipe_mealtimes,
+                   ) :
 
     ctx = dash.callback_context
 
+    the_recipe_cookbook = new_recipe_cookbook
+
     # If this is a new recipe ...
     if ctx.triggered and 'confirm-new-recipe' in ctx.triggered[0]['prop_id'] :
-        pass
+
+        # If there is a new cookbook...
+        if ('display' not in new_cookbook_div.keys()) or (new_cookbook_div['display'] != 'none') :
+            the_recipe_cookbook = new_recipe_new_cookbook_short
+
+        text = []
+        text.append('Property.cooktime_minutes: %d'%(new_recipe_cooktime))
+        text.append('Property.recipe_book: %s'%(the_recipe_cookbook))
+        text.append('Property.recipe_tags: %s'%(new_recipe_tags))
+        text.append('Property.recipe_mealtimes: %s'%(new_recipe_mealtimes))
+        print('Adding new recipe: %s.txt'%(new_recipe_name))
+        print('\n'.join(text))
 
     # Default / startup behavior:
     dummy_recipes = [
