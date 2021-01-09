@@ -20,6 +20,9 @@ storage = [
     dcc.ConfirmDialog(id='confirm-reset',
                       message='Are you sure you want to reset the list? This will delete the shopping list for all users.',
                       ),
+    dcc.ConfirmDialog(id='confirm-new-recipe',
+                      message='Adding new recipe -- please confirm.',
+                      ),
 ]
 
 final_list_children = []
@@ -59,15 +62,6 @@ def SetGlobalShoppingListJsonFile(_table_meals_data,_table_single_ingredients_da
     return _full_summary_dumps
 
 
-dummy_recipes = [
-    {'label':'Recipe 1','value':'Recipe 1'},
-    {'label':'Recipe 2','value':'Recipe 2'},
-    {'label':'Recipe 3','value':'Recipe 3'},
-]
-dinner_recipes = dummy_recipes
-lunch_recipes = dummy_recipes
-breakfast_recipes = dummy_recipes
-
 meals_table = dash_table.DataTable(
     id = 'table-meals',
     row_deletable=False,
@@ -90,7 +84,9 @@ meals_table = dash_table.DataTable(
         {'if': {'state': 'selected'},'backgroundColor': '#FAFAFA','border': '1px dark gray',},
     ],
 
+    # Populated in dropdowns
     data=[],
+    dropdown_data=[],
 
     columns=[
         {'id': 'Day', 'name': ''},
@@ -98,25 +94,6 @@ meals_table = dash_table.DataTable(
         {'id': 'Serves', 'name': 'Serves', 'presentation': 'dropdown'},
     ],
 
-    dropdown_data=[
-        {'Meal': {'options':dinner_recipes,
-                  'clearable':False},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
-                   'clearable':False}
-         } for day in days
-    ] + [{}] + [
-        {'Meal': {'options':breakfast_recipes,
-                  'clearable':False},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
-                   'clearable':False}
-         } for day in weekends
-    ] + [{}] + [
-        {'Meal': {'options':lunch_recipes,
-                  'clearable':False},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
-                   'clearable':False}
-         } for day in weekdays
-    ],
 )
 
 def MakeIngredientsTable(id) :
@@ -278,6 +255,14 @@ def reset_confirm(n_clicks):
         return True
     return False
 
+# Confirm whether you really wanted to add a new recipe
+@app.callback(Output('confirm-new-recipe', 'displayed'),
+              Input('add-recipe-button', 'n_clicks'))
+def new_recipe_confirm(n_clicks):
+    if n_clicks > 0 :
+        return True
+    return False
+
 # Switch to/from adding a new cookbook
 @app.callback([Output('existing-cookbook-div', 'style'),
                Output('new-cookbook-div', 'style'),
@@ -396,7 +381,7 @@ def create_string_summary(table_meals,table_single_ingredients,
     return new_string_summary,sync_div_style,shopping_list
 
 
-# Create local full string summary
+# Update the list of available ingredients
 @app.callback([Output('table-single-ingredients','dropdown'),
                Output('table-recipe-ingredients','dropdown'),
                Output('new-ingredient','value'),
@@ -427,3 +412,49 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
     }
 
     return dropdown,dropdown,''
+
+# Add a recipe / update the list of available recipes
+@app.callback([Output('table-meals','dropdown_data')
+               ],
+              [Input('confirm-new-recipe','submit_n_clicks'),
+               ],
+              )
+def update_recipes(confirm_new_recipe_nclicks) :
+
+    ctx = dash.callback_context
+
+    # If this is a new recipe ...
+    if ctx.triggered and 'confirm-new-recipe' in ctx.triggered[0]['prop_id'] :
+        pass
+
+    # Default / startup behavior:
+    dummy_recipes = [
+        {'label':'Recipe 1','value':'Recipe 1'},
+        {'label':'Recipe 2','value':'Recipe 2'},
+        {'label':'Recipe 3','value':'Recipe 3'},
+    ]
+    dinner_recipes = dummy_recipes
+    lunch_recipes = dummy_recipes
+    breakfast_recipes = dummy_recipes
+
+    dropdown_data=[
+        {'Meal': {'options':dinner_recipes,
+                  'clearable':False},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+                   'clearable':False}
+         } for day in days
+    ] + [{}] + [
+        {'Meal': {'options':breakfast_recipes,
+                  'clearable':False},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+                   'clearable':False}
+         } for day in weekends
+    ] + [{}] + [
+        {'Meal': {'options':lunch_recipes,
+                  'clearable':False},
+         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+                   'clearable':False}
+         } for day in weekdays
+    ]
+
+    return [dropdown_data]

@@ -11,7 +11,7 @@ def isFloat(_str) :
     return True
 
 def AddMeasurements(val1,unit1,val2,unit2) :
-    print ('combining \"',val1,'\"',unit1,'\"',val2,'\"',unit2,'\"')
+    # print ('combining \"',val1,'\"',unit1,'\"',val2,'\"',unit2,'\"')
 
     # If the units are the same, then this is easy:
     if (unit1 == unit2) or (not unit1 and not unit2) :
@@ -28,7 +28,7 @@ def TallyAmounts(table_single_ingredients) :
     output = []
 
     for ingredient in ingredients :
-        print(ingredient)
+        # print(ingredient)
         tmp = dict()
         tmp['Ingredient'] = ingredient
         for mention in list(a for a in table_single_ingredients if a['Ingredient'] == ingredient) :
@@ -47,7 +47,7 @@ def CreateShoppingList(table_meals,table_single_ingredients) :
 
     text = []
 
-    print(table_single_ingredients)
+    # print(table_single_ingredients)
 
     tallied_ingredients = TallyAmounts(table_single_ingredients)
 
@@ -70,7 +70,7 @@ def CreateShoppingList(table_meals,table_single_ingredients) :
             tmp = []
             for i in range(len(idict['Amount'].split('+'))) :
                 tmp.append('%s%s'%(idict['Amount'].split('+')[i],unit.split('+')[i]))
-            print(tmp)
+            # print(tmp)
             text.append('%s: %s'%(idict['Ingredient'],' + '.join(tmp)))
 
         # Normal situation: ingredient, amount.
