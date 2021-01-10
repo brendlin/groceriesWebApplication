@@ -33,6 +33,9 @@ days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
 weekdays = ['monday','tuesday','wednesday','thursday','friday']
 weekends = ['sunday','saturday']
 
+def MakeNewRecipeName(recipe_text) :
+    return recipe_text.lower().replace(' ','_') + '.txt'
+
 def GetResetMealTableData() :
 
     _days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
@@ -296,6 +299,7 @@ def reset_confirm(n_clicks):
                State('new-cookbook-div','style'),
                State('new-recipe-tags','value'),
                State('new-recipe-mealtimes','value'),
+               State('table-recipe-ingredients','data'),
                ]
               )
 def new_recipe_confirm(n_clicks,
@@ -307,6 +311,7 @@ def new_recipe_confirm(n_clicks,
                        new_cookbook_div,
                        new_recipe_tags,
                        new_recipe_mealtimes,
+                       recipe_ingredients_data
                        ):
     if n_clicks <= 0 :
         return False,'',False,''
@@ -316,6 +321,9 @@ def new_recipe_confirm(n_clicks,
 
     if new_recipe_name == None :
         return False,'',True,err_msg.format('no name given')
+
+    if MakeNewRecipeName(new_recipe_name) in os.listdir('recipes') :
+        return False,'',True,err_msg.format('recipe with this name already exists')
 
     if new_recipe_cooktime == None :
         return False,'',True,err_msg.format('no cooktime given')
@@ -338,6 +346,11 @@ def new_recipe_confirm(n_clicks,
         if meal.lstrip().rstrip().lower() not in ['breakfast','lunch','dinner'] :
             return False,'',True,err_msg.format('Did not recognize mealtime \"{}\"').format(meal)
 
+    for row in recipe_ingredients_data :
+        if row['Ingredient'] and not row['Amount'] :
+            tmp_msg = 'no amount given for ingredient %s'%(row['Ingredient'])
+            return False,'',True,err_msg.format(tmp_msg)
+
     return True,confirm_msg.format(new_recipe_name),False,''
 
 # Switch to/from adding a new cookbook
@@ -357,17 +370,6 @@ def switch_new_cookbook(n_clicks_new,n_clicks_exising):
 
     return {},{'display':'none'}
 
-
-# Add Row to recipe ingredients table
-@app.callback(
-    Output('table-recipe-ingredients', 'data'),
-    Input('add-recipe-ingredient-row-button', 'n_clicks'),
-    State('table-recipe-ingredients', 'data'),
-    State('table-recipe-ingredients', 'columns'))
-def add_row(n_clicks, rows, columns):
-    if n_clicks > 0:
-        rows.append({c['id']: '' for c in columns})
-    return rows
 
 # Add Row Callback + Sync tables callback
 @app.callback([Output('table-meals','data'),
@@ -491,6 +493,7 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
     return dropdown,dropdown,''
 
 # Add a recipe / update the list of available recipes
+# Add Row to recipe ingredients table
 @app.callback([Output('table-meals','dropdown_data'),
                Output('cookbook-dropdown','options'),
                Output('new-recipe-cookbook','options'),
@@ -501,8 +504,10 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
                Output('new-recipe-url','value'),
                Output('new-recipe-tags','value'),
                Output('new-recipe-mealtimes','value'),
+               Output('table-recipe-ingredients', 'data'),
                ],
               [Input('confirm-new-recipe','submit_n_clicks'),
+               Input('add-recipe-ingredient-row-button', 'n_clicks'),
                ],
               [State('new-recipe-name','value'),
                State('new-recipe-cooktime','value'),
@@ -512,9 +517,12 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
                State('new-cookbook-div','style'),
                State('new-recipe-tags','value'),
                State('new-recipe-mealtimes','value'),
+               State('table-recipe-ingredients','data'),
+               State('table-recipe-ingredients', 'columns'),
                ]
               )
 def update_recipes(confirm_new_recipe_nclicks,
+                   add_recipe_ingredient_row_button_nclicks,
                    new_recipe_name,
                    new_recipe_cooktime,
                    new_recipe_cookbook,
@@ -523,14 +531,20 @@ def update_recipes(confirm_new_recipe_nclicks,
                    new_cookbook_div,
                    new_recipe_tags,
                    new_recipe_mealtimes,
+                   recipe_ingredients_data,
+                   recipe_ingredients_columns,
                    ) :
 
     ctx = dash.callback_context
 
-    the_recipe_cookbook = new_recipe_cookbook
+    # Add row to recipe ingredients table
+    if ctx.triggered and 'add-recipe-ingredient-row-button' in ctx.triggered[0]['prop_id'] :
+        recipe_ingredients_data.append({c['id']: '' for c in recipe_ingredients_columns})
 
     # If this is a new recipe ...
     if ctx.triggered and 'confirm-new-recipe' in ctx.triggered[0]['prop_id'] :
+
+        the_recipe_cookbook = new_recipe_cookbook
 
         # If there is a new cookbook...
         if ('display' not in new_cookbook_div.keys()) or (new_cookbook_div['display'] != 'none') :
@@ -543,8 +557,34 @@ def update_recipes(confirm_new_recipe_nclicks,
             text.append('Property.recipe_url: %s'%(new_recipe_url))
         text.append('Property.recipe_tags: %s'%(new_recipe_tags))
         text.append('Property.recipe_mealtimes: %s'%(new_recipe_mealtimes))
-        print('Adding new recipe: %s.txt'%(new_recipe_name))
-        print('\n'.join(text))
+
+        for row in recipe_ingredients_data :
+            if not row['Ingredient'] :
+                continue
+
+            amount = ''
+            if row['Amount'] and row['Unit'] :
+                amount = '{} {}'.format(row['Amount'],row['Unit'])
+            else :
+                amount = '{}'.format(row['Amount'])
+
+            text.append('Ingredient.{}: {}'.format(row['Ingredient'],amount))
+
+        #print('Adding new recipe: %s'%(MakeNewRecipeName(new_recipe_name)))
+        #print('\n'.join(text))
+
+        with open('recipes/%s'%(MakeNewRecipeName(new_recipe_name)),'w') as f :
+            for t in text :
+                f.write(t+'\n')
+
+        recipe_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':'x'},]
+        new_recipe_name = ''
+        new_recipe_cooktime = ''
+        new_recipe_cookbook = ''
+        new_recipe_new_cookbook = ''
+        new_recipe_url = ''
+        new_recipe_tags = ''
+        new_recipe_mealtimes = ''
 
     # Default / startup behavior:
     dummy_recipes = [
@@ -581,4 +621,6 @@ def update_recipes(confirm_new_recipe_nclicks,
         {'label': 'No Cookbook', 'value': 'no cookbook'},
     ]
 
-    return dropdown_data,cookbook_options,cookbook_options,*(['']*7)
+    return (dropdown_data,cookbook_options,cookbook_options,
+            new_recipe_name,new_recipe_cooktime,new_recipe_cookbook,new_recipe_new_cookbook,
+            new_recipe_url,new_recipe_tags,new_recipe_mealtimes,recipe_ingredients_data)
