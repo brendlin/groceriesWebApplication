@@ -185,15 +185,19 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                            html.Div(id='new-cookbook-div',
                                     style={'display':'none'},
                                     children=[
-                                        dcc.Input(id='new-recipe-new-cookbook-short',type='text',
+                                        dcc.Input(id='new-recipe-new-cookbook',type='text',
                                                   placeholder='Cookbook name',
-                                                  style={'width':'300px'}),
-                                        dcc.Input(id='new-recipe-new-cookbook-long',type='text',
-                                                  placeholder='url/description',
                                                   style={'width':'300px'}),
                                         html.Button('cancel', id='switch-existing-cookbook-button', n_clicks=0),
                                     ]
                                     ),
+                           html.Label('Url: ',style={'display':'inline-block'
+                                                      ,'verticalAlign':'middle'
+                                                      ,'marginRight':'10px'},),
+                           dcc.Input(id='new-recipe-url',type='text',
+                                     placeholder='(optional)',
+                                     style={'width':'300px'}),
+                           html.Br(),
                            html.Label('Tags: ',style={'display':'inline-block'
                                                       ,'verticalAlign':'middle'
                                                       ,'marginRight':'10px'},),
@@ -287,8 +291,8 @@ def reset_confirm(n_clicks):
               [State('new-recipe-name','value'),
                State('new-recipe-cooktime','value'),
                State('new-recipe-cookbook','value'),
-               State('new-recipe-new-cookbook-short','value'),
-               State('new-recipe-new-cookbook-long','value'),
+               State('new-recipe-new-cookbook','value'),
+               State('new-recipe-url','value'),
                State('new-cookbook-div','style'),
                State('new-recipe-tags','value'),
                State('new-recipe-mealtimes','value'),
@@ -298,8 +302,8 @@ def new_recipe_confirm(n_clicks,
                        new_recipe_name,
                        new_recipe_cooktime,
                        new_recipe_cookbook,
-                       new_recipe_new_cookbook_short,
-                       new_recipe_new_cookbook_long,
+                       new_recipe_new_cookbook,
+                       new_recipe_url,
                        new_cookbook_div,
                        new_recipe_tags,
                        new_recipe_mealtimes,
@@ -318,10 +322,8 @@ def new_recipe_confirm(n_clicks,
 
     # If new cookbook div is active:
     if ('display' not in new_cookbook_div.keys()) or (new_cookbook_div['display'] != 'none') :
-        if new_recipe_new_cookbook_short == None :
+        if new_recipe_new_cookbook == None :
             return False,'',True,err_msg.format('no new cookbook name given')
-        if new_recipe_new_cookbook_long == None :
-            return False,'',True,err_msg.format('no new cookbook description given')
     else :
         if new_recipe_cookbook == None :
             return False,'',True,err_msg.format('no cookbook given')
@@ -492,14 +494,21 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
 @app.callback([Output('table-meals','dropdown_data'),
                Output('cookbook-dropdown','options'),
                Output('new-recipe-cookbook','options'),
+               Output('new-recipe-name','value'),
+               Output('new-recipe-cooktime','value'),
+               Output('new-recipe-cookbook','value'),
+               Output('new-recipe-new-cookbook','value'),
+               Output('new-recipe-url','value'),
+               Output('new-recipe-tags','value'),
+               Output('new-recipe-mealtimes','value'),
                ],
               [Input('confirm-new-recipe','submit_n_clicks'),
                ],
               [State('new-recipe-name','value'),
                State('new-recipe-cooktime','value'),
                State('new-recipe-cookbook','value'),
-               State('new-recipe-new-cookbook-short','value'),
-               State('new-recipe-new-cookbook-long','value'),
+               State('new-recipe-new-cookbook','value'),
+               State('new-recipe-url','value'),
                State('new-cookbook-div','style'),
                State('new-recipe-tags','value'),
                State('new-recipe-mealtimes','value'),
@@ -509,8 +518,8 @@ def update_recipes(confirm_new_recipe_nclicks,
                    new_recipe_name,
                    new_recipe_cooktime,
                    new_recipe_cookbook,
-                   new_recipe_new_cookbook_short,
-                   new_recipe_new_cookbook_long,
+                   new_recipe_new_cookbook,
+                   new_recipe_url,
                    new_cookbook_div,
                    new_recipe_tags,
                    new_recipe_mealtimes,
@@ -525,11 +534,13 @@ def update_recipes(confirm_new_recipe_nclicks,
 
         # If there is a new cookbook...
         if ('display' not in new_cookbook_div.keys()) or (new_cookbook_div['display'] != 'none') :
-            the_recipe_cookbook = new_recipe_new_cookbook_short
+            the_recipe_cookbook = new_recipe_new_cookbook
 
         text = []
         text.append('Property.cooktime_minutes: %d'%(new_recipe_cooktime))
         text.append('Property.recipe_book: %s'%(the_recipe_cookbook))
+        if new_recipe_url :
+            text.append('Property.recipe_url: %s'%(new_recipe_url))
         text.append('Property.recipe_tags: %s'%(new_recipe_tags))
         text.append('Property.recipe_mealtimes: %s'%(new_recipe_mealtimes))
         print('Adding new recipe: %s.txt'%(new_recipe_name))
@@ -570,4 +581,4 @@ def update_recipes(confirm_new_recipe_nclicks,
         {'label': 'No Cookbook', 'value': 'no cookbook'},
     ]
 
-    return dropdown_data,cookbook_options,cookbook_options
+    return dropdown_data,cookbook_options,cookbook_options,*(['']*7)
