@@ -87,10 +87,13 @@ def CreateShoppingList(table_meals,table_single_ingredients) :
         if not meal_dict['Day'] :
             text.append(html.Br())
             text.append(meal_dict['Meal']+':')
+            text.append(html.Br())
         elif not meal_dict['Meal'] :
-            text.append('%s: %s'%(meal_dict['Day'],''))
+            #text.append('%s: %s'%(meal_dict['Day'],''))
+            #text.append(html.Br())
+            pass
         else :
             text.append('%s: %s'%(meal_dict['Day'],meal_dict['Meal']))
-        text.append(html.Br())
+            text.append(html.Br())
 
     return text
