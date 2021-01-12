@@ -23,6 +23,8 @@ storage = [
                       ),
     dcc.ConfirmDialog(id='confirm-new-recipe',message='',),
     dcc.ConfirmDialog(id='confirm-recipe-mistake',message='',),
+    dcc.ConfirmDialog(id='confirm-new-ingredient',message='',),
+    dcc.ConfirmDialog(id='confirm-ingredient-mistake',message='',),
 ]
 
 final_list_children = []
@@ -161,6 +163,26 @@ new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'mar
                                dcc.Input(id='new-ingredient',type='text',
                                          placeholder='Insert new ingredient name',
                                          style={'width':'300px'}),
+                               html.Div(id='existing-location-div',
+                                        children=[
+                                            dcc.Dropdown(id='new-ingredient-location',
+                                                         placeholder='Store',
+                                                         options=[],
+                                                         style={'width':'200px','display':'inline-block',
+                                                                'verticalAlign':'middle'}),
+                                            html.Button('New location', id='switch-new-location-button', n_clicks=0,
+                                                        style={'display':'inline-block','verticalAlign':'middle'}),
+                                        ],
+                                        ),
+                               html.Div(id='new-location-div',
+                                        style={'display':'none'},
+                                        children=[
+                                            dcc.Input(id='new-ingredient-new-location',type='text',
+                                                      placeholder='Store name',
+                                                      style={'width':'200px'}),
+                                            html.Button('cancel', id='switch-existing-location-button', n_clicks=0),
+                                        ]
+                                        ),
                                html.Button('Add', id='add-ingredient-button', n_clicks=0),
                                ],
                               style={'backgroundColor':'#f0e9e9'})
@@ -190,7 +212,7 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                                     children=[
                                         dcc.Input(id='new-recipe-new-cookbook',type='text',
                                                   placeholder='Cookbook name',
-                                                  style={'width':'300px'}),
+                                                  style={'width':'200px'}),
                                         html.Button('cancel', id='switch-existing-cookbook-button', n_clicks=0),
                                     ]
                                     ),
@@ -330,10 +352,10 @@ def new_recipe_confirm(n_clicks,
 
     # If new cookbook div is active:
     if ('display' not in new_cookbook_div.keys()) or (new_cookbook_div['display'] != 'none') :
-        if new_recipe_new_cookbook == None :
+        if not new_recipe_new_cookbook :
             return False,'',True,err_msg.format('no new cookbook name given')
     else :
-        if new_recipe_cookbook == None :
+        if not new_recipe_cookbook :
             return False,'',True,err_msg.format('no cookbook given')
 
     if new_recipe_tags == None :
@@ -361,6 +383,23 @@ def new_recipe_confirm(n_clicks,
                Input('switch-existing-cookbook-button', 'n_clicks'),
                ])
 def switch_new_cookbook(n_clicks_new,n_clicks_exising):
+
+    ctx = dash.callback_context
+    if ctx.triggered and 'switch-new' in ctx.triggered[0]['prop_id'] :
+        return {'display':'none'},{}
+    if ctx.triggered and 'switch-existing' in ctx.triggered[0]['prop_id'] :
+        return {},{'display':'none'}
+
+    return {},{'display':'none'}
+
+# Switch to/from adding a new location
+@app.callback([Output('existing-location-div', 'style'),
+               Output('new-location-div', 'style'),
+               ],
+              [Input('switch-new-location-button', 'n_clicks'),
+               Input('switch-existing-location-button', 'n_clicks'),
+               ])
+def switch_new_location(n_clicks_new,n_clicks_exising):
 
     ctx = dash.callback_context
     if ctx.triggered and 'switch-new' in ctx.triggered[0]['prop_id'] :
@@ -460,26 +499,78 @@ def create_string_summary(table_meals,table_single_ingredients,
     return new_string_summary,sync_div_style,shopping_list
 
 
-# Update the list of available ingredients
-@app.callback([Output('table-single-ingredients','dropdown'),
-               Output('table-recipe-ingredients','dropdown'),
-               Output('new-ingredient','value'),
+# Confirm whether you really wanted to add a new ingredient
+@app.callback([Output('confirm-new-ingredient', 'displayed'),
+               Output('confirm-new-ingredient','message'),
+               Output('confirm-ingredient-mistake', 'displayed'),
+               Output('confirm-ingredient-mistake','message'),
                ],
               [Input('add-ingredient-button','n_clicks'),
                ],
               [State('new-ingredient','value'),
-               State('table-single-ingredients','dropdown')
+               State('new-ingredient-location','value'),
+               State('new-ingredient-new-location','value'),
+               State('new-location-div','style'),
                ]
               )
-def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredients) :
+def new_ingredient_confirm(n_clicks,
+                           new_ingredient_name,
+                           new_ingredient_location,
+                           new_ingredient_new_location,
+                           new_location_div,
+                           ) :
+
+    if n_clicks <= 0 :
+        return False,'',False,''
+
+    err_msg = 'There is a mistake in your ingredient ({}) - please check.'
+    confirm_msg = 'Adding new ingredient \"{}\" -- please confirm.'
+
+    if new_ingredient_name == None :
+        return False,'',True,err_msg.format('no name given')
+
+    # If new cookbook div is active:
+    if ('display' not in new_location_div.keys()) or (new_location_div['display'] != 'none') :
+        if not new_ingredient_new_location :
+            return False,'',True,err_msg.format('no new store name given')
+    else :
+        if not new_ingredient_location :
+            return False,'',True,err_msg.format('no store given (just guess)')
+
+    return True,confirm_msg.format(new_ingredient_name),False,''
+
+
+# Update the list of available ingredients
+@app.callback([Output('table-single-ingredients','dropdown'),
+               Output('table-recipe-ingredients','dropdown'),
+               Output('new-ingredient','value'),
+               Output('new-ingredient-location','value'),
+               Output('new-ingredient-new-location','value'),
+               ],
+              [Input('confirm-new-ingredient','submit_n_clicks'),
+               ],
+              [State('new-ingredient','value'),
+               State('table-single-ingredients','dropdown'),
+               State('new-ingredient-location','value'),
+               State('new-ingredient-new-location','value'),
+               State('new-location-div','style'),
+               ]
+              )
+def update_ingredients(add_ingredient_n_clicks,
+                       new_ingredient,
+                       existing_ingredients,
+                       new_ingredient_location,
+                       new_ingredient_new_location,
+                       new_location_div,
+                       ) :
 
     ctx = dash.callback_context
 
     # Add ingredient
-    if ctx.triggered and 'add-ingredient' in ctx.triggered[0]['prop_id'] :
+    if ctx.triggered and 'confirm-new-ingredient' in ctx.triggered[0]['prop_id'] :
         i = new_ingredient
         existing_ingredients['Ingredient']['options'].append({'label':i,'value':i})
-        return existing_ingredients,existing_ingredients,''
+        return existing_ingredients,existing_ingredients,'','',''
 
     # Start-up behavior
     unit_options = [{'label': i, 'value': i} for i in ['x','g']]
@@ -490,7 +581,8 @@ def update_ingredients(add_ingredient_n_clicks,new_ingredient,existing_ingredien
         'Unit': {'options': unit_options,'clearable':False,}
     }
 
-    return dropdown,dropdown,''
+    return dropdown,dropdown,'','',''
+
 
 # Add a recipe / update the list of available recipes
 # Add Row to recipe ingredients table
