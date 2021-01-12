@@ -341,13 +341,13 @@ def new_recipe_confirm(n_clicks,
     err_msg = 'There is a mistake in your recipe ({}) - please check.'
     confirm_msg = 'Adding new recipe \"{}\" -- please confirm.'
 
-    if new_recipe_name == None :
+    if not new_recipe_name :
         return False,'',True,err_msg.format('no name given')
 
     if MakeNewRecipeName(new_recipe_name) in os.listdir('recipes') :
         return False,'',True,err_msg.format('recipe with this name already exists')
 
-    if new_recipe_cooktime == None :
+    if new_recipe_cooktime == None or new_recipe_cooktime == '' :
         return False,'',True,err_msg.format('no cooktime given')
 
     # If new cookbook div is active:
@@ -358,10 +358,10 @@ def new_recipe_confirm(n_clicks,
         if not new_recipe_cookbook :
             return False,'',True,err_msg.format('no cookbook given')
 
-    if new_recipe_tags == None :
+    if not new_recipe_tags :
         return False,'',True,err_msg.format('no tags given')
 
-    if new_recipe_mealtimes == None :
+    if not new_recipe_mealtimes :
         return False,'',True,err_msg.format('no mealtimes given')
 
     for meal in new_recipe_mealtimes.split(',') :
@@ -526,7 +526,7 @@ def new_ingredient_confirm(n_clicks,
     err_msg = 'There is a mistake in your ingredient ({}) - please check.'
     confirm_msg = 'Adding new ingredient \"{}\" -- please confirm.'
 
-    if new_ingredient_name == None :
+    if not new_ingredient_name :
         return False,'',True,err_msg.format('no name given')
 
     # If new cookbook div is active:
