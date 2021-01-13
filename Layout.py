@@ -546,11 +546,13 @@ def new_ingredient_confirm(n_clicks,
                Output('new-ingredient','value'),
                Output('new-ingredient-location','value'),
                Output('new-ingredient-new-location','value'),
+               Output('new-ingredient-location','options'),
                ],
               [Input('confirm-new-ingredient','submit_n_clicks'),
                ],
               [State('new-ingredient','value'),
                State('table-single-ingredients','dropdown'),
+               State('new-ingredient-location','options'),
                State('new-ingredient-location','value'),
                State('new-ingredient-new-location','value'),
                State('new-location-div','style'),
@@ -559,6 +561,7 @@ def new_ingredient_confirm(n_clicks,
 def update_ingredients(add_ingredient_n_clicks,
                        new_ingredient,
                        existing_ingredients,
+                       existing_locations,
                        new_ingredient_location,
                        new_ingredient_new_location,
                        new_location_div,
@@ -568,20 +571,41 @@ def update_ingredients(add_ingredient_n_clicks,
 
     # Add ingredient
     if ctx.triggered and 'confirm-new-ingredient' in ctx.triggered[0]['prop_id'] :
+
         i = new_ingredient
         existing_ingredients['Ingredient']['options'].append({'label':i,'value':i})
-        return existing_ingredients,existing_ingredients,'','',''
+
+        the_ingredient_location = new_ingredient_location
+        # If there is a new location...
+        if ('display' not in new_location_div.keys()) or (new_location_div['display'] != 'none') :
+            the_ingredient_location = new_ingredient_new_location
+            existing_locations.append({'label':the_ingredient_location,
+                                       'value':the_ingredient_location})
+
+        text = []
+        text.append('%s %s'%(new_ingredient,the_ingredient_location))
+
+        with open('recipes/ingredients.txt','a') as f :
+            for t in text :
+                f.write(t+'\n')
+
+        return existing_ingredients,existing_ingredients,'','','',existing_locations
+
+    default_location_options = [
+        {'label': 'lidl', 'value': 'lidl'},
+        {'label': 'rewe', 'value': 'rewe'},
+    ]
 
     # Start-up behavior
     unit_options = [{'label': i, 'value': i} for i in ['x','g']]
     ingredient_options = [{'label': i, 'value': i} for i in ['Toast Twins','Tomatoes']]
 
-    dropdown={
+    columns_dropdown={
         'Ingredient': {'options': ingredient_options,'clearable':False,},
         'Unit': {'options': unit_options,'clearable':False,}
     }
 
-    return dropdown,dropdown,'','',''
+    return columns_dropdown,columns_dropdown,'','','',default_location_options
 
 
 # Add a recipe / update the list of available recipes
