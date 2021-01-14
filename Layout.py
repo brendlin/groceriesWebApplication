@@ -8,9 +8,11 @@ import dash_table
 import json
 import os
 import time
+import sqlalchemy
 
 from .Components import sync_div
 from .HelperFunctions import CreateShoppingList
+from .DatabaseHelpers import GetDataframe
 
 from app import app
 
@@ -591,21 +593,29 @@ def update_ingredients(add_ingredient_n_clicks,
 
         return existing_ingredients,existing_ingredients,'','','',existing_locations
 
-    default_location_options = [
-        {'label': 'lidl', 'value': 'lidl'},
-        {'label': 'rewe', 'value': 'rewe'},
-    ]
+    # print('Accessing database')
+    engine = sqlalchemy.create_engine('mysql+pymysql://root:atlaslap44@localhost/groceries')
+
+    units_df = GetDataframe(engine,'units')
+    units_abbrev = sorted(list(units_df['abbreviation']))
+
+    ingredients_df = GetDataframe(engine,'ingredients')
+    ingredient_locs = sorted(set(ingredients_df['ingredient_loc']))
+
+    ingredients = sorted(list(ingredients_df['ingredient_name']))
+    # print('Accessing database complete')
 
     # Start-up behavior
-    unit_options = [{'label': i, 'value': i} for i in ['x','g']]
-    ingredient_options = [{'label': i, 'value': i} for i in ['Toast Twins','Tomatoes']]
+    location_options = [{'label': i, 'value': i} for i in ingredient_locs]
+    unit_options = [{'label': i, 'value': i} for i in units_abbrev]
+    ingredient_options = [{'label': i, 'value': i} for i in ingredients]
 
     columns_dropdown={
         'Ingredient': {'options': ingredient_options,'clearable':False,},
         'Unit': {'options': unit_options,'clearable':False,}
     }
 
-    return columns_dropdown,columns_dropdown,'','','',default_location_options
+    return columns_dropdown,columns_dropdown,'','','',location_options
 
 
 # Add a recipe / update the list of available recipes
