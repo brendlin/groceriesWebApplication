@@ -14,6 +14,24 @@ from .Components import sync_div
 from .HelperFunctions import CreateShoppingList
 from .DatabaseHelpers import GetDataframe
 
+
+# PythonAnywhere database
+tmp = 'mysql+pymysql://{username}:{password}@{hostname}/{databasename}'
+DATABASE = tmp.format(username='kurtbrendlinger',
+                      password='ILoveSnickers',
+                      hostname='kurtbrendlinger.mysql.pythonanywhere-services.com',
+                      databasename='kurtbrendlinger$groceries',
+                      )
+
+# Local database
+if not os.environ.get('PYTHONANYWHERE_DOMAIN') :
+    # 'mysql+pymysql://root:atlaslap44@localhost/groceries'
+    DATABASE = tmp.format(username='root',
+                          password='atlaslap44',
+                          hostname='localhost',
+                          databasename='groceries',
+                          )
+
 from app import app
 
 storage = [
@@ -158,7 +176,7 @@ def make_filter_string(*click_info):
         else :
             styles.append({'display':'inline-block','verticalAlign':'middle',})
 
-    return *styles,','.join(out_str)
+    return styles + [','.join(out_str)]
 
 
 new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'marginTop':'20px',}),
@@ -594,7 +612,7 @@ def update_ingredients(add_ingredient_n_clicks,
         return existing_ingredients,existing_ingredients,'','','',existing_locations
 
     # print('Accessing database')
-    engine = sqlalchemy.create_engine('mysql+pymysql://root:atlaslap44@localhost/groceries')
+    engine = sqlalchemy.create_engine(DATABASE)
 
     units_df = GetDataframe(engine,'units')
     units_abbrev = sorted(list(units_df['abbreviation']))
