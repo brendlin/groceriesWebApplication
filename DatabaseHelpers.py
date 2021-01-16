@@ -10,7 +10,15 @@ def GetDataframe(engine,table_name) :
 
         return df
 
-def AddIngredientToDatabase(ingredient) :
+def AddIngredientToDatabase(engine,ingredient,location) :
+
+    txt  = 'INSERT IGNORE INTO ingredients (ingredient_name,ingredient_loc)'
+    txt += ' VALUES (:ingredient_name, :ingredient_loc);'
+    insert_ingredient_text = txt
+
+    tmp_dict = {'ingredient_name': ingredient.lower(), 'ingredient_loc': location.lower()}
+    with engine.connect() as con:
+        con.execute(sqlalchemy.sql.text(insert_ingredient_text), **tmp_dict)
 
     return
 

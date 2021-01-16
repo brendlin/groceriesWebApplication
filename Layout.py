@@ -12,7 +12,7 @@ import sqlalchemy
 
 from .Components import sync_div
 from .HelperFunctions import CreateShoppingList
-from .DatabaseHelpers import GetDataframe
+from .DatabaseHelpers import GetDataframe,AddIngredientToDatabase
 
 
 # PythonAnywhere database
@@ -531,6 +531,7 @@ def create_string_summary(table_meals,table_single_ingredients,
                State('new-ingredient-location','value'),
                State('new-ingredient-new-location','value'),
                State('new-location-div','style'),
+               State('table-single-ingredients','dropdown'),
                ]
               )
 def new_ingredient_confirm(n_clicks,
@@ -538,6 +539,7 @@ def new_ingredient_confirm(n_clicks,
                            new_ingredient_location,
                            new_ingredient_new_location,
                            new_location_div,
+                           existing_ingredients,
                            ) :
 
     if n_clicks <= 0 :
@@ -556,6 +558,11 @@ def new_ingredient_confirm(n_clicks,
     else :
         if not new_ingredient_location :
             return False,'',True,err_msg.format('no store given (just guess)')
+
+    #print(existing_ingredients['Ingredient']['options'])
+    ingredients_list = list(a['label'] for a in existing_ingredients['Ingredient']['options'])
+    if new_ingredient_name.lower() in ingredients_list :
+        return False,'',True,err_msg.format('ingredient %s already exists'%(new_ingredient_name))
 
     return True,confirm_msg.format(new_ingredient_name),False,''
 
@@ -589,6 +596,8 @@ def update_ingredients(add_ingredient_n_clicks,
 
     ctx = dash.callback_context
 
+    engine = sqlalchemy.create_engine(DATABASE)
+
     # Add ingredient
     if ctx.triggered and 'confirm-new-ingredient' in ctx.triggered[0]['prop_id'] :
 
@@ -609,11 +618,11 @@ def update_ingredients(add_ingredient_n_clicks,
             for t in text :
                 f.write(t+'\n')
 
+        AddIngredientToDatabase(engine,new_ingredient,the_ingredient_location)
+
         return existing_ingredients,existing_ingredients,'','','',existing_locations
 
     # print('Accessing database')
-    engine = sqlalchemy.create_engine(DATABASE)
-
     units_df = GetDataframe(engine,'units')
     units_abbrev = sorted(list(units_df['abbreviation']))
 
@@ -760,10 +769,17 @@ def update_recipes(confirm_new_recipe_nclicks,
          } for day in weekdays
     ]
 
-    cookbook_options = [
-        {'label': 'Chris Kochtute', 'value': 'chris kochtute'},
-        {'label': 'No Cookbook', 'value': 'no cookbook'},
-    ]
+    # print('Accessing database')
+    engine = sqlalchemy.create_engine(DATABASE)
+
+    recipes_df = GetDataframe(engine,'recipes')
+    recipe_mealtimes = GetDataframe(engine,'recipe_mealtimes')
+
+    cookbooks_df = GetDataframe(engine,'recipe_book')
+    cookbooks = sorted(list(cookbooks_df['recipe_book_short']))
+    # print('Accessing database complete')
+
+    cookbook_options = [{'label': i, 'value': i} for i in cookbooks]
 
     return (dropdown_data,cookbook_options,cookbook_options,
             new_recipe_name,new_recipe_cooktime,new_recipe_cookbook,new_recipe_new_cookbook,
