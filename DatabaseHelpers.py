@@ -22,6 +22,77 @@ def AddIngredientToDatabase(engine,ingredient,location) :
 
     return
 
+def AddRecipeToDatabase(engine,
+                        recipe_name,
+                        recipe_cooktime,
+                        recipe_cookbook,
+                        recipe_url,
+                        recipe_tags,
+                        recipe_mealtimes,
+                        recipe_ingredients_data
+                        ) :
+
+    with engine.connect() as con:
+
+        # insert cookbook
+        sql  = 'INSERT IGNORE INTO recipe_book (recipe_book_short)'
+        sql += ' VALUES (:recipe_book_short);'
+
+        tmp_dict = {'recipe_book_short': recipe_cookbook.rstrip().lstrip().lower(),}
+        #print(tmp_dict)
+        con.execute(sqlalchemy.sql.text(sql), **tmp_dict)
+
+        # insert recipe name
+        sql  = 'INSERT IGNORE INTO recipes (recipe_name,recipe_book_short,cooktime_minutes,recipe_url)'
+        sql += ' VALUES (:recipe_name, :recipe_book_short, :cooktime_minutes, :recipe_url);'
+
+        tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
+                    'recipe_book_short':recipe_cookbook.rstrip().lstrip().lower(),
+                    'cooktime_minutes':recipe_cooktime,
+                    'recipe_url':recipe_url.rstrip().lstrip().lower(),
+                    }
+        #print(tmp_dict)
+        con.execute(sqlalchemy.sql.text(sql), **tmp_dict)
+
+        # insert recipe quantity
+        for quantity_dict in recipe_ingredients_data :
+
+            sql  = 'INSERT INTO recipe_quantities (recipe_name,ingredient,quantity,unit_name)'
+            sql += ' VALUES (:recipe_name, :ingredient, :quantity, :unit_name);'
+
+            tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
+                        'ingredient': quantity_dict['Ingredient'],
+                        'quantity':float(quantity_dict['Amount']),
+                        'unit_name':quantity_dict['Unit'],
+                        }
+            #print(tmp_dict)
+            con.execute(sqlalchemy.sql.text(sql), **tmp_dict)
+
+        # insert mealtimes
+        for mealtime in recipe_mealtimes.split(',') :
+            sql  = 'INSERT IGNORE INTO recipe_mealtimes (recipe_name,recipe_mealtime)'
+            sql += ' VALUES (:recipe_name, :recipe_mealtime);'
+
+            tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
+                        'recipe_mealtime': mealtime.rstrip().lstrip().lower(),
+                        }
+            #print(tmp_dict)
+            con.execute(sqlalchemy.sql.text(sql), **tmp_dict)
+
+        # insert tags
+        for tag in recipe_tags.split(',') :
+            sql  = 'INSERT IGNORE INTO recipe_tags (recipe_name,recipe_tag)'
+            sql += ' VALUES (:recipe_name, :recipe_tag);'
+
+            tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
+                        'recipe_tag': tag.rstrip().lstrip().lower(),
+                        }
+            #print(tmp_dict)
+            con.execute(sqlalchemy.sql.text(sql), **tmp_dict)
+
+    return
+
+
 # Add recipe by filename
 # def AddRecipeFileToDatabase(recipe,fname) :
 

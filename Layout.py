@@ -12,7 +12,7 @@ import sqlalchemy
 
 from .Components import sync_div
 from .HelperFunctions import CreateShoppingList
-from .DatabaseHelpers import GetDataframe,AddIngredientToDatabase
+from .DatabaseHelpers import GetDataframe,AddIngredientToDatabase,AddRecipeToDatabase
 
 
 # PythonAnywhere database
@@ -689,6 +689,7 @@ def update_recipes(confirm_new_recipe_nclicks,
                    ) :
 
     ctx = dash.callback_context
+    engine = sqlalchemy.create_engine(DATABASE)
 
     # Add row to recipe ingredients table
     if ctx.triggered and 'add-recipe-ingredient-row-button' in ctx.triggered[0]['prop_id'] :
@@ -730,6 +731,16 @@ def update_recipes(confirm_new_recipe_nclicks,
             for t in text :
                 f.write(t+'\n')
 
+        AddRecipeToDatabase(engine,
+                            new_recipe_name,
+                            new_recipe_cooktime,
+                            the_recipe_cookbook,
+                            new_recipe_url,
+                            new_recipe_tags,
+                            new_recipe_mealtimes,
+                            recipe_ingredients_data
+                            )
+
         recipe_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':'x'},]
         new_recipe_name = ''
         new_recipe_cooktime = ''
@@ -770,8 +781,6 @@ def update_recipes(confirm_new_recipe_nclicks,
     ]
 
     # print('Accessing database')
-    engine = sqlalchemy.create_engine(DATABASE)
-
     recipes_df = GetDataframe(engine,'recipes')
     recipe_mealtimes = GetDataframe(engine,'recipe_mealtimes')
 
