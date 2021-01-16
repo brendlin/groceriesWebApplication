@@ -12,7 +12,12 @@ import sqlalchemy
 
 from .Components import sync_div
 from .HelperFunctions import CreateShoppingList
-from .DatabaseHelpers import GetDataframe,AddIngredientToDatabase,AddRecipeToDatabase
+from .DatabaseHelpers import (
+    GetDataframe,
+    AddIngredientToDatabase,
+    AddRecipeToDatabase,
+    SelectFilteredRecipes,
+)
 
 
 # PythonAnywhere database
@@ -151,6 +156,11 @@ single_ingredients_table = MakeIngredientsTable('table-single-ingredients')
 recipe_ingredients_table = MakeIngredientsTable('table-recipe-ingredients')
 
 tags = ['indian','spicy','vegetarian','asian','soup','pasta']
+
+# tags from database (must be reloaded to find new ones)
+engine = sqlalchemy.create_engine(DATABASE)
+tags_df = GetDataframe(engine,'recipe_tags')
+tags = set(list(tags_df['recipe_tag']))
 tag_buttons = []
 for tag in tags :
     tmp = html.Button(id='tag-%s-button'%(tag),children=tag,n_clicks=0,
@@ -176,6 +186,7 @@ def make_filter_string(*click_info):
         else :
             styles.append({'display':'inline-block','verticalAlign':'middle',})
 
+    #print('filter-string-csv:',','.join(out_str))
     return styles + [','.join(out_str)]
 
 
@@ -661,6 +672,11 @@ def update_ingredients(add_ingredient_n_clicks,
                ],
               [Input('confirm-new-recipe','submit_n_clicks'),
                Input('add-recipe-ingredient-row-button', 'n_clicks'),
+               # Filters
+               Input('filter-string-csv','children'),
+               Input('recipe-time-min','value'),
+               Input('recipe-time-max','value'),
+               Input('cookbook-dropdown','value'),
                ],
               [State('new-recipe-name','value'),
                State('new-recipe-cooktime','value'),
@@ -672,10 +688,16 @@ def update_ingredients(add_ingredient_n_clicks,
                State('new-recipe-mealtimes','value'),
                State('table-recipe-ingredients','data'),
                State('table-recipe-ingredients', 'columns'),
+               State('table-meals','data'),
                ]
               )
 def update_recipes(confirm_new_recipe_nclicks,
                    add_recipe_ingredient_row_button_nclicks,
+                   # Filters
+                   tag_filter_csv,
+                   recipe_time_minimum,
+                   recipe_time_max,
+                   cookbook_filter,
                    new_recipe_name,
                    new_recipe_cooktime,
                    new_recipe_cookbook,
@@ -686,9 +708,12 @@ def update_recipes(confirm_new_recipe_nclicks,
                    new_recipe_mealtimes,
                    recipe_ingredients_data,
                    recipe_ingredients_columns,
+                   current_table_meals_data,
                    ) :
 
     ctx = dash.callback_context
+
+    # move to where it is needed?
     engine = sqlalchemy.create_engine(DATABASE)
 
     # Add row to recipe ingredients table
@@ -750,35 +775,48 @@ def update_recipes(confirm_new_recipe_nclicks,
         new_recipe_tags = ''
         new_recipe_mealtimes = ''
 
-    # Default / startup behavior:
-    dummy_recipes = [
-        {'label':'Recipe 1','value':'Recipe 1'},
-        {'label':'Recipe 2','value':'Recipe 2'},
-        {'label':'Recipe 3','value':'Recipe 3'},
-    ]
-    dinner_recipes = dummy_recipes
-    lunch_recipes = dummy_recipes
-    breakfast_recipes = dummy_recipes
+    dinner_recipes = SelectFilteredRecipes(engine,mealtime='dinner',
+                                           cookbook=cookbook_filter,
+                                           tags=tag_filter_csv,
+                                           cooktime_min=recipe_time_minimum,
+                                           cooktime_max=recipe_time_max,
+                                           )
+    #print(dinner_recipes)
 
-    dropdown_data=[
-        {'Meal': {'options':dinner_recipes,
-                  'clearable':False},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
+    lunch_recipes = SelectFilteredRecipes(engine,mealtime='lunch',
+                                          cookbook=cookbook_filter,
+                                          tags=tag_filter_csv,
+                                          cooktime_min=recipe_time_minimum,
+                                          cooktime_max=recipe_time_max,
+                                          )
+
+    breakfast_recipes = SelectFilteredRecipes(engine,mealtime='breakfast',
+                                              cookbook=cookbook_filter,
+                                              tags=tag_filter_csv,
+                                              cooktime_min=recipe_time_minimum,
+                                              cooktime_max=recipe_time_max,
+                                              )
+
+    serves_dict = {'options':[{'label': str(i), 'value': i} for i in range(1,11)],
                    'clearable':False}
-         } for day in days
-    ] + [{}] + [
-        {'Meal': {'options':breakfast_recipes,
-                  'clearable':False},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
-                   'clearable':False}
-         } for day in weekends
-    ] + [{}] + [
-        {'Meal': {'options':lunch_recipes,
-                  'clearable':False},
-         'Serves':{'options':[{'label': str(i), 'value': i} for i in range(1,11)],
-                   'clearable':False}
-         } for day in weekdays
-    ]
+
+    dropdown_data = []
+    dropdown_data += [{'Meal':{'options':dinner_recipes[:],'clearable':False},
+                       'Serves':serves_dict} for day in days]
+    dropdown_data += [{}]
+    dropdown_data += [{'Meal': {'options':breakfast_recipes[:],'clearable':False},
+                       'Serves':serves_dict} for day in weekends]
+    dropdown_data += [{}]
+    dropdown_data += [{'Meal': {'options':lunch_recipes[:],'clearable':False},
+                       'Serves':serves_dict} for day in weekdays]
+
+    # Make sure that regardless of the filter, the users choice does not disappear.
+    for i,row in enumerate(current_table_meals_data) :
+        if row['Meal'] in ['Breakfasts','Lunches'] :
+            continue
+        if row['Meal'] :
+            val = row['Meal']
+            dropdown_data[i]['Meal']['options'].append({'label':val,'value':val})
 
     # print('Accessing database')
     recipes_df = GetDataframe(engine,'recipes')

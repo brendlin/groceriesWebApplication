@@ -10,6 +10,42 @@ def GetDataframe(engine,table_name) :
 
         return df
 
+def SelectFilteredRecipes(engine,mealtime=None,cookbook=None,
+                          tags=None,cooktime_min=None,cooktime_max=None) :
+
+    with engine.connect() as con :
+
+        txt  = 'SELECT recipes.recipe_name FROM recipes'
+        if mealtime :
+            txt += ' INNER JOIN recipe_mealtimes'
+            txt += ' ON recipes.recipe_name = recipe_mealtimes.recipe_name'
+        if tags :
+            txt += ' INNER JOIN recipe_tags'
+            txt += ' ON recipes.recipe_name = recipe_tags.recipe_name'
+
+        filters = []
+        if mealtime :
+            filters.append('recipe_mealtime = "%s"'%(mealtime))
+        if cookbook :
+            filters.append('recipe_book_short = "%s"'%(cookbook))
+        if (cooktime_min != None) and (cooktime_max == None or cooktime_min < cooktime_max) :
+            filters.append('cooktime_minutes >= %d'%(cooktime_min))
+        if (cooktime_max != None) and (cooktime_min == None or cooktime_min < cooktime_max) :
+            filters.append('cooktime_minutes <= %d'%(cooktime_max))
+        if tags :
+            for tag in tags.split(',') :
+                filters.append('recipe_tag = "%s"'%(tag))
+
+        filter_txt = ' WHERE '+' AND '.join(filters)
+
+        query = txt + filter_txt
+        #print(query)
+        df = pd.read_sql_query(query,con)
+
+    # Return a list of {'label':'blah','value':'blah'} dictionaries
+    tmp = df['recipe_name']
+    return [{'label':a,'value':a} for a in tmp]
+
 def AddIngredientToDatabase(engine,ingredient,location) :
 
     txt  = 'INSERT IGNORE INTO ingredients (ingredient_name,ingredient_loc)'
