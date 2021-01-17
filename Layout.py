@@ -167,7 +167,7 @@ for tag in tags_empty :
     tmp = html.Button(id='tag-%d-button'%(tag),children='button %d'%(tag),n_clicks=0,
                       style={'display':'inline-block','verticalAlign':'middle'})
     tmp_div = html.Div(id='tag-%d-div'%(tag),children=tmp,
-                       style={'display':'inline-block','verticalAlign':'middle'})
+                       style={'display':'inline-block','verticalAlign':'middle','display':'none'})
     tag_buttons.append(tmp_div)
 
 # This one determines whether the button div is visible or not
@@ -858,7 +858,7 @@ def update_recipes(confirm_new_recipe_nclicks,
     cookbooks = sorted(list(cookbooks_df['recipe_book_short']))
 
     tags_df = GetDataframe(engine,'recipe_tags')
-    available_tags = ','.join(list(set(sorted(list(tags_df['recipe_tag'])))))
+    available_tags = ','.join(sorted(list(set(list(tags_df['recipe_tag'])))))
     # print('Accessing database complete')
 
     cookbook_options = [{'label': i, 'value': i} for i in cookbooks]
