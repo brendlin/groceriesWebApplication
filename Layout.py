@@ -43,6 +43,7 @@ storage = [
     # full string summary of state
     html.Div(id='full-string-summary' ,style={'display': 'none'},children=None),
     html.Div(id='filter-string-csv' ,style={'display': 'none'},children=None),
+    html.Div(id='available-tags-csv' ,style={'display': 'none'},children=None),
     dcc.ConfirmDialog(id='confirm-reset',
                       message='Are you sure you want to reset the list? This will delete the shopping list for all users.',
                       ),
@@ -160,33 +161,66 @@ tags = ['indian','spicy','vegetarian','asian','soup','pasta']
 # tags from database (must be reloaded to find new ones)
 engine = sqlalchemy.create_engine(DATABASE)
 tags_df = GetDataframe(engine,'recipe_tags')
-tags = set(list(tags_df['recipe_tag']))
+tags_empty = list(range(20))
 tag_buttons = []
-for tag in tags :
-    tmp = html.Button(id='tag-%s-button'%(tag),children=tag,n_clicks=0,
+for tag in tags_empty :
+    tmp = html.Button(id='tag-%d-button'%(tag),children='button %d'%(tag),n_clicks=0,
                       style={'display':'inline-block','verticalAlign':'middle'})
-    tag_buttons.append(tmp)
+    tmp_div = html.Div(id='tag-%d-div'%(tag),children=tmp,
+                       style={'display':'inline-block','verticalAlign':'middle'})
+    tag_buttons.append(tmp_div)
 
+# This one determines whether the button div is visible or not
+# Also the button names
+@app.callback([Output('tag-{}-div'.format(tag), 'style') for tag in tags_empty]
+              + [Output('tag-{}-button'.format(tag), 'children') for tag in tags_empty],
+              [Input('available-tags-csv','children')],
+              [State('tag-{}-div'.format(tag), 'style') for tag in tags_empty]
+              + [State('tag-{}-button'.format(tag), 'children') for tag in tags_empty],
+              )
+def label_buttons(available_tags_csv,*tag_info):
+
+    style_info = list(tag_info[:len(tag_info)//2])
+    button_labels = list(tag_info[len(tag_info)//2:])
+    print(button_labels)
+
+    # Most of the tag fields are empty, do not display them.
+    for i in range(len(style_info)) :
+        style_info[i]['display'] = 'none'
+
+    # For each tag that is available, show a button for it
+    for i,tag in enumerate(available_tags_csv.split(',')) :
+        if (i+1)*2 > len(tag_info) :
+            break
+        style_info[i]['display'] = 'inline-block'
+        button_labels[i] = tag
+
+    print(style_info)
+    return style_info + button_labels
+
+# Outputs the filter string, and colors the button, based on the number of clicks.
 # Make filter string from button inputs
-@app.callback([Output('tag-{}-button'.format(tag), 'style') for tag in tags]
+@app.callback([Output('tag-{}-button'.format(tag), 'style') for tag in tags_empty]
               + [Output('filter-string-csv', 'children')],
-              [Input('tag-{}-button'.format(tag), 'n_clicks') for tag in tags],
-              [State('tag-{}-button'.format(tag), 'children') for tag in tags],
-)
-def make_filter_string(*click_info):
+              [Input('tag-{}-button'.format(tag), 'n_clicks') for tag in tags_empty],
+              [State('tag-{}-button'.format(tag), 'children') for tag in tags_empty]
+              )
+def make_filter_string(*inputs):
 
     out_str = []
     styles = []
 
-    for n_click,val in zip(click_info[:len(click_info)//2],click_info[len(click_info)//2:]) :
+    click_info = inputs[:len(inputs)//2]
+    tagname_info = inputs[len(inputs)//2:]
+
+    for i,n_click in enumerate(click_info) :
         if (n_click % 2) :
-            out_str.append(val)
+            out_str.append(tagname_info[i])
             styles.append({'display':'inline-block','verticalAlign':'middle',
                            'background-color':'#bfd8ff'})
         else :
             styles.append({'display':'inline-block','verticalAlign':'middle',})
 
-    #print('filter-string-csv:',','.join(out_str))
     return styles + [','.join(out_str)]
 
 
@@ -299,7 +333,7 @@ layout = html.Div( # Main Div
                 html.Label('Tags: ',style={'display':'inline-block','verticalAlign':'middle','marginRight':'10px'},),
                 *tag_buttons,
             ],
-            style={'margin-left':'1%','margin-right':'1%','height':'45px'},
+            style={'margin-left':'1%','margin-right':'1%'}, #,'height':'45px'
         ),
         html.Div( # Row Div
             children=[
@@ -669,6 +703,7 @@ def update_ingredients(add_ingredient_n_clicks,
                Output('new-recipe-tags','value'),
                Output('new-recipe-mealtimes','value'),
                Output('table-recipe-ingredients', 'data'),
+               Output('available-tags-csv','children')
                ],
               [Input('confirm-new-recipe','submit_n_clicks'),
                Input('add-recipe-ingredient-row-button', 'n_clicks'),
@@ -819,15 +854,16 @@ def update_recipes(confirm_new_recipe_nclicks,
             dropdown_data[i]['Meal']['options'].append({'label':val,'value':val})
 
     # print('Accessing database')
-    recipes_df = GetDataframe(engine,'recipes')
-    recipe_mealtimes = GetDataframe(engine,'recipe_mealtimes')
-
     cookbooks_df = GetDataframe(engine,'recipe_book')
     cookbooks = sorted(list(cookbooks_df['recipe_book_short']))
+
+    tags_df = GetDataframe(engine,'recipe_tags')
+    available_tags = ','.join(list(set(sorted(list(tags_df['recipe_tag'])))))
     # print('Accessing database complete')
 
     cookbook_options = [{'label': i, 'value': i} for i in cookbooks]
 
     return (dropdown_data,cookbook_options,cookbook_options,
             new_recipe_name,new_recipe_cooktime,new_recipe_cookbook,new_recipe_new_cookbook,
-            new_recipe_url,new_recipe_tags,new_recipe_mealtimes,recipe_ingredients_data)
+            new_recipe_url,new_recipe_tags,new_recipe_mealtimes,recipe_ingredients_data,
+            available_tags)
