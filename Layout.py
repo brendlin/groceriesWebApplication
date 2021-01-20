@@ -12,7 +12,7 @@ import sqlalchemy
 import pandas as pd
 
 from .Components import sync_div
-from .HelperFunctions import CreateShoppingList
+from .HelperFunctions import CreateShoppingListFromDF,CreateMealList
 from .DatabaseHelpers import (
     GetDataframe,
     AddIngredientToDatabase,
@@ -625,10 +625,12 @@ def create_string_summary(table_meals,table_single_ingredients,
     groupby = ['ingredient_loc','ingredient_name','unit_abbrev']
     agg = {'shopping_list_q':'sum'}
     all_ingredients_df = all_ingredients_df.groupby(groupby).agg(agg)
-    #all_ingredients_df = all_ingredients_df.reset_index()
+    all_ingredients_df = all_ingredients_df.reset_index()
     #print(all_ingredients_df)
 
-    shopping_list = CreateShoppingList(table_meals,table_single_ingredients)
+    shopping_list = CreateShoppingListFromDF(all_ingredients_df)
+    shopping_list.append(html.Br())
+    shopping_list += CreateMealList(table_meals)
 
     return new_string_summary,sync_div_style,shopping_list
 
