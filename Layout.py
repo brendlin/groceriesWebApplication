@@ -435,8 +435,15 @@ def new_recipe_confirm(n_clicks,
             return False,'',True,err_msg.format('Did not recognize mealtime \"{}\"').format(meal)
 
     for row in recipe_ingredients_data :
+        if not row['Ingredient'] :
+            return False,'',True,err_msg.format('ingredient missing in table')
+
         if row['Ingredient'] and not row['Amount'] :
             tmp_msg = 'no amount given for ingredient %s'%(row['Ingredient'])
+            return False,'',True,err_msg.format(tmp_msg)
+
+        if row['Ingredient'] and not row['Unit'] :
+            tmp_msg = 'no unit given for ingredient %s'%(row['Ingredient'])
             return False,'',True,err_msg.format(tmp_msg)
 
     return True,confirm_msg.format(new_recipe_name),False,''

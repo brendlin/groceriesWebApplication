@@ -148,6 +148,9 @@ def AddRecipeToDatabase(engine,
             sql  = 'INSERT INTO recipe_quantities (recipe_name,ingredient_name,quantity,unit_name)'
             sql += ' VALUES (:recipe_name, :ingredient_name, :quantity, :unit_name);'
 
+            if not quantity_dict['Ingredient'] :
+                continue
+
             tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
                         'ingredient_name': quantity_dict['Ingredient'],
                         'quantity':float(quantity_dict['Amount']),
