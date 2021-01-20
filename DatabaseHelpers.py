@@ -10,6 +10,57 @@ def GetDataframe(engine,table_name) :
 
         return df
 
+
+def GetIngredientLocations(engine,ingredient_names) :
+
+    if not len(list(ingredient_names)) :
+        return dict()
+
+    with engine.connect() as con :
+
+        txt = 'SELECT ingredient_name,ingredient_loc FROM ingredients'
+
+        filters = []
+        for i in ingredient_names :
+            filters.append('ingredient_name = "%s"'%(i))
+
+        filter_txt = ''
+        if filters :
+            filter_txt = ' WHERE '+' OR '.join(filters)
+
+        query = txt + filter_txt
+        #print(query)
+        df = pd.read_sql_query(query,con)
+        #print(df)
+        #print(df.set_index('ingredient_name').to_dict()['ingredient_loc'])
+
+    # Return a dictionary
+    ret_dict = df.set_index('ingredient_name').to_dict()['ingredient_loc']
+    return ret_dict
+
+
+def GetIngredientsFromRecipes(engine,recipes=[]) :
+
+    with engine.connect() as con :
+
+        txt  = 'SELECT recipe_quantities.*, ingredient_loc'
+        txt += ' from recipe_quantities INNER JOIN ingredients'
+        txt += ' ON recipe_quantities.ingredient_name = ingredients.ingredient_name'
+
+        filters = []
+        for i in recipes :
+            filters.append('recipe_name = "%s"'%(i))
+
+        filter_txt = ''
+        if filters :
+            filter_txt = ' WHERE '+' OR '.join(filters)
+
+        query = txt + filter_txt
+        #print(query)
+        df = pd.read_sql_query(query,con)
+
+    return df
+
 def SelectFilteredRecipes(engine,mealtime=None,cookbook=None,
                           tags=None,cooktime_min=None,cooktime_max=None) :
 
@@ -65,7 +116,8 @@ def AddRecipeToDatabase(engine,
                         recipe_url,
                         recipe_tags,
                         recipe_mealtimes,
-                        recipe_ingredients_data
+                        recipe_ingredients_data,
+                        units_dict # translating the unit abbreviations to full unit name
                         ) :
 
     with engine.connect() as con:
@@ -93,13 +145,13 @@ def AddRecipeToDatabase(engine,
         # insert recipe quantity
         for quantity_dict in recipe_ingredients_data :
 
-            sql  = 'INSERT INTO recipe_quantities (recipe_name,ingredient,quantity,unit_name)'
-            sql += ' VALUES (:recipe_name, :ingredient, :quantity, :unit_name);'
+            sql  = 'INSERT INTO recipe_quantities (recipe_name,ingredient_name,quantity,unit_name)'
+            sql += ' VALUES (:recipe_name, :ingredient_name, :quantity, :unit_name);'
 
             tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
-                        'ingredient': quantity_dict['Ingredient'],
+                        'ingredient_name': quantity_dict['Ingredient'],
                         'quantity':float(quantity_dict['Amount']),
-                        'unit_name':quantity_dict['Unit'],
+                        'unit_name':units_dict[quantity_dict['Unit']],
                         }
             #print(tmp_dict)
             con.execute(sqlalchemy.sql.text(sql), **tmp_dict)

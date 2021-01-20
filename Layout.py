@@ -9,6 +9,7 @@ import json
 import os
 import time
 import sqlalchemy
+import pandas as pd
 
 from .Components import sync_div
 from .HelperFunctions import CreateShoppingList
@@ -17,6 +18,8 @@ from .DatabaseHelpers import (
     AddIngredientToDatabase,
     AddRecipeToDatabase,
     SelectFilteredRecipes,
+    GetIngredientsFromRecipes,
+    GetIngredientLocations,
 )
 
 
@@ -182,7 +185,6 @@ def label_buttons(available_tags_csv,*tag_info):
 
     style_info = list(tag_info[:len(tag_info)//2])
     button_labels = list(tag_info[len(tag_info)//2:])
-    print(button_labels)
 
     # Most of the tag fields are empty, do not display them.
     for i in range(len(style_info)) :
@@ -195,7 +197,6 @@ def label_buttons(available_tags_csv,*tag_info):
         style_info[i]['display'] = 'inline-block'
         button_labels[i] = tag
 
-    print(style_info)
     return style_info + button_labels
 
 # Outputs the filter string, and colors the button, based on the number of clicks.
@@ -358,7 +359,7 @@ layout = html.Div( # Main Div
                 *storage,
             ],
             className='row',
-            style={'height':'100%'},
+            style={'height':'100%','margin-top':'10px'},
         ), # Row Div End
     ], # Main Div children End
 ) # Main Div End
@@ -558,7 +559,75 @@ def create_string_summary(table_meals,table_single_ingredients,
     new_string_summary = SetGlobalShoppingListJsonFile(table_meals,table_single_ingredients)
     sync_div_style['display'] = 'none'
 
+    #
     # Create the shopping list
+    #
+
+    #print (table_meals)
+    meals = list(a['Meal'] for a in table_meals)
+    #print('Meals:',meals)
+
+    meals_df = pd.DataFrame(table_meals)
+    #print(meals_df)
+
+    # If there are duplicate meals, aggregate them together.
+    meals_df_agg = meals_df[meals_df['Serves'] != ''].groupby(by='Meal').sum()
+    meals_df_agg['Serves'] = meals_df_agg['Serves'].astype(int)
+    #print(meals_df_agg)
+
+    # This is the serving scale factor dict
+    scale_factor_dict = meals_df_agg['Serves'].to_dict()
+
+    #
+    # Get the recipe quantities for each meal
+    #
+    unique_meals_list = list(meals_df_agg.index)
+    engine = sqlalchemy.create_engine(DATABASE)
+    meals_ingredients_df = GetIngredientsFromRecipes(engine,unique_meals_list)
+
+    # Change units to abbrev
+    units_dict = GetDataframe(engine,'units').set_index('unit_name').to_dict()['abbreviation']
+    meals_ingredients_df['unit_abbrev'] = meals_ingredients_df['unit_name'].map(units_dict)
+
+    # Multiply by the scale factor of servings
+    meals_ingredients_df['shopping_list_q'] = meals_ingredients_df['quantity']
+    meals_ingredients_df['shopping_list_q'] *= (0.5 * meals_ingredients_df['recipe_name'].map(scale_factor_dict))
+
+    columns = ['recipe_name','ingredient_name','shopping_list_q','unit_abbrev','ingredient_loc']
+    meals_ingredients_df = meals_ingredients_df[columns]
+    #print(meals_ingredients_df)
+
+    #
+    # Now for the extra ingredients
+    #
+    single_ingredients_df = pd.DataFrame(table_single_ingredients)
+
+    ingr_loc_dict = GetIngredientLocations(engine,single_ingredients_df['Ingredient'])
+    #print(ingr_loc_dict)
+    single_ingredients_df['ingredient_loc'] = single_ingredients_df['Ingredient'].map(ingr_loc_dict)
+    single_ingredients_df['recipe_name'] = 'extras'
+    single_ingredients_df['shopping_list_q'] = single_ingredients_df['Amount'].astype(float)
+    single_ingredients_df.rename(columns={'Ingredient':'ingredient_name',
+                                          'Unit':'unit_abbrev'},inplace=True)
+    single_ingredients_df = single_ingredients_df[columns]
+    #print(single_ingredients_df)
+
+    #
+    # Combine recipes with extras
+    #
+    all_ingredients_df = pd.concat([meals_ingredients_df,single_ingredients_df],ignore_index=False)
+    #print(all_ingredients_df)
+
+
+    # Group by ingredient_name and unit,
+    # Aggregate quantities,
+    # Promote ingredient_name and unit back to columns (reset_index)
+    groupby = ['ingredient_loc','ingredient_name','unit_abbrev']
+    agg = {'shopping_list_q':'sum'}
+    all_ingredients_df = all_ingredients_df.groupby(groupby).agg(agg)
+    #all_ingredients_df = all_ingredients_df.reset_index()
+    #print(all_ingredients_df)
+
     shopping_list = CreateShoppingList(table_meals,table_single_ingredients)
 
     return new_string_summary,sync_div_style,shopping_list
@@ -772,13 +841,17 @@ def update_recipes(confirm_new_recipe_nclicks,
         text.append('Property.recipe_tags: %s'%(new_recipe_tags))
         text.append('Property.recipe_mealtimes: %s'%(new_recipe_mealtimes))
 
+        units_dict = GetDataframe(engine,'units').set_index('unit_name').to_dict()['abbreviation']
+        units_dict = {value:key for key, value in units_dict.items()}
+        # print('units_dict:',units_dict)
+
         for row in recipe_ingredients_data :
             if not row['Ingredient'] :
                 continue
 
             amount = ''
             if row['Amount'] and row['Unit'] :
-                amount = '{} {}'.format(row['Amount'],row['Unit'])
+                amount = '{} {}'.format(row['Amount'],units_dict[row['Unit']])
             else :
                 amount = '{}'.format(row['Amount'])
 
@@ -798,7 +871,8 @@ def update_recipes(confirm_new_recipe_nclicks,
                             new_recipe_url,
                             new_recipe_tags,
                             new_recipe_mealtimes,
-                            recipe_ingredients_data
+                            recipe_ingredients_data,
+                            units_dict
                             )
 
         recipe_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':'x'},]
