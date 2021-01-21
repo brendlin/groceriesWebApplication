@@ -14,6 +14,7 @@ import pandas as pd
 from .Components import sync_div
 from .HelperFunctions import CreateShoppingListFromDF,CreateMealList
 from .DatabaseHelpers import (
+    GetDatabaseName,
     GetDataframe,
     AddIngredientToDatabase,
     AddRecipeToDatabase,
@@ -23,22 +24,7 @@ from .DatabaseHelpers import (
 )
 
 
-# PythonAnywhere database
-tmp = 'mysql+pymysql://{username}:{password}@{hostname}/{databasename}'
-DATABASE = tmp.format(username='kurtbrendlinger',
-                      password='ILoveSnickers',
-                      hostname='kurtbrendlinger.mysql.pythonanywhere-services.com',
-                      databasename='kurtbrendlinger$groceries',
-                      )
-
-# Local database
-if not os.environ.get('PYTHONANYWHERE_DOMAIN') :
-    # 'mysql+pymysql://root:atlaslap44@localhost/groceries'
-    DATABASE = tmp.format(username='root',
-                          password='atlaslap44',
-                          hostname='localhost',
-                          databasename='groceries',
-                          )
+DATABASE = GetDatabaseName()
 
 from app import app
 
@@ -739,7 +725,7 @@ def update_ingredients(add_ingredient_n_clicks,
                                        'value':the_ingredient_location})
 
         text = []
-        text.append('%s %s'%(new_ingredient,the_ingredient_location))
+        text.append('%s, %s'%(new_ingredient,the_ingredient_location))
 
         with open('recipes/ingredients.txt','a') as f :
             for t in text :
