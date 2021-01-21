@@ -308,6 +308,7 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                            html.Br(),
                            html.Div(html.Button('Add Recipe', id='add-recipe-button', n_clicks=0),
                                     style={'text-align':'right','width':'95%'}),
+                           html.Br(),
                            ],
                           style={'backgroundColor':'#e9eaf0'},
 )
@@ -327,7 +328,7 @@ layout = html.Div( # Main Div
                 dcc.Dropdown(id='cookbook-dropdown',placeholder='Cookbook',style={'width':'200px','display':'inline-block','verticalAlign':'middle'}),
                 html.A('Link to recipe',id='cookbook-link',href='https://cern.ch/kurt', target='_blank',style={'display':'inline-block','verticalAlign':'middle','marginLeft':'10px','display':'none'},)
             ],
-            style={'margin-left':'1%','margin-right':'1%','height':'80px'},
+            style={'margin-left':'1%','margin-right':'1%'},
         ),
         html.Div( # Tags
             children=[
@@ -338,21 +339,24 @@ layout = html.Div( # Main Div
         ),
         html.Div( # Row Div
             children=[
-                html.Div(html.Div(meals_table,style={'width':'95%'}),
-                         className='four columns',
-                         style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
+                html.Div([html.Div(meals_table,style={'width':'95%'}),
+                          html.Div(html.Br()),
+                          ],
+                         className='fork columns',
+                         style={'border-right':'1px solid #adadad','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
                           html.Button('Add Row', id='add-rows-button', n_clicks=0),
                           new_ingredient_div,
                           new_recipe_div,
+                          html.Div(html.Br()),
                           ],
-                         className='four columns',
-                         style={'border-right':'1px solid #adadad','height':'80vh','margin-left':'1%','margin-right':'1%'},
+                         className='fork columns',
+                         style={'border-right':'1px solid #adadad','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(final_list_children)],
-                         className='four columns',
-                         style={'margin-left':'1%','margin-right':'1%','height':'80vh'},
+                         className='fork columns',
+                         style={'margin-left':'1%','margin-right':'1%'},
                         ),
 
                 # here is where all the hidden components get added
