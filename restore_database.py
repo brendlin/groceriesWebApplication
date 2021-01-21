@@ -113,6 +113,8 @@ AddIngredientsByFile(the_ingredients_file)
 for i in os.listdir(the_dir) :
     if i.startswith('.') :
         continue
+    if i.endswith('~') :
+        continue
     if i == 'ingredients.txt' :
         continue
 

@@ -25,6 +25,7 @@ from .DatabaseHelpers import (
 
 
 DATABASE = GetDatabaseName()
+engine = sqlalchemy.create_engine(DATABASE)
 
 from app import app
 
@@ -148,7 +149,6 @@ recipe_ingredients_table = MakeIngredientsTable('table-recipe-ingredients')
 tags = ['indian','spicy','vegetarian','asian','soup','pasta']
 
 # tags from database (must be reloaded to find new ones)
-engine = sqlalchemy.create_engine(DATABASE)
 tags_df = GetDataframe(engine,'recipe_tags')
 tags_empty = list(range(20))
 tag_buttons = []
@@ -175,6 +175,10 @@ def label_buttons(available_tags_csv,*tag_info):
     # Most of the tag fields are empty, do not display them.
     for i in range(len(style_info)) :
         style_info[i]['display'] = 'none'
+
+    # Catch missing tags
+    if available_tags_csv == None :
+        return style_info + button_labels
 
     # For each tag that is available, show a button for it
     for i,tag in enumerate(available_tags_csv.split(',')) :
@@ -579,7 +583,6 @@ def create_string_summary(table_meals,table_single_ingredients,
     # Get the recipe quantities for each meal
     #
     unique_meals_list = list(meals_df_agg.index)
-    engine = sqlalchemy.create_engine(DATABASE)
     meals_ingredients_df = GetIngredientsFromRecipes(engine,unique_meals_list)
 
     # Change units to abbrev
@@ -709,8 +712,6 @@ def update_ingredients(add_ingredient_n_clicks,
 
     ctx = dash.callback_context
 
-    engine = sqlalchemy.create_engine(DATABASE)
-
     # Add ingredient
     if ctx.triggered and 'confirm-new-ingredient' in ctx.triggered[0]['prop_id'] :
 
@@ -815,9 +816,6 @@ def update_recipes(confirm_new_recipe_nclicks,
                    ) :
 
     ctx = dash.callback_context
-
-    # move to where it is needed?
-    engine = sqlalchemy.create_engine(DATABASE)
 
     # Add row to recipe ingredients table
     if ctx.triggered and 'add-recipe-ingredient-row-button' in ctx.triggered[0]['prop_id'] :

@@ -30,7 +30,7 @@ def GetDataframe(engine,table_name) :
         query = 'SELECT * FROM %s'%(table_name)
         df = pd.read_sql_query(query,con)
 
-        return df
+    return df
 
 
 def GetIngredientLocations(engine,ingredient_names) :
