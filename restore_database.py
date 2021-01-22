@@ -17,6 +17,10 @@ def AddRecipeFileToDatabase(recipe,fname) :
                   'recipe_url','recipe_tags','recipe_mealtimes']
 
     properties = dict()
+
+    # Default url is empty
+    properties['recipe_url'] = ''
+
     recipe_quantity_dicts = []
 
     with open(fname) as f:

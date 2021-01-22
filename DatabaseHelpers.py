@@ -163,10 +163,15 @@ def AddRecipeToDatabase(engine,
         sql  = 'INSERT IGNORE INTO recipes (recipe_name,recipe_book_short,cooktime_minutes,recipe_url)'
         sql += ' VALUES (:recipe_name, :recipe_book_short, :cooktime_minutes, :recipe_url);'
 
+        if recipe_url :
+            recipe_url = recipe_url.rstrip().lstrip().lower()
+        else :
+            recipe_url = ''
+
         tmp_dict = {'recipe_name': recipe_name.rstrip().lstrip().lower(),
                     'recipe_book_short':recipe_cookbook.rstrip().lstrip().lower(),
                     'cooktime_minutes':recipe_cooktime,
-                    'recipe_url':recipe_url.rstrip().lstrip().lower(),
+                    'recipe_url':recipe_url,
                     }
         #print(tmp_dict)
         con.execute(sqlalchemy.sql.text(sql), **tmp_dict)

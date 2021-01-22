@@ -1,5 +1,5 @@
 
-DROP TABLE IF EXISTS recipe_quantities, recipes, ingredients, units, recipe_book, recipe_tags, recipe_mealtimes;
+DROP TABLE IF EXISTS recipe_mealtimes, recipe_tags, recipe_quantities, recipes, recipe_book, ingredients, units;
 
 CREATE TABLE units (
     unit_name VARCHAR(100) NOT NULL,
@@ -88,7 +88,8 @@ CREATE TABLE recipe_tags (
 
 INSERT IGNORE INTO recipe_tags (recipe_name,recipe_tag)
 VALUES
-('avocado pasta','pasta');
+('avocado pasta','pasta'),
+('avocado pasta','avocado');
 
 -- Because each recipe can have multiple mealtimes, normalize it
 CREATE TABLE recipe_mealtimes (
