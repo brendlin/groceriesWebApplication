@@ -63,6 +63,11 @@ def GetIngredientLocations(engine,ingredient_names) :
 
 def GetIngredientsFromRecipes(engine,recipes=[]) :
 
+    # If there are no recipes selected, then should return an empty list.
+    # This is a hack to force that.
+    if not recipes :
+        recipes.append('no_recipe_ever')
+
     with engine.connect() as con :
 
         txt  = 'SELECT recipe_quantities.*, ingredient_loc'
@@ -125,7 +130,8 @@ def AddIngredientToDatabase(engine,ingredient,location) :
     txt += ' VALUES (:ingredient_name, :ingredient_loc);'
     insert_ingredient_text = txt
 
-    tmp_dict = {'ingredient_name': ingredient.lower(), 'ingredient_loc': location.lower()}
+    tmp_dict = {'ingredient_name': ingredient.lstrip().rstrip().lower(),
+                'ingredient_loc': location.lstrip().rstrip().lower()}
     with engine.connect() as con:
         con.execute(sqlalchemy.sql.text(insert_ingredient_text), **tmp_dict)
 

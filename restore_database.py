@@ -62,7 +62,7 @@ def AddRecipeFileToDatabase(recipe,fname) :
 
     engine = sqlalchemy.create_engine(DATABASE)
     AddRecipeToDatabase(engine,
-                        recipe,
+                        recipe.replace('_',' '),
                         properties['cooktime_minutes'],
                         properties['recipe_book'],
                         properties['recipe_url'],
@@ -92,8 +92,8 @@ def AddIngredientsByFile(fname) :
                 print(line)
                 sys.exit()
 
-            ingredients.append(tmp[0])
-            locations.append(tmp[1])
+            ingredients.append(tmp[0].lstrip().rstrip())
+            locations.append(tmp[1].lstrip().rstrip())
 
     engine = sqlalchemy.create_engine(DATABASE)
     for ingr,loc in zip(ingredients,locations) :

@@ -54,7 +54,7 @@ weekends = ['sunday','saturday']
 def MakeNewRecipeName(recipe_text) :
     return recipe_text.lower().replace(' ','_') + '.txt'
 
-def GetResetMealTableData() :
+def GetResetMealTableData(mealtime) :
 
     _days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
     _weekdays = ['monday','tuesday','wednesday','thursday','friday']
@@ -63,16 +63,25 @@ def GetResetMealTableData() :
     abbrev = {'saturday':'Sat','sunday':'Sun','monday':'Mon','tuesday':'Tue','wednesday':'Wed',
               'thursday':'Thu','friday':'Fri'}
 
-    _data  = [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _days]
-    _data += [{'Day':''         ,'Meal':'Breakfasts','Serves':''}]
-    _data += [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _weekends]
-    _data += [{'Day':''         ,'Meal':'Lunches','Serves':''}]
-    _data += [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _weekdays]
+    _data = []
+    if mealtime == 'Dinners' :
+        _data = [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _days]
+
+    if mealtime == 'Breakfasts' :
+        _data = [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _weekends]
+
+    if mealtime == 'Lunches' :
+        _data = [{'Day':abbrev[day],'Meal':None,'Serves':2} for day in _weekdays]
 
     return _data
 
-def SetGlobalShoppingListJsonFile(_table_meals_data,_table_single_ingredients_data) :
-    _full_summary = [_table_meals_data,_table_single_ingredients_data]
+def SetGlobalShoppingListJsonFile(_table_meals_data_dinners,_table_meals_data_bfasts,
+                                  _table_meals_data_lunches,
+                                  _table_single_ingredients_data) :
+    _full_summary = [_table_meals_data_dinners,
+                     _table_meals_data_bfasts,
+                     _table_meals_data_lunches,
+                     _table_single_ingredients_data]
     _full_summary_dumps = json.dumps(_full_summary)
 
     # If there was no sync,
@@ -83,39 +92,42 @@ def SetGlobalShoppingListJsonFile(_table_meals_data,_table_single_ingredients_da
     return _full_summary_dumps
 
 
-meals_table = dash_table.DataTable(
-    id = 'table-meals',
-    row_deletable=False,
-    editable=True,
-    style_cell={'textAlign':'left','padding-left':'15px',},
-    style_cell_conditional=[
-        {'if': {'column_id': 'Meal'}  ,'width': '5%'},
-        {'if': {'column_id': 'Meal'}  ,'width': '75%'},
-        {'if': {'column_id': 'Serves'},'width': '20%'},
-        {'if': {'column_id': 'Day'}   ,'padding-left': '5px','padding-right':'5px'},
-    ],
-    style_data_conditional=[
-        {'if': {'filter_query': '{Serves} > 2','column_id': 'Serves'},
-         'fontWeight':'bold','fontSize':16},
-        {'if': {'filter_query': '{Serves} < 2','column_id': 'Serves'},
-         'fontWeight': 'bold','fontSize':16},
-        {'if': {'filter_query': '{Meal} = "Dinners"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
-        {'if': {'filter_query': '{Meal} = "Breakfasts"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
-        {'if': {'filter_query': '{Meal} = "Lunches"'},'backgroundColor': '#fafafa','fontWeight': '','fontSize':12},
-        {'if': {'state': 'selected'},'backgroundColor': '#FAFAFA','border': '1px dark gray',},
-    ],
+def MakeMealsTable(mealtime) :
+    meals_table = dash_table.DataTable(
+        id = 'table-meals-%s'%(mealtime.lower()),
+        row_deletable=False,
+        editable=True,
+        style_cell={'textAlign':'left','padding-left':'15px',},
+        style_cell_conditional=[
+            {'if': {'column_id': 'Meal'}  ,'width': '5%'},
+            {'if': {'column_id': 'Meal'}  ,'width': '75%'},
+            {'if': {'column_id': 'Serves'},'width': '20%'},
+            {'if': {'column_id': 'Day'}   ,'padding-left': '5px','padding-right':'5px'},
+        ],
+        style_data_conditional=[
+            {'if': {'filter_query': '{Serves} > 2','column_id': 'Serves'},
+             'fontWeight':'bold','fontSize':16},
+            {'if': {'filter_query': '{Serves} < 2','column_id': 'Serves'},
+             'fontWeight': 'bold','fontSize':16},
+            {'if': {'state': 'selected'},'backgroundColor': '#FAFAFA','border': '1px dark gray',},
+        ],
 
-    # Populated in dropdowns
-    data=[],
-    dropdown_data=[],
+        # Populated in dropdowns
+        data=[],
+        dropdown_data=[],
 
-    columns=[
-        {'id': 'Day', 'name': ''},
-        {'id': 'Meal', 'name': 'Dinners', 'presentation': 'dropdown'},
-        {'id': 'Serves', 'name': 'Serves', 'presentation': 'dropdown'},
-    ],
+        columns=[
+            {'id': 'Day', 'name': ''},
+            {'id': 'Meal', 'name': mealtime, 'presentation': 'dropdown'},
+            {'id': 'Serves', 'name': 'Serves', 'presentation': 'dropdown'},
+        ],
 
-)
+    )
+    return meals_table
+
+meals_table_dinners = MakeMealsTable('Dinners')
+meals_table_breakfasts = MakeMealsTable('Breakfasts')
+meals_table_lunches = MakeMealsTable('Lunches')
 
 def MakeIngredientsTable(id) :
     return dash_table.DataTable(
@@ -329,7 +341,9 @@ layout = html.Div( # Main Div
         ),
         html.Div( # Row Div
             children=[
-                html.Div([html.Div(meals_table,style={'width':'95%'}),
+                html.Div([html.Div(meals_table_dinners,style={'width':'95%'}),
+                          html.Div(meals_table_breakfasts,style={'width':'95%'}),
+                          html.Div(meals_table_lunches,style={'width':'95%'}),
                           html.Div(html.Br()),
                           ],
                          className='fork columns',
@@ -478,7 +492,9 @@ def switch_new_location(n_clicks_new,n_clicks_exising):
 
 
 # Add Row Callback + Sync tables callback
-@app.callback([Output('table-meals','data'),
+@app.callback([Output('table-meals-dinners','data'),
+               Output('table-meals-breakfasts','data'),
+               Output('table-meals-lunches','data'),
                Output('table-single-ingredients','data'),
                ],
               [Input('add-rows-button', 'n_clicks'),
@@ -487,36 +503,43 @@ def switch_new_location(n_clicks_new,n_clicks_exising):
                ],
               [State('full-string-summary','children'),
                State('table-single-ingredients', 'data'),
-               State('table-meals','data'),
+               State('table-meals-dinners','data'),
+               State('table-meals-breakfasts','data'),
+               State('table-meals-lunches','data'),
                ],
 )
 def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
-               full_string_summary,si_rows,meals_data) :
+               full_string_summary,si_rows,
+               meals_data_dinners,meals_data_breakfasts,meals_data_lunches) :
 
     ctx = dash.callback_context
 
     # Add rows to single ingredients
     if ctx.triggered and 'add-rows-button' in ctx.triggered[0]['prop_id'] :
         si_rows.append({'Ingredient':'','Amount':1,'Unit':'x'})
-        return meals_data,si_rows
+        return meals_data_dinners,meals_data_breakfasts,meals_data_lunches,si_rows
 
     # Replace tables with the full string summary coming from the file
     # (triggered by callback below)
     elif ctx.triggered and 'sync-button' in ctx.triggered[0]['prop_id'] :
         full_summary = json.loads(full_string_summary)
-        table_meals = full_summary[0]
-        table_single_ingredients = full_summary[1]
-        return table_meals,table_single_ingredients
+        table_meals_dinners = full_summary[0]
+        table_meals_bfasts = full_summary[1]
+        table_meals_lunches = full_summary[2]
+        table_single_ingredients = full_summary[3]
+        return table_meals_dinners,table_meals_bfasts,table_meals_lunches,table_single_ingredients
 
     # Use "starting point" tables
-    default_meals_data = GetResetMealTableData()
+    default_dinners = GetResetMealTableData('Dinners')
+    default_bfasts = GetResetMealTableData('Breakfasts')
+    default_lunches = GetResetMealTableData('Lunches')
     default_single_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':'x'},]
 
     # If this is a reset, then also remove the json file.
     if ctx.triggered and 'confirm-reset' in ctx.triggered[0]['prop_id'] :
         os.remove('global_shopping_list.json')
 
-    return default_meals_data,default_single_ingredients_data
+    return default_dinners,default_bfasts,default_lunches,default_single_ingredients_data
 
 # Create local full string summary
 @app.callback(
@@ -524,7 +547,9 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
      Output('sync-div','style'),
      Output('shopping-list','children'),
      ],
-    [Input('table-meals','data'),
+    [Input('table-meals-dinners','data'),
+     Input('table-meals-breakfasts','data'),
+     Input('table-meals-lunches','data'),
      Input('table-single-ingredients','data'),
      ],
     [State('full-string-summary','children'),
@@ -532,13 +557,15 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
      State('shopping-list','children'),
      ]
 )
-def create_string_summary(table_meals,table_single_ingredients,
+def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lunches,
+                          table_single_ingredients,
                           previous_string_summary,sync_div_style,current_shopping_list) :
 
     # If we are just starting, then we need to set the previous string summary to check against
     # the json file.
     if previous_string_summary == None :
-        full_summary = [table_meals,table_single_ingredients]
+        full_summary = [table_meals_dinners,table_meals_bfasts,table_meals_lunches,
+                        table_single_ingredients]
         previous_string_summary = json.dumps(full_summary)
 
     # Check if the previous string summary is the same
@@ -557,7 +584,10 @@ def create_string_summary(table_meals,table_single_ingredients,
 
     # If the json file matches the previous state, then proceed
     # (update the json file and make sure the sync div is hidden)
-    new_string_summary = SetGlobalShoppingListJsonFile(table_meals,table_single_ingredients)
+    new_string_summary = SetGlobalShoppingListJsonFile(table_meals_dinners,
+                                                       table_meals_bfasts,
+                                                       table_meals_lunches,
+                                                       table_single_ingredients)
     sync_div_style['display'] = 'none'
 
     #
@@ -565,14 +595,16 @@ def create_string_summary(table_meals,table_single_ingredients,
     #
 
     #print (table_meals)
-    meals = list(a['Meal'] for a in table_meals)
+    meals  = list(a['Meal'] for a in table_meals_dinners)
+    meals += list(a['Meal'] for a in table_meals_bfasts)
+    meals += list(a['Meal'] for a in table_meals_lunches)
     #print('Meals:',meals)
 
-    meals_df = pd.DataFrame(table_meals)
+    meals_df = pd.DataFrame(table_meals_dinners + table_meals_bfasts + table_meals_lunches)
     #print(meals_df)
 
     # If there are duplicate meals, aggregate them together.
-    meals_df_agg = meals_df[meals_df['Serves'] != ''].groupby(by='Meal').sum()
+    meals_df_agg = meals_df.groupby(by='Meal').sum()
     meals_df_agg['Serves'] = meals_df_agg['Serves'].astype(int)
     #print(meals_df_agg)
 
@@ -584,6 +616,7 @@ def create_string_summary(table_meals,table_single_ingredients,
     #
     unique_meals_list = list(meals_df_agg.index)
     meals_ingredients_df = GetIngredientsFromRecipes(engine,unique_meals_list)
+    #print(meals_ingredients_df)
 
     # Change units to abbrev
     units_dict = GetDataframe(engine,'units').set_index('unit_name').to_dict()['abbreviation']
@@ -601,6 +634,7 @@ def create_string_summary(table_meals,table_single_ingredients,
     # Now for the extra ingredients
     #
     single_ingredients_df = pd.DataFrame(table_single_ingredients)
+    #print(single_ingredients_df)
 
     ingr_loc_dict = GetIngredientLocations(engine,single_ingredients_df['Ingredient'])
     #print(ingr_loc_dict)
@@ -630,7 +664,7 @@ def create_string_summary(table_meals,table_single_ingredients,
 
     shopping_list = CreateShoppingListFromDF(all_ingredients_df)
     shopping_list.append(html.Br())
-    shopping_list += CreateMealList(table_meals)
+    shopping_list += CreateMealList(table_meals_dinners + table_meals_bfasts + table_meals_lunches)
 
     return new_string_summary,sync_div_style,shopping_list
 
@@ -759,9 +793,24 @@ def update_ingredients(add_ingredient_n_clicks,
     return columns_dropdown,columns_dropdown,'','','',location_options
 
 
+#
+# Helper function to keep the current choice from disappearing
+#
+def KeepUserChoiceAsOption(_table_meals_data,_dropdown) :
+    for i,row in enumerate(_table_meals_data) :
+        if not row['Meal'] :
+            continue
+        val = row['Meal']
+        _dropdown[i]['Meal']['options'].append({'label':val,'value':val})
+
+    return
+
+
 # Add a recipe / update the list of available recipes
 # Add Row to recipe ingredients table
-@app.callback([Output('table-meals','dropdown_data'),
+@app.callback([Output('table-meals-dinners','dropdown_data'),
+               Output('table-meals-breakfasts','dropdown_data'),
+               Output('table-meals-lunches','dropdown_data'),
                Output('cookbook-dropdown','options'),
                Output('new-recipe-cookbook','options'),
                Output('new-recipe-name','value'),
@@ -792,7 +841,9 @@ def update_ingredients(add_ingredient_n_clicks,
                State('new-recipe-mealtimes','value'),
                State('table-recipe-ingredients','data'),
                State('table-recipe-ingredients', 'columns'),
-               State('table-meals','data'),
+               State('table-meals-dinners','data'),
+               State('table-meals-breakfasts','data'),
+               State('table-meals-lunches','data'),
                ]
               )
 def update_recipes(confirm_new_recipe_nclicks,
@@ -812,7 +863,9 @@ def update_recipes(confirm_new_recipe_nclicks,
                    new_recipe_mealtimes,
                    recipe_ingredients_data,
                    recipe_ingredients_columns,
-                   current_table_meals_data,
+                   current_table_meals_dinners,
+                   current_table_meals_bfasts,
+                   current_table_meals_lunches,
                    ) :
 
     ctx = dash.callback_context
@@ -906,23 +959,17 @@ def update_recipes(confirm_new_recipe_nclicks,
     serves_dict = {'options':[{'label': str(i), 'value': i} for i in range(1,11)],
                    'clearable':False}
 
-    dropdown_data = []
-    dropdown_data += [{'Meal':{'options':dinner_recipes[:],'clearable':False},
-                       'Serves':serves_dict} for day in days]
-    dropdown_data += [{}]
-    dropdown_data += [{'Meal': {'options':breakfast_recipes[:],'clearable':False},
-                       'Serves':serves_dict} for day in weekends]
-    dropdown_data += [{}]
-    dropdown_data += [{'Meal': {'options':lunch_recipes[:],'clearable':False},
-                       'Serves':serves_dict} for day in weekdays]
+    dropdown_dinners = [{'Meal':{'options':dinner_recipes[:],'clearable':False},
+                         'Serves':serves_dict} for day in days]
+    dropdown_bfasts = [{'Meal': {'options':breakfast_recipes[:],'clearable':False},
+                        'Serves':serves_dict} for day in weekends]
+    dropdown_lunches = [{'Meal': {'options':lunch_recipes[:],'clearable':False},
+                         'Serves':serves_dict} for day in weekdays]
 
     # Make sure that regardless of the filter, the users choice does not disappear.
-    for i,row in enumerate(current_table_meals_data) :
-        if row['Meal'] in ['Breakfasts','Lunches'] :
-            continue
-        if row['Meal'] :
-            val = row['Meal']
-            dropdown_data[i]['Meal']['options'].append({'label':val,'value':val})
+    KeepUserChoiceAsOption(current_table_meals_dinners,dropdown_dinners)
+    KeepUserChoiceAsOption(current_table_meals_bfasts,dropdown_bfasts)
+    KeepUserChoiceAsOption(current_table_meals_lunches,dropdown_lunches)
 
     # print('Accessing database')
     cookbooks_df = GetDataframe(engine,'recipe_book')
@@ -934,7 +981,7 @@ def update_recipes(confirm_new_recipe_nclicks,
 
     cookbook_options = [{'label': i, 'value': i} for i in cookbooks]
 
-    return (dropdown_data,cookbook_options,cookbook_options,
+    return (dropdown_dinners,dropdown_bfasts,dropdown_lunches,cookbook_options,cookbook_options,
             new_recipe_name,new_recipe_cooktime,new_recipe_cookbook,new_recipe_new_cookbook,
             new_recipe_url,new_recipe_tags,new_recipe_mealtimes,recipe_ingredients_data,
             available_tags)
