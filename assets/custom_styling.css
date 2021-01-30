@@ -5,8 +5,12 @@
 
 @media (max-width: 992px) {
     html {
-	font-size: 1.0em;
+	font-size: 3.0em;
     }
+  .no-phone, .no-phone *
+  {
+    display: none !important;
+  }
 }
 
 @media (min-width: 992px) {
@@ -19,4 +23,5 @@
   .columns:first-child {
     margin-left: 0; }
   .fork.columns { float: left; width: 30.6666666667%; } /* background-color: #fc0b03; */
+
 }

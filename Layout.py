@@ -12,7 +12,7 @@ import sqlalchemy
 import pandas as pd
 
 from .Components import sync_div
-from .HelperFunctions import CreateShoppingListFromDF,CreateMealList
+from .HelperFunctions import CreateShoppingListFromDF,CreateShoppingListFromDF_Compressed,CreateMealList
 from .DatabaseHelpers import (
     GetDatabaseName,
     GetDataframe,
@@ -45,7 +45,7 @@ storage = [
 
 final_list_children = []
 final_list_children.append(html.Label('Shopping List: ',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle','font-weight':'bold'}))
-final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle','font-family':'monospace'}))
+final_list_children.append(html.P('[No shopping list items]',id='shopping-list',style={'marginTop':'10px','width': '100%','display': 'inline-block','verticalAlign':'middle'}))
 
 days = ['saturday','sunday','monday','tuesday','wednesday','thursday','friday']
 weekdays = ['monday','tuesday','wednesday','thursday','friday']
@@ -331,6 +331,7 @@ layout = html.Div( # Main Div
                 html.A('Link to recipe',id='cookbook-link',href='https://cern.ch/kurt', target='_blank',style={'display':'inline-block','verticalAlign':'middle','marginLeft':'10px','display':'none'},)
             ],
             style={'margin-left':'1%','margin-right':'1%'},
+            className='no-phone',
         ),
         html.Div( # Tags
             children=[
@@ -338,6 +339,7 @@ layout = html.Div( # Main Div
                 *tag_buttons,
             ],
             style={'margin-left':'1%','margin-right':'1%'}, #,'height':'45px'
+            className='no-phone',
         ),
         html.Div( # Row Div
             children=[
@@ -346,7 +348,7 @@ layout = html.Div( # Main Div
                           html.Div(meals_table_lunches,style={'width':'95%'}),
                           html.Div(html.Br()),
                           ],
-                         className='fork columns',
+                         className='fork columns no-phone',
                          style={'border-right':'1px solid #adadad','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(single_ingredients_table,style={'width':'95%'}),
@@ -355,7 +357,7 @@ layout = html.Div( # Main Div
                           new_recipe_div,
                           html.Div(html.Br()),
                           ],
-                         className='fork columns',
+                         className='fork columns no-phone',
                          style={'border-right':'1px solid #adadad','margin-left':'1%','margin-right':'1%'},
                          ),
                 html.Div([html.Div(final_list_children)],
@@ -662,7 +664,7 @@ def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lun
     all_ingredients_df = all_ingredients_df.reset_index()
     #print(all_ingredients_df)
 
-    shopping_list = CreateShoppingListFromDF(all_ingredients_df)
+    shopping_list = CreateShoppingListFromDF_Compressed(all_ingredients_df)
     shopping_list.append(html.Br())
     shopping_list += CreateMealList(table_meals_dinners + table_meals_bfasts + table_meals_lunches)
 

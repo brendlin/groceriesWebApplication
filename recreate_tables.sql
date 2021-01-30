@@ -8,8 +8,13 @@ CREATE TABLE units (
 ) ENGINE=InnoDB;
 
 INSERT IGNORE INTO units (unit_name, abbreviation)
-VALUES ('milliliters','ml'), ('grams','g'), ('thumbs','thumbs'),
-('cups','c'), ('teaspoons','tsp'), ('tablespoons','tbsp'), ('cloves','cloves'),('units','x');
+VALUES ('milliliters','ml'),
+('grams','g'),('thumbs','thumbs'),
+('cups','c'), ('teaspoons','tsp'),
+('tablespoons','tbsp'),
+('cloves','cloves'),
+('messerspitze','msp'),
+('units','x');
 
 CREATE TABLE ingredients (
     ingredient_name VARCHAR(100) NOT NULL,
@@ -18,7 +23,7 @@ CREATE TABLE ingredients (
 ) ENGINE=InnoDB;
 
 INSERT IGNORE INTO ingredients (ingredient_name, ingredient_loc)
-VALUES ('avocado','rewe'), ('garlic','lidl'), ('spaghetti','rewe'), ('olive oil','lidl'),
+VALUES ('avocado','rewe'), ('garlic','lidl'), ('whole-grain pasta','rewe'), ('spaghetti','rewe'), ('olive oil','lidl'),
 ('lemon','rewe'), ('walnuts','lidl'), ('parmesan','rewe'),
 ('ear cleaners','budni');
 
@@ -57,7 +62,7 @@ CREATE TABLE recipe_quantities (
         REFERENCES ingredients(ingredient_name)
 	ON DELETE CASCADE,
     PRIMARY KEY (recipe_name,ingredient_name),
-    quantity NUMERIC(3),
+    quantity NUMERIC(5,2),
     unit_name VARCHAR(100),
     INDEX unit_name_index(unit_name),
     FOREIGN KEY(unit_name)
@@ -69,7 +74,7 @@ INSERT IGNORE INTO recipe_quantities (recipe_name,ingredient_name,quantity,unit_
 VALUES
 ('avocado pasta','avocado',2,'units'),
 ('avocado pasta','garlic',2,'cloves'),
-('avocado pasta','spaghetti',300,'grams'),
+('avocado pasta','whole-grain pasta',300,'grams'),
 ('avocado pasta','olive oil',2,'tablespoons'),
 ('avocado pasta','lemon',1,'units'),
 ('avocado pasta','walnuts',100,'grams'),
