@@ -786,7 +786,7 @@ def update_ingredients(add_ingredient_n_clicks,
                                        'value':the_ingredient_location})
 
         text = []
-        text.append('%s, %s'%(new_ingredient,the_ingredient_location))
+        text.append('%s @ %s'%(new_ingredient,the_ingredient_location))
 
         with open('recipes/ingredients.txt','a') as f :
             for t in text :

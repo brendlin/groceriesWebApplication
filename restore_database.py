@@ -90,8 +90,8 @@ def AddIngredientsByFile(fname) :
         for line in f.readlines() :
             line = line.replace('\n','')
 
-            tmp = line.split(',')
-            if len(tmp) < 2 :
+            tmp = line.split('@')
+            if len(tmp) != 2 :
                 print('Error: ingredient from ingredients.txt not understandable')
                 print(line)
                 sys.exit()
