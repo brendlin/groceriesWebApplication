@@ -62,7 +62,7 @@ CREATE TABLE recipe_quantities (
         REFERENCES ingredients(ingredient_name)
 	ON DELETE CASCADE,
     PRIMARY KEY (recipe_name,ingredient_name),
-    quantity NUMERIC(5,2),
+    quantity DECIMAL(5,2),
     unit_name VARCHAR(100),
     INDEX unit_name_index(unit_name),
     FOREIGN KEY(unit_name)

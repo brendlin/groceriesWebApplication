@@ -9,6 +9,7 @@ the_dir = sys.argv[1]
 
 
 DATABASE = GetDatabaseName()
+engine = sqlalchemy.create_engine(DATABASE)
 
 # Add recipe by filename
 def AddRecipeFileToDatabase(recipe,fname) :
@@ -64,7 +65,6 @@ def AddRecipeFileToDatabase(recipe,fname) :
             print('Error: file {} missing property {}'.format(fname,prop))
             sys.exit()
 
-    engine = sqlalchemy.create_engine(DATABASE)
     AddRecipeToDatabase(engine,
                         recipe.replace('_',' '),
                         properties['cooktime_minutes'],
@@ -99,7 +99,6 @@ def AddIngredientsByFile(fname) :
             ingredients.append(tmp[0].lstrip().rstrip())
             locations.append(tmp[1].lstrip().rstrip())
 
-    engine = sqlalchemy.create_engine(DATABASE)
     for ingr,loc in zip(ingredients,locations) :
         AddIngredientToDatabase(engine,ingr,loc)
 
