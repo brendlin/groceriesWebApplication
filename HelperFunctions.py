@@ -1,6 +1,12 @@
 
 import dash_html_components as html
 
+style_miniheader = {'marginTop':'7px',
+                    'width': '100%',
+                    'display': 'inline-block',
+                    'verticalAlign':'middle',
+                    'font-weight':'bold'}
+
 def CreateShoppingListFromDF(all_ingredients_df) :
     # The input is a groupby defined in Layout
 
@@ -11,7 +17,8 @@ def CreateShoppingListFromDF(all_ingredients_df) :
         if row['ingredient_loc'] != current_store :
             if current_store != '' :
                 text.append(html.Br())
-            text.append('{}:'.format(row['ingredient_loc']))
+            location = row['ingredient_loc'].captialize()
+            text.append(html.Label('{}:'.format(location),style=style_miniheader))
             text.append(html.Br())
             current_store = row['ingredient_loc']
         amount = str(row['shopping_list_q'])
@@ -38,8 +45,8 @@ def CreateShoppingListFromDF_Compressed(all_ingredients_df) :
                 text.append(single_line.rstrip(divider))
                 single_line = ''
                 text.append(html.Br())
-                text.append(html.Br())
-            text.append('{}:'.format(row['ingredient_loc']))
+            location = row['ingredient_loc'].capitalize()
+            text.append(html.Label('{}:'.format(location),style=style_miniheader))
             text.append(html.Br())
             current_store = row['ingredient_loc']
         amount = str(row['shopping_list_q'])
@@ -57,24 +64,16 @@ def CreateShoppingListFromDF_Compressed(all_ingredients_df) :
     return text
 
 
-def CreateMealList(table_meals) :
+def CreateMealList(table_meals,mealtime) :
 
     text = []
-    text.append(html.Br())
 
-    text.append('Dinners:')
+    text.append(html.Label('%s:'%(mealtime),style=style_miniheader))
     text.append(html.Br())
     for meal_dict in table_meals :
-        if not meal_dict['Day'] :
-            text.append(html.Br())
-            text.append(meal_dict['Meal']+':')
-            text.append(html.Br())
-        elif not meal_dict['Meal'] :
-            #text.append('%s: %s'%(meal_dict['Day'],''))
-            #text.append(html.Br())
-            pass
-        else :
-            text.append('%s: %s'%(meal_dict['Day'],meal_dict['Meal']))
-            text.append(html.Br())
+        if not meal_dict['Meal'] :
+            continue
+        text.append('%s: %s'%(meal_dict['Day'],meal_dict['Meal']))
+        text.append(html.Br())
 
     return text
