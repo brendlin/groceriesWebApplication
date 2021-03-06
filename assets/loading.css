@@ -1,0 +1,39 @@
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}
+
+._dash-loading-callback {
+  font-family: sans-serif;
+  padding-top: 50px;
+  color: rgb(0, 0, 0);
+
+  /* The banner */
+  position: fixed;
+  top: 47.5%;
+  left: 47.5%;
+  width: 5%;
+  height: 5%;
+  text-align: center;
+  nothing: url(https://scaan.net/waterfrontmap/Assets/images/loadloop.gif);
+  nothing: url(https://www.w3schools.com/html/programming.gif);
+  nothing: url('glow.gif');
+  background-image: url('spinner2.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0);
+  /* Delay animation by 1s to prevent flashing 
+     and smoothly transition the animation over 0.5s 
+   */
+  -moz-animation: fadein 0.5s ease-in 1s forwards; /* Firefox */
+  -webkit-animation: fadein 0.5s ease-in 1s forwards; /* Safari and Chrome */
+  -o-animation: fadein 0.5s ease-in 1s forwards; /* Opera */
+    animation: fadein 0.5s ease-in 1s forwards;
+}

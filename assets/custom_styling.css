@@ -1,0 +1,27 @@
+
+.dash-spreadsheet-container .dash-spreadsheet-inner table {
+    --accent: #242b63 !important; /* Dropdown options; dropdown arrows during hover. */
+}
+
+@media (max-width: 992px) {
+    html {
+	font-size: 3.0em;
+    }
+  .no-phone, .no-phone *
+  {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 80%; }
+  .column,
+  .columns {
+    margin-left: 4%; }
+  .column:first-child,
+  .columns:first-child {
+    margin-left: 0; }
+  .fork.columns { float: left; width: 30.6666666667%; } /* background-color: #fc0b03; */
+
+}
