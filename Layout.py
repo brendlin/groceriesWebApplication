@@ -25,7 +25,12 @@ from .DatabaseHelpers import (
 
 
 DATABASE = GetDatabaseName()
-engine = sqlalchemy.create_engine(DATABASE)
+
+# From: https://help.pythonanywhere.com/pages/UsingSQLAlchemywithMySQL
+# The RDS service disconnects clients after 5 minutes (300s), so we
+# need to set the pool_recycle to something lower than that, or you'll
+# occasionally see disconnection errors in your logs.
+engine = sqlalchemy.create_engine(DATABASE,pool_recycle=280)
 
 from app import app
 
