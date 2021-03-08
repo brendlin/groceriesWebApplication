@@ -34,6 +34,11 @@ engine = sqlalchemy.create_engine(DATABASE,pool_recycle=280)
 
 from app import app
 
+sync_fname = html.Div(id='groceries-sync-filename' ,style={'display': 'none'},
+                      children='global_shopping_list.json')
+
+censored_ingr = html.Div(id='censored-ingredient-list' ,style={'display': 'none'},children='')
+
 storage = [
     # full string summary of state
     html.Div(id='full-string-summary' ,style={'display': 'none'},children=None),
@@ -86,7 +91,9 @@ def GetResetMealTableData(mealtime) :
 def SetGlobalShoppingListJsonFile(_table_meals_data_dinners,_table_meals_data_bfasts,
                                   _table_meals_data_lunches,
                                   _table_meals_data_other,
-                                  _table_single_ingredients_data) :
+                                  _table_single_ingredients_data,
+                                  _sync_filename,
+                                  ) :
     _full_summary = [_table_meals_data_dinners,
                      _table_meals_data_bfasts,
                      _table_meals_data_lunches,
@@ -95,7 +102,7 @@ def SetGlobalShoppingListJsonFile(_table_meals_data_dinners,_table_meals_data_bf
     _full_summary_dumps = json.dumps(_full_summary)
 
     # If there was no sync,
-    with open('global_shopping_list.json', 'w') as f:
+    with open(_sync_filename, 'w') as f:
         json.dump(_full_summary, f)
 
     # Return this string summary, for comparing with file later
@@ -328,6 +335,8 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
 
 layout = html.Div( # Main Div
     children=[ # Main Div children
+        sync_fname,
+        censored_ingr,
         sync_div, # The full-screen sync message/button
         html.Div( # Welcome and Filters
             children=[
@@ -522,12 +531,15 @@ def switch_new_location(n_clicks_new,n_clicks_exising):
                State('table-meals-breakfasts','data'),
                State('table-meals-lunches','data'),
                State('table-meals-other','data'),
+               State('groceries-sync-filename','children'),
                ],
 )
 def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
                full_string_summary,si_rows,
                meals_data_dinners,meals_data_breakfasts,meals_data_lunches,
-               meals_data_other) :
+               meals_data_other,
+               sync_filename,
+               ) :
 
     ctx = dash.callback_context
 
@@ -556,7 +568,7 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
 
     # If this is a reset, then also remove the json file.
     if ctx.triggered and 'confirm-reset' in ctx.triggered[0]['prop_id'] :
-        os.remove('global_shopping_list.json')
+        os.remove(sync_filename)
 
     return default_dinners,default_bfasts,default_lunches,default_other,default_single_ingredients_data
 
@@ -575,12 +587,15 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
     [State('full-string-summary','children'),
      State('sync-div','style'),
      State('shopping-list','children'),
+     State('groceries-sync-filename','children'),
      ]
 )
 def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lunches,
                           table_meals_other,
                           table_single_ingredients,
-                          previous_string_summary,sync_div_style,current_shopping_list) :
+                          previous_string_summary,sync_div_style,current_shopping_list,
+                          sync_filename,
+                          ) :
 
     # If we are just starting, then we need to set the previous string summary to check against
     # the json file.
@@ -591,8 +606,8 @@ def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lun
         previous_string_summary = json.dumps(full_summary)
 
     # Check if the previous string summary is the same
-    if os.path.exists('global_shopping_list.json') :
-        with open('global_shopping_list.json', 'r') as f:
+    if os.path.exists(sync_filename) :
+        with open(sync_filename, 'r') as f:
             txt = f.readlines()[0]
             if txt == previous_string_summary :
                 #print('They are the same!')
@@ -610,7 +625,8 @@ def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lun
                                                        table_meals_bfasts,
                                                        table_meals_lunches,
                                                        table_meals_other,
-                                                       table_single_ingredients)
+                                                       table_single_ingredients,
+                                                       sync_filename)
     sync_div_style['display'] = 'none'
 
     #
@@ -764,6 +780,7 @@ def new_ingredient_confirm(n_clicks,
                State('new-ingredient-location','value'),
                State('new-ingredient-new-location','value'),
                State('new-location-div','style'),
+               State('censored-ingredient-list','children'),
                ]
               )
 def update_ingredients(add_ingredient_n_clicks,
@@ -773,6 +790,7 @@ def update_ingredients(add_ingredient_n_clicks,
                        new_ingredient_location,
                        new_ingredient_new_location,
                        new_location_div,
+                       censored_ingredients,
                        ) :
 
     ctx = dash.callback_context
@@ -810,6 +828,15 @@ def update_ingredients(add_ingredient_n_clicks,
 
     ingredients = sorted(list(ingredients_df['ingredient_name']))
     # print('Accessing database complete')
+
+    # Filter out some censored products
+    for i in range(len(ingredients)-1,-1,-1) :
+        for j in censored_ingredients.split(',') :
+            if not j :
+                continue
+            if j in ingredients[i].lower() :
+                ingredients.pop(i)
+                continue
 
     # Start-up behavior
     location_options = [{'label': i, 'value': i} for i in ingredient_locs]
