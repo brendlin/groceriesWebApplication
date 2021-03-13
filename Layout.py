@@ -176,11 +176,8 @@ def MakeIngredientsTable(id) :
 single_ingredients_table = MakeIngredientsTable('table-single-ingredients')
 recipe_ingredients_table = MakeIngredientsTable('table-recipe-ingredients')
 
-tags = ['indian','spicy','vegetarian','asian','soup','pasta']
-
 # tags from database (must be reloaded to find new ones)
-tags_df = GetDataframe(engine,'recipe_tags')
-tags_empty = list(range(20))
+tags_empty = list(range(25))
 tag_buttons = []
 for tag in tags_empty :
     tmp = html.Button(id='tag-%d-button'%(tag),children='button %d'%(tag),n_clicks=0,
