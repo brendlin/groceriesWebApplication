@@ -1,5 +1,7 @@
 
+import dash_core_components as dcc
 import dash_html_components as html
+from .DatabaseHelpers import GetRecipeLocation
 
 style_miniheader = {'marginTop':'7px',
                     'width': '100%',
@@ -64,7 +66,7 @@ def CreateShoppingListFromDF_Compressed(all_ingredients_df) :
     return text
 
 
-def CreateMealList(table_meals,mealtime) :
+def CreateMealList(table_meals,mealtime,engine) :
 
     text = []
 
@@ -73,7 +75,13 @@ def CreateMealList(table_meals,mealtime) :
     for meal_dict in table_meals :
         if not meal_dict['Meal'] :
             continue
-        text.append('%s: %s'%(meal_dict['Day'],meal_dict['Meal']))
+        book,url = GetRecipeLocation(engine,meal_dict['Meal'])
+        book_text = '' if (book == 'no cookbook') else ' (%s)'%(book)
+        url_open_bracket = ' (' if url else ''
+        text.append('%s: %s%s%s'%(meal_dict['Day'],meal_dict['Meal'],book_text,url_open_bracket))
+        if url :
+            text.append(html.A("link",target="_blank",href=url))
+            text.append(')')
         text.append(html.Br())
 
     return text
