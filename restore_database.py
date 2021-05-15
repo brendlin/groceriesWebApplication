@@ -35,7 +35,9 @@ def AddRecipeFileToDatabase(recipe,fname) :
             if isprop :
                 for prop in prop_names :
                     if 'Property.%s'%(prop) in line :
-                        properties[prop] = line.split(':')[1].rstrip().lstrip()
+                        # The special colon treatment below should work for urls
+                        tmp = ':'.join( line.split(':')[1:] )
+                        properties[prop] = tmp.rstrip().lstrip()
                         break
             elif 'Ingredient.' in line :
                 tmp = line.split(':')
