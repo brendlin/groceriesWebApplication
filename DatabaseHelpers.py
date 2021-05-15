@@ -88,6 +88,22 @@ def GetIngredientsFromRecipes(engine,recipes=[]) :
 
     return df
 
+def GetRecipeLocation(engine,recipe) :
+
+    if not recipe :
+        return ''
+
+    with engine.connect() as con :
+
+        txt  = 'SELECT recipe_book_short, recipe_url'
+        txt += ' from recipes'
+        txt += ' WHERE recipe_name = "%s"'%(recipe)
+        query = txt
+
+        df = pd.read_sql_query(query,con)
+
+    return df['recipe_book_short'].tolist()[0],df['recipe_url'].tolist()[0]
+
 def SelectFilteredRecipes(engine,mealtime=None,cookbook=None,
                           tags=None,cooktime_min=None,cooktime_max=None) :
 

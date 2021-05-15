@@ -684,13 +684,13 @@ def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lun
     shopping_list = CreateShoppingListFromDF_Compressed(all_ingredients_df)
     shopping_list.append(html.Hr(style={'marginTop':'5px','marginBottom':'0px'}))
     if True in list(a['Meal'] != None for a in table_meals_dinners) :
-        shopping_list += CreateMealList(table_meals_dinners,'Dinners')
+        shopping_list += CreateMealList(table_meals_dinners,'Dinners',engine)
     if True in list(a['Meal'] != None for a in table_meals_bfasts) :
-        shopping_list += CreateMealList(table_meals_bfasts,'Breakfasts')
+        shopping_list += CreateMealList(table_meals_bfasts,'Breakfasts',engine)
     if True in list(a['Meal'] != None for a in table_meals_lunches) :
-        shopping_list += CreateMealList(table_meals_lunches,'Lunches')
+        shopping_list += CreateMealList(table_meals_lunches,'Lunches',engine)
     if True in list(a['Meal'] != None for a in table_meals_other) :
-        shopping_list += CreateMealList(table_meals_other,'Other')
+        shopping_list += CreateMealList(table_meals_other,'Other',engine)
 
     return new_string_summary,sync_div_style,shopping_list
 
