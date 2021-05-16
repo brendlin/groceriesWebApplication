@@ -242,7 +242,7 @@ def make_filter_string(*inputs):
     return styles + [','.join(out_str)]
 
 
-new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'marginTop':'20px',}),
+new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'margin-top':'0px'}),
                                dcc.Input(id='new-ingredient',type='text',
                                          placeholder='Insert new ingredient name',
                                          style={'width':'300px'}),
@@ -268,9 +268,9 @@ new_ingredient_div = html.Div([html.H5(children='Add new ingredient',style={'mar
                                         ),
                                html.Button('Add', id='add-ingredient-button', n_clicks=0),
                                ],
-                              style={'backgroundColor':'#f0e9e9'})
+                              style={'backgroundColor':'#f0e9e9','padding':'10px','margin':'10px 22px 0px 0px'})
 
-new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':'20px',}),
+new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'margin-top':'0px'}),
                            dcc.Input(id='new-recipe-name',type='text',
                                      placeholder='Recipe name',
                                      style={'width':'250px','marginRight':'10px'}),
@@ -320,14 +320,14 @@ new_recipe_div = html.Div([html.H5(children='Add new recipe',style={'marginTop':
                                      placeholder='(comma-separated)',
                                      style={'width':'300px'}),
                            html.Br(),
-                           html.Div(recipe_ingredients_table,style={'width':'95%'}),
+                           html.Div(recipe_ingredients_table,style={'width':'100%'}),
                            html.Button('Add Row', id='add-recipe-ingredient-row-button', n_clicks=0),
                            html.Br(),
                            html.Div(html.Button('Add Recipe', id='add-recipe-button', n_clicks=0),
-                                    style={'text-align':'right','width':'95%'}),
+                                    style={'text-align':'right','width':'100%'}),
                            html.Br(),
                            ],
-                          style={'backgroundColor':'#e9eaf0'},
+                          style={'backgroundColor':'#e9eaf0','padding':'10px','margin':'10px 22px 0px 0px'},
 )
 
 layout = html.Div( # Main Div
