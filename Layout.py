@@ -561,7 +561,24 @@ def syncTables(add_row_nclicks,sync_nclicks,confirm_reset_nclicks,
     default_bfasts = GetResetMealTableData('Breakfasts')
     default_lunches = GetResetMealTableData('Lunches')
     default_other = GetResetMealTableData('Other')
-    default_single_ingredients_data = [{'Ingredient':'','Amount':1,'Unit':'x'},]
+
+    #
+    # Our default ingredients!
+    #
+    tmp = []
+    tmp.append({"Ingredient": "peanut butter"  , "Amount": 1, "Unit": "x"})
+    tmp.append({"Ingredient": "toast twins"    , "Amount": 1, "Unit": "x"})
+    tmp.append({"Ingredient": "oat milk"       , "Amount": 3, "Unit": "x"})
+    tmp.append({"Ingredient": "brombeere acai" , "Amount": 2, "Unit": "x"})
+    tmp.append({"Ingredient": "tomatoes"       , "Amount": 6, "Unit": "x"})
+    tmp.append({"Ingredient": "eggs"           , "Amount": 6, "Unit": "x"})
+    tmp.append({"Ingredient": "some bread"     , "Amount": 1, "Unit": "x"})
+    tmp.append({"Ingredient": "sarah chocolate", "Amount": 5, "Unit": "x"})
+    tmp.append({"Ingredient": "ganze mandel"   , "Amount": 5, "Unit": "x"})
+    tmp.append({"Ingredient": "elstar apples"  , "Amount": 3, "Unit": "x"})
+    tmp.append({"Ingredient": "toilet paper"   , "Amount": 1, "Unit": "x"})
+
+    default_single_ingredients_data = tmp
 
     # If this is a reset, then also remove the json file.
     if ctx.triggered and 'confirm-reset' in ctx.triggered[0]['prop_id'] :
@@ -700,15 +717,16 @@ def create_string_summary(table_meals_dinners,table_meals_bfasts,table_meals_lun
     #print(all_ingredients_df)
 
     shopping_list = CreateShoppingListFromDF_Compressed(all_ingredients_df)
-    shopping_list.append(html.Hr(style={'marginTop':'5px','marginBottom':'0px'}))
-    if True in list(a['Meal'] != None for a in table_meals_dinners) :
-        shopping_list += CreateMealList(table_meals_dinners,'Dinners',engine)
-    if True in list(a['Meal'] != None for a in table_meals_bfasts) :
-        shopping_list += CreateMealList(table_meals_bfasts,'Breakfasts',engine)
-    if True in list(a['Meal'] != None for a in table_meals_lunches) :
-        shopping_list += CreateMealList(table_meals_lunches,'Lunches',engine)
-    if True in list(a['Meal'] != None for a in table_meals_other) :
-        shopping_list += CreateMealList(table_meals_other,'Other',engine)
+    for i in range(2) : # print it out twice!
+        shopping_list.append(html.Hr(style={'marginTop':'5px','marginBottom':'0px'}))
+        if True in list(a['Meal'] != None for a in table_meals_dinners) :
+            shopping_list += CreateMealList(table_meals_dinners,'Dinners',engine)
+        if True in list(a['Meal'] != None for a in table_meals_bfasts) :
+            shopping_list += CreateMealList(table_meals_bfasts,'Breakfasts',engine)
+        if True in list(a['Meal'] != None for a in table_meals_lunches) :
+            shopping_list += CreateMealList(table_meals_lunches,'Lunches',engine)
+        if True in list(a['Meal'] != None for a in table_meals_other) :
+            shopping_list += CreateMealList(table_meals_other,'Other',engine)
 
     return new_string_summary,sync_div_style,shopping_list
 
