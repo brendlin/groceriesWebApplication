@@ -1,5 +1,5 @@
 
-import dash_html_components as html
+from dash import html
 
 sync_button = html.Button(id='sync-button',children='Sync',n_clicks=0,
                           className='button buttonPhone',
