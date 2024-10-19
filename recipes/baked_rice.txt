@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: simple
+Property.recipe_tags: vegetarian,rice
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.rice: 400 grams
+Ingredient.butter: 50 grams
+Ingredient.mint: 50 grams
+Ingredient.feta cheese: 150 grams
+Ingredient.green olives: 40 grams
+Ingredient.pomegranate: 0.5 units
+Ingredient.walnuts: 50 grams
+Ingredient.olive oil: 3 tablespoons
+Ingredient.pomegranate syrup: 1 tablespoons
+Ingredient.garlic: 1 cloves

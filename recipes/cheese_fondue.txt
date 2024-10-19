@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: internet
+Property.recipe_url: https://www.koch-mit.de/rezepte/schweizer-kaesefondue-moitie-moitie/
+Property.recipe_tags: cheese,guests,vegetarian
+Property.recipe_mealtimes: dinner
+Ingredient.vacherin cheese, grated: 200 grams
+Ingredient.gruyere cheese, grated: 200 grams
+Ingredient.white wine: 1 units
+Ingredient.garlic: 3 cloves
+Ingredient.corn flour: 2 tablespoons
+Ingredient.pearl onions: 1 units
+Ingredient.baguette: 1 units

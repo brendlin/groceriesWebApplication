@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: no cookbook
+Property.recipe_tags: asian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.salmon: 400 grams
+Ingredient.rice: 200 grams
+Ingredient.avocado: 2 units
+Ingredient.cucumber big: 1 units
+Ingredient.soy sauce: 5 tablespoons
+Ingredient.brown sugar: 3 tablespoons
+Ingredient.rice vinegar: 4 tablespoons
+Ingredient.cilantro: 1 units
+Ingredient.ginger: 1 thumbs
+Ingredient.sesame seeds: 30 grams

@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1015026-smoky-eggplant-dip-with-pita-chips?action=click&module=RecipeBox&pgType=recipebox-page&region=all&rank=0
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: dinner
+Ingredient.eggplant: 500 grams
+Ingredient.garlic: 3 cloves
+Ingredient.greek joghurt: 0.3 cups
+Ingredient.lemon: 1 units

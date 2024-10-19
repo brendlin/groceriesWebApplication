@@ -1,0 +1,8 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: meat
+Property.recipe_mealtimes: dinner
+Ingredient.french fries: 1 units
+Ingredient.steak: 1 units
+Ingredient.lettuce: 1 units
+Ingredient.tomatoes: 1 units

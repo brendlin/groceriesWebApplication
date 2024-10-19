@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: ramsey quick&delicious
+Property.recipe_tags: meat,guests
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.carrots: 200 grams
+Ingredient.red onion: 2 units
+Ingredient.olive oil: 2 tablespoons
+Ingredient.ras-el-hanout: 2 tablespoons
+Ingredient.chicken broth: 1 tablespoons
+Ingredient.chicken legs: 4 units
+Ingredient.zucchini: 2 units
+Ingredient.chick peas: 400 grams
+Ingredient.cilantro: 4 tablespoons
+Ingredient.lemon: 0.5 units
+Ingredient.pistachios: 15 grams
+Ingredient.couscous: 150 grams

@@ -1,0 +1,5 @@
+Property.cooktime_minutes: 10
+Property.recipe_book: no cookbook
+Property.recipe_tags: soup
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.ready-made soup: 2 units

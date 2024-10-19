@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: chris kochtute
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.polenta: 250 grams
+Ingredient.vegetable broth: 1 tablespoons
+Ingredient.parmesan: 50 grams
+Ingredient.butter: 30 grams
+Ingredient.mushrooms: 300 grams
+Ingredient.onion: 1 units
+Ingredient.thyme: 1 units
+Ingredient.sugar: 1 tablespoons
+Ingredient.balsamico: 4 tablespoons
+Ingredient.olive oil: 1 tablespoons

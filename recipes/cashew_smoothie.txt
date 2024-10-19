@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 20
+Property.recipe_book: internet
+Property.recipe_url: https://thealmondeater.com/chocolate-cashew-smoothie/
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: breakfast,other
+Ingredient.cashew nuts: 1 cups
+Ingredient.oatmeal: 0.5 cups
+Ingredient.dates: 6 units
+Ingredient.chia seeds: 2 tablespoons
+Ingredient.cocoa: 2 tablespoons
+Ingredient.maple syrup: 2 tablespoons
+Ingredient.oat milk: 2.5 cups

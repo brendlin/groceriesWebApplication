@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/58361021449431/Kaiserschmarrn.html
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.eggs: 4 units
+Ingredient.sugar: 30 grams
+Ingredient.vanilla sugar: 1 units
+Ingredient.sarah milk: 875 milliliters
+Ingredient.flour: 125 grams
+Ingredient.powdered sugar: 50 grams
+Ingredient.corn flour: 20 grams
+Ingredient.vanilla stalk: 1 units

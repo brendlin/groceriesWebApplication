@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/1350651239802004/Kartoffelcremesuppe.html
+Property.recipe_tags: soup,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.potatoes: 1.5 units
+Ingredient.creme fraiche: 1 units
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.suppengemuese: 1 units
+Ingredient.parsley: 1 units
+Ingredient.bacon: 1 units
+Ingredient.butter: 30 grams

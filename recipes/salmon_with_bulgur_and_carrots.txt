@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 50
+Property.recipe_book: internet
+Property.recipe_url: https://www.lecker.de/ofenlachs-auf-warmem-bulgursalat-73212.html
+Property.recipe_tags: seafood,guests
+Property.recipe_mealtimes: dinner
+Ingredient.salmon: 400 grams
+Ingredient.bulgur: 200 grams
+Ingredient.mint: 1 units
+Ingredient.cilantro: 1 units
+Ingredient.lemon: 1 units
+Ingredient.sriracha: 5 tablespoons
+Ingredient.soy sauce: 2 tablespoons
+Ingredient.maple syrup: 2 tablespoons
+Ingredient.carrots: 500 grams
+Ingredient.paprika: 2 teaspoons

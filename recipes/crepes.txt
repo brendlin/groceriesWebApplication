@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/1011781206352501/Crepes.html?portionen=4.5
+Property.recipe_tags: easy
+Property.recipe_mealtimes: dinner
+Ingredient.eggs: 3 units
+Ingredient.flour: 150 grams
+Ingredient.sarah milk: 380 milliliters
+Ingredient.mineral water: 3 tablespoons
+Ingredient.baking powder: 1.5 messerspitze
+Ingredient.cooked ham: 150 grams
+Ingredient.creme fraiche: 1 units
+Ingredient.parmesan: 50 grams
+Ingredient.tomatoes: 3 units
+Ingredient.mozzarella, std: 2 units
+Ingredient.basil: 1 units

@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian
+Property.recipe_mealtimes: breakfast,lunch
+Ingredient.tomatoes: 2 units
+Ingredient.tofu sausages: 1 units
+Ingredient.eggs: 4 units
+Ingredient.toast twins: 4 units
+Ingredient.lettuce: 1 units
+Ingredient.mushrooms: 100 grams

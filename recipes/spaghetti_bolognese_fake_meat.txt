@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 80
+Property.recipe_book: no cookbook
+Property.recipe_tags: guests,italian
+Property.recipe_mealtimes: dinner
+Ingredient.whole-grain pasta: 300 grams
+Ingredient.parmesan: 50 grams
+Ingredient.tomato sauce: 500 grams
+Ingredient.bacon: 1 units
+Ingredient.fake meat: 400 grams
+Ingredient.onion: 2 units
+Ingredient.garlic: 5 cloves
+Ingredient.beef broth: 4 tablespoons
+Ingredient.tomato paste: 100 grams
+Ingredient.oregano: 4 tablespoons

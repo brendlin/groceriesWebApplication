@@ -1,0 +1,17 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://ellerepublic.de/en/smoked-tofu-stir-fry-with-asparagus/
+Property.recipe_tags: vegetarian,rice,asian
+Property.recipe_mealtimes: dinner
+Ingredient.green asparagus: 250 grams
+Ingredient.smoked tofu: 200 grams
+Ingredient.mixed mushrooms: 150 grams
+Ingredient.cilantro: 0.5 units
+Ingredient.mint: 0.5 units
+Ingredient.lime: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.ginger: 2 tablespoons
+Ingredient.rice vinegar: 1.5 tablespoons
+Ingredient.soy sauce: 1.5 tablespoons
+Ingredient.sesame oil: 3 tablespoons
+Ingredient.brown rice: 200 grams

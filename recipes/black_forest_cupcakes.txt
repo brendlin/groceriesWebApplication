@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: cupcake cookbook
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: other
+Ingredient.pitted cherries in can or glas: 400 grams
+Ingredient.butter: 160 grams
+Ingredient.dark chocolate: 200 grams
+Ingredient.sugar: 200 grams
+Ingredient.flour: 140 grams
+Ingredient.baking powder: 1 teaspoons
+Ingredient.cocoa: 3 tablespoons
+Ingredient.eggs: 1 units
+Ingredient.cream: 160 milliliters

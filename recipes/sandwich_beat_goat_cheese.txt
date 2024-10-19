@@ -1,0 +1,7 @@
+Property.cooktime_minutes: 15
+Property.recipe_book: no cookbook
+Property.recipe_tags: vegetarian,bread
+Property.recipe_mealtimes: lunch,breakfast,dinner
+Ingredient.nice bread or rolls: 1 units
+Ingredient.goat cheese: 1 units
+Ingredient.red beets: 1 units

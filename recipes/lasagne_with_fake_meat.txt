@@ -1,0 +1,18 @@
+Property.cooktime_minutes: 120
+Property.recipe_book: jamies ministry of food
+Property.recipe_tags: italian,guests
+Property.recipe_mealtimes: dinner
+Ingredient.bacon: 1 units
+Ingredient.onion: 2 units
+Ingredient.garlic: 2 cloves
+Ingredient.carrots: 2 units
+Ingredient.celery: 2 units
+Ingredient.oregano: 2 teaspoons
+Ingredient.fake meat: 500 grams
+Ingredient.pak chopped tomatoes: 800 grams
+Ingredient.basil: 1 units
+Ingredient.parmesan: 50 grams
+Ingredient.lasagne sheets: 250 grams
+Ingredient.creme fraiche: 500 grams
+Ingredient.parmesan: 100 grams
+Ingredient.tomatoes: 1 units

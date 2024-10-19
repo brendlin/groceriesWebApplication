@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.justonecookbook.com/souffle-pancake/
+Property.recipe_tags: asian,sweet
+Property.recipe_mealtimes: breakfast
+Ingredient.eggs: 8 units
+Ingredient.sarah milk: 90 milliliters
+Ingredient.vanilla extract: 1 teaspoons
+Ingredient.flour: 120 grams
+Ingredient.baking powder: 8 grams
+Ingredient.sugar: 185 grams
+Ingredient.olive oil: 4 tablespoons
+Ingredient.cream: 480 milliliters
+Ingredient.maple syrup: 3 tablespoons
+Ingredient.fresh berries: 1 units

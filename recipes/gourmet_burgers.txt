@@ -1,0 +1,18 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.readersdigest.ca/food/recipes/worcestershire-burger/
+Property.recipe_tags: easy,grill
+Property.recipe_mealtimes: dinner
+Ingredient.ground beef: 500 grams
+Ingredient.breadcrumbs: 0.5 cups
+Ingredient.onion: 1 units
+Ingredient.eggs: 1 units
+Ingredient.salt: 0.75 teaspoons
+Ingredient.worcester sauce: 2 tablespoons
+Ingredient.ketchup: 1 units
+Ingredient.lettuce: 1 units
+Ingredient.cheese slices: 1 units
+Ingredient.tomatoes: 1 units
+Ingredient.avocado: 1 units
+Ingredient.red onion: 1 units
+Ingredient.bacon strips: 1 units

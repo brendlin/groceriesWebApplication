@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: jamie's italy
+Property.recipe_tags: italian,guests,meat
+Property.recipe_mealtimes: dinner
+Ingredient.dried mushrooms: 20 grams
+Ingredient.chicken breasts: 4 units
+Ingredient.garlic: 2 cloves
+Ingredient.mushrooms: 350 grams
+Ingredient.white wine: 200 milliliters
+Ingredient.spaghetti: 500 grams
+Ingredient.cream: 500 milliliters
+Ingredient.parmesan: 200 grams
+Ingredient.basil: 1 units

@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.bbc.co.uk/food/recipes/tartiflette_59096
+Property.recipe_tags: cheese,french
+Property.recipe_mealtimes: dinner
+Ingredient.potatoes: 500 grams
+Ingredient.bacon: 125 grams
+Ingredient.shallots: 1 units
+Ingredient.garlic: 1 cloves
+Ingredient.cream: 100 milliliters
+Ingredient.white wine: 50 milliliters
+Ingredient.reblochon: 225 grams

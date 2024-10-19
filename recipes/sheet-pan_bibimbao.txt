@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1022131-sheet-pan-bibimbap
+Property.recipe_tags: vegetarian,rice,asian,easy,guests
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.rice: 400 grams
+Ingredient.butter: 40 grams
+Ingredient.oyster mushrooms: 180 grams
+Ingredient.sweet potatoes: 1 units
+Ingredient.red onion: 1 units
+Ingredient.baby spinach: 250 grams
+Ingredient.eggs: 4 units
+Ingredient.sesame oil: 6 tablespoons

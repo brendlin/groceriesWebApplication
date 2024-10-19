@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 20
+Property.recipe_book: no cookbook
+Property.recipe_tags: pasta,easy,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.avocado: 2 units
+Ingredient.parmesan: 40 grams
+Ingredient.spaghetti: 250 grams
+Ingredient.garlic: 2 cloves
+Ingredient.cilantro: 1 units

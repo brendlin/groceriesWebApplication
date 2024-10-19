@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: yummy mami
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.shallots: 2 units
+Ingredient.zucchini: 200 grams
+Ingredient.bell pepper: 2 units
+Ingredient.tomatoes: 300 grams
+Ingredient.thyme: 1 units
+Ingredient.bay leaves: 1 units
+Ingredient.garlic: 1 cloves
+Ingredient.vegetable broth: 1 teaspoons
+Ingredient.lemon: 0.5 units
+Ingredient.butter: 1 tablespoons
+Ingredient.bulgur: 250 grams
+Ingredient.basil: 0.5 units

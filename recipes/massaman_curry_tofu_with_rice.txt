@@ -1,0 +1,24 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://minimalistbaker.com/easy-1-pot-massaman-curry/
+Property.recipe_tags: asian,spicy
+Property.recipe_mealtimes: dinner
+Ingredient.smoked tofu: 2 units
+Ingredient.sesame oil: 2 tablespoons
+Ingredient.shallots: 3 units
+Ingredient.cumin: 1 teaspoons
+Ingredient.coriander seeds: 1 teaspoons
+Ingredient.red curry paste: 5 tablespoons
+Ingredient.potatoes: 1.5 cups
+Ingredient.carrots: 2 units
+Ingredient.coconut milk: 800 grams
+Ingredient.ground cinnamon: 0.25 teaspoons
+Ingredient.cardamom: 1 messerspitze
+Ingredient.nutmeg: 1 messerspitze
+Ingredient.soy sauce: 2 tablespoons
+Ingredient.maple syrup: 2 tablespoons
+Ingredient.peanut butter: 2 tablespoons
+Ingredient.lime: 1 units
+Ingredient.peanuts: 80 grams
+Ingredient.cilantro: 0.5 units
+Ingredient.rice: 250 grams

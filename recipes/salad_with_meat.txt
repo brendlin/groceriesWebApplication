@@ -1,0 +1,8 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: salad
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.lettuce: 1 units
+Ingredient.salad veg(avs,bellpepr,cucmbr): 1 units
+Ingredient.meat(ham,sausg,balls,fake nugts): 1 units
+Ingredient.salad starch(brot,couscs,bulgr,rice): 1 units

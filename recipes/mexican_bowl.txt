@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: mexican,vegetarian
+Property.recipe_mealtimes: dinner,lunch
+Ingredient.rice: 150 grams
+Ingredient.black beans, dry: 80 grams
+Ingredient.sour creme: 1 units
+Ingredient.avocado: 1 units
+Ingredient.red onion: 2 units
+Ingredient.lime: 1 units
+Ingredient.tortilla chips: 1 units
+Ingredient.fake bbq chicken meat: 1 units
+Ingredient.tomatoes: 2 units
+Ingredient.cilantro: 1 units
+Ingredient.cheddar cheese: 50 grams

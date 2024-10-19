@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: waffle cookbook
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: breakfast,other
+Ingredient.eggs: 4 units
+Ingredient.butter: 150 grams
+Ingredient.sugar: 100 grams
+Ingredient.vanilla sugar: 0.5 units
+Ingredient.ground cinnamon: 1 teaspoons
+Ingredient.flour: 175 grams
+Ingredient.baking powder: 0.3 units
+Ingredient.cream: 150 grams

@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 120
+Property.recipe_book: internet
+Property.recipe_url: https://www.sophisticatedgourmet.com/2009/10/new-york-style-bagel-recipe/
+Property.recipe_tags: bread
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.yeast: 6 grams
+Ingredient.sugar: 19 grams
+Ingredient.bread flour: 440 grams
+Ingredient.dried onions: 30 grams
+Ingredient.oregano: 2 tablespoons
+Ingredient.coarse salt: 2 tablespoons
+Ingredient.sesame seeds: 3 tablespoons

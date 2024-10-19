@@ -1,0 +1,7 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: no cookbook
+Property.recipe_tags: pizza,italian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.pizza pack: 1 units
+Ingredient.grated mozarella: 1 units
+Ingredient.sliced chorizo: 1 units

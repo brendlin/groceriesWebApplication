@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: pasta,italian
+Property.recipe_mealtimes: dinner,lunch
+Ingredient.white spaghetti: 250 grams
+Ingredient.bacon: 75 grams
+Ingredient.pak chopped tomatoes: 400 grams
+Ingredient.chili: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.pecorino: 50 grams

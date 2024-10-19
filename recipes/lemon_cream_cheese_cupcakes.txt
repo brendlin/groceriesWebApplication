@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 70
+Property.recipe_book: cupcake cookbook
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: other
+Ingredient.butter: 120 grams
+Ingredient.cream cheese: 170 grams
+Ingredient.lemon: 1 units
+Ingredient.sugar: 130 grams
+Ingredient.powdered sugar: 195 grams
+Ingredient.eggs: 2 units
+Ingredient.flour: 120 grams
+Ingredient.baking powder: 0.5 units

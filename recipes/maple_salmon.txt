@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1021718-maple-baked-salmon
+Property.recipe_tags: seafood,guests,easy
+Property.recipe_mealtimes: dinner
+Ingredient.salmon: 400 grams
+Ingredient.maple syrup: 2 tablespoons
+Ingredient.whole grain dijon mustard: 2 tablespoons
+Ingredient.lemon: 1 units
+Ingredient.cilantro: 1 units

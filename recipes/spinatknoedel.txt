@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: chris kochtute
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.breadcubes: 180 grams
+Ingredient.sarah milk: 200 milliliters
+Ingredient.eggs: 1 units
+Ingredient.onion: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.parmesan: 40 grams
+Ingredient.butter: 80 grams
+Ingredient.lettuce: 1 units

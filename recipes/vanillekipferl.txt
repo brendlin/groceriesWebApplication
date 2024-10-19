@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: sarah laptop
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.flour: 250 units
+Ingredient.vanilla sugar: 2 units
+Ingredient.powdered sugar: 75 grams
+Ingredient.ground almonds: 100 grams
+Ingredient.butter: 200 grams
+Ingredient.sugar: 100 grams
+Ingredient.vanilla stalk: 2 units

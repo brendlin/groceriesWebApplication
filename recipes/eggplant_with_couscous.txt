@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: chris kochtute
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.eggplant: 2 units
+Ingredient.couscous: 200 grams
+Ingredient.lemon: 1 units
+Ingredient.garlic: 1 units
+Ingredient.dates: 8 units
+Ingredient.almonds: 30 grams
+Ingredient.pomegranate: 0.3 units
+Ingredient.ground cinnamon: 0.25 teaspoons
+Ingredient.cumin: 1 teaspoons
+Ingredient.mint: 1 units
+Ingredient.tahini: 2 tablespoons

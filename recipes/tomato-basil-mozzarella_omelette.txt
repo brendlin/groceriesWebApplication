@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 20
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy
+Property.recipe_mealtimes: breakfast,lunch
+Ingredient.tomatoes: 2 units
+Ingredient.basil: 1 units
+Ingredient.mozzarella, std: 1 units
+Ingredient.eggs: 6 units
+Ingredient.toast twins: 2 units

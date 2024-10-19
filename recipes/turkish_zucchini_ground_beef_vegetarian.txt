@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/807961184662690/Tuerkisches-Hackrezept.html
+Property.recipe_tags: vegetarian,pasta
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.spaghetti: 250 grams
+Ingredient.fake meat: 300 grams
+Ingredient.onion: 0.5 units
+Ingredient.greek joghurt: 100 grams
+Ingredient.garlic: 1 cloves
+Ingredient.cilantro: 1 units
+Ingredient.zucchini: 2 units

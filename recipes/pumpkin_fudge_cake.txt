@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1021648-pumpkin-fudge-torte
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.hokkaido: 1 units
+Ingredient.butter: 170 grams
+Ingredient.brown sugar: 275 grams
+Ingredient.cocoa: 45 grams
+Ingredient.eggs: 2 units
+Ingredient.flour: 95 grams
+Ingredient.cream: 240 milliliters
+Ingredient.powdered sugar: 30 grams
+Ingredient.vanilla extract: 1 teaspoons

@@ -1,0 +1,455 @@
+thread-locking fluid @ obi
+peanut butter @ rewe
+banana @ rewe
+eggs @ lidl
+sesame oil @ rewe
+tomatoes @ rewe
+toilet paper @ lidl
+kurt shampoo @ lidl
+burrata @ rewe
+smoked tofu @ rewe
+fake meat @ rewe
+pork belly @ rewe
+shitake mushrooms @ rewe
+spring onions @ lidl
+curly pasta @ rewe
+cilantro @ rewe
+ramen broth @ internet
+nori sheets @ rewe
+dried mushrooms @ rewe
+soy sauce @ lidl
+red beets @ lidl
+lime @ lidl
+sour creme @ lidl
+creme fraiche @ lidl
+sage @ rewe
+flour @ lidl
+honey @ rewe
+goat cheese @ lidl
+parmesan @ lidl
+lettuce @ lidl
+salad @ lidl
+toilet freshener balls @ lidl
+butter @ lidl
+cream @ lidl
+coffee @ rewe
+whole-grain pasta @ rewe
+cereal flakes with almonds @ lidl
+Tapatio @ rewe
+oatmeal @ lidl
+hokkaido @ lidl
+chorizo @ rewe
+mozzarella, std @ rewe
+buffola mozzarella @ rewe
+cocktail tomatoes @ rewe
+tortillas @ rewe
+cheddar cheese @ rewe
+chili @ rewe
+bulgur @ rewe
+carrots @ lidl
+mint @ rewe
+sriracha @ rewe
+maple syrup @ rewe
+salmon @ rewe
+paprika @ lidl
+sarah milk @ lidl
+oat milk @ lidl
+mineral water @ rewe
+baking powder @ lidl
+sugar @ lidl
+cooked ham @ rewe
+bacon @ lidl
+basil @ rewe
+toast twins @ rewe
+sarah ice cream @ rewe
+kurt ice cream @ rewe
+vacherin cheese, grated @ rewe
+gruyere cheese, grated @ rewe
+corn flour @ rewe
+white wine @ rewe
+pearl onions @ rewe
+baguette @ rewe
+joghurt @ rewe
+falafel mix @ rewe
+cucumber, small @ lidl
+couscous @ rewe
+vegetable broth @ lidl
+ecken @ lidl
+eggplant @ lidl
+teriyaki sauce @ rewe
+worcester sauce @ rewe
+bell pepper @ lidl
+ginger @ lidl
+mushrooms @ rewe
+rice @ lidl
+brown sugar @ rewe
+hoisin sauce @ rewe
+onion @ lidl
+chives @ rewe
+rice plates @ rewe
+glass noodles @ rewe
+shrimps, frozen @ rewe
+tomato paste @ lidl
+tomato sauce @ lidl
+beef broth @ lidl
+oregano @ lidl
+curly pasta, short @ rewe
+black beans, dry @ rewe
+fake bbq chicken meat @ rewe
+fake sausages @ rewe
+fake gyros meat @ rewe
+tortilla chips @ rewe
+red onion @ lidl
+chicken broth @ lidl
+dark chocolate @ lidl
+dishwashing detergent @ lidl
+pork shoulder @ rewe
+celery @ lidl
+red wine @ rewe
+canned/pak whole tomatoes @ lidl
+parpadelle @ rewe
+thyme @ rewe
+rosemary @ rewe
+bresaola @ rewe
+pine nuts @ lidl
+arugola @ lidl
+dried tomatoes @ rewe
+yeast @ lidl
+bok choi @ lidl
+chinese cabbage @ lidl
+camembert @ rewe
+nice bread @ bakery
+elstar apples @ rewe
+ganze mandel @ lidl
+sarah chocolate @ rewe
+femi baby @ budni
+black pepper corns @ lidl
+multivitamin tablets @ budni
+pears @ lidl
+brombeere acai @ rewe
+potatoes @ rewe
+coconut milk @ rewe
+thai curry paste @ rewe
+dried aprikots ungeschwefelt @ rewe
+ciabatta bread @ lidl
+pak chopped tomatoes @ rewe
+passierte tomatoes @ rewe
+corny choco mit milch @ rewe
+AAA batteries @ lidl
+kurt body soap @ lidl
+spinach frozen @ lidl
+risotto rice @ rewe
+toast bread @ lidl
+sarah muesli @ rewe
+mustard @ rewe
+chicken legs @ rewe
+bread flour @ rewe
+pecorino @ rewe
+rice vinegar @ rewe
+drink syrup @ rewe
+shallots @ lidl
+cumin @ lidl
+coriander seeds @ lidl
+red curry paste @ rewe
+ground cinnamon @ lidl
+cardamom @ lidl
+nutmeg @ lidl
+peanuts @ lidl
+tofu sausages @ rewe
+condensed milk @ rewe
+glass cleaner @ lidl
+hobnobs or leibniz @ rewe
+chocolate chip cookies @ rewe
+big white beans @ rewe
+ricotta @ rewe
+black forest ham @ rewe
+vanilla sugar @ lidl
+powdered sugar @ lidl
+vanilla stalk @ rewe
+handsoap @ lidl
+ketchup @ lidl
+salt @ lidl
+wine vinegar @ rewe
+macaroni @ rewe
+macaroni @ rewe
+bay leaves @ rewe
+breadcrumbs @ lidl
+turkey escalopes @ rewe
+chicken breasts @ rewe
+lasagne sheets @ rewe
+reblochon @ rewe
+reblochon @ rewe
+dried onions @ rewe
+garlic powder @ lidl
+coarse salt @ rewe
+sesame seeds @ lidl
+cream cheese @ rewe
+brussel sprouts @ lidl
+scamorza @ rewe
+mouthwash @ lidl
+lindt chocolate spread @ rewe
+kiwi @ lidl
+oreo cookies @ lidl
+quark @ lidl
+vanilla pudding powder @ lidl
+vanilla extract @ rewe
+cox orange apples @ rewe
+dishwasher tabs @ lidl
+grated mozarella @ lidl
+peperoni salami @ lidl
+garbage bags @ lidl
+almonds @ lidl
+chocolate nips @ lidl
+frozen acai berries @ rewe
+frozen blueberries @ lidl
+green asparagus @ rewe
+garam masala @ lidl
+five spice powder @ rewe
+lamb or duck meat @ rewe
+mixed mushrooms @ rewe
+fresh berries @ rewe
+feta cheese @ rewe
+pimientos de padron @ rewe
+cashew nuts @ lidl
+dates @ lidl
+chia seeds @ lidl
+cocoa @ rewe
+bell pepper long @ lidl
+cheese sausages @ lidl
+flash cards @ budni
+whole grain dijon mustard @ rewe
+frozen berries @ lidl
+white spaghetti @ rewe
+brown rice @ rewe
+greek joghurt @ rewe
+harissa @ rewe
+chewing gum @ rewe
+sports laundry detergent @ lidl
+chocolate drink powder @ lidl
+corn on the cob @ lidl
+meat for bbq @ lidl
+magnesium tables @ budni
+tumeric @ rewe
+chili powder @ lidl
+pizza rolls with filling @ rewe
+lemonade @ rewe
+skewers for bbq @ rewe
+small bell peppers @ lidl
+taleggio cheese @ rewe
+sandwich meat @ rewe
+pesto @ lidl
+baby spinach @ lidl
+tea @ rewe
+paper towels @ lidl
+bell pepper long and green @ lidl
+cucumber big @ lidl
+chocolate chips @ rewe
+toilet cleaner @ lidl
+fleur de sel @ rewe
+ground beef @ lidl
+cheese slices @ rewe
+bacon strips @ lidl
+hot-smoked salami @ lidl
+shrimps, fresh @ rewe
+estragon @ rewe
+kurt deodorant @ budni
+balsamico @ rewe
+whole chicken @ rewe
+grill vegetables @ lidl
+farfalle @ rewe
+zucchini @ lidl
+nice cheese for breakfast @ rewe
+nice ham for breakfast @ rewe
+beer @ rewe
+sun screen @ budni
+shaving razors @ budni
+pitted cherries in can or glas @ lidl
+polenta @ lidl
+vegetable oil @ lidl
+buttermilk @ lidl
+red food coloring @ lidl
+sugar snap peas @ lidl
+baby milk @ budni
+baby bottles @ budni
+baby nipples @ budni
+ear plugs @ budni
+fennel tea @ budni
+blueberries @ rewe
+baby frank schnuller @ budni
+hand cream @ apotheke
+coke @ lidl
+meatballs @ rewe
+garbage bags 10 l @ lidl
+salt sticks @ lidl
+smoked ham @ rewe
+nice bread or rolls @ bakery
+some bread @ lidl
+pickled jalapeno @ rewe
+pistachios @ lidl
+feta or goat cheese @ rewe
+orange @ lidl
+cheese (blue,feta,burrata...) @ rewe
+sweet potatoes @ lidl
+parsnips @ rewe
+croutons @ lidl
+fabric softener @ lidl
+ffp masks @ lidl
+meat(ham,sausg,balls,fake nugts) @ rewe
+salad veg(avs,bellpepr,cucmbr) @ rewe
+salad starch(brot,couscs,bulgr,rice) @ rewe
+basedahl ham @ rewe
+allzweckreiniger @ lidl
+cranberries in glas @ rewe
+washing detergent whites @ lidl
+washing detergents color @ lidl
+bread spread @ rewe
+yeast dough @ lidl
+chicken meat @ rewe
+(filled) fresh pasta @ rewe
+milchschnitten @ lidl
+little flat bread @ lidl
+button battery (CR2032) @ budni
+lightbulb (G9 2W=25W 200 lum) @ budni
+nail scissors @ budni
+little lunch @ budni
+pampers size 2 @ budni
+kalkreiniger @ lidl
+steak @ rewe
+french fries @ rewe
+suppengemuese @ rewe
+parsley @ rewe
+pampers size 3 @ lidl
+meat balls @ lidl
+grapes @ rewe
+frozen vegetable mix @ rewe
+curry powder @ rewe
+red lentils @ rewe
+green olives @ rewe
+pomegranate @ lidl
+pomegranate syrup @ rewe
+lamb cutlets @ rewe
+flowers @ lidl
+aaa rechargeable batteries @ budni
+quinoa @ rewe
+hazelnuts @ lidl
+almond mus @ rewe
+peanut oil @ rewe
+chopped almonds @ lidl
+pizza pack @ lidl
+sliced chorizo @ rewe
+aufbackbroetchen @ rewe
+baby veggie glas @ budni
+crackers @ rewe
+clementines @ lidl
+garbage bags 25 l @ lidl
+peanut butter (creamy) @ rewe
+razor sarah @ budni
+binder clips @ budni
+pork schnitzel @ rewe
+deodorant (old sp deep sea) @ budni
+strawberries @ rewe
+zwieback @ lidl
+sarah body soap @ rewe
+sarah body soap @ lidl
+lars tooth brush @ budni
+chlorine-free bleach @ rewe
+brokkoli @ lidl
+corn dinkel sticks @ budni
+gummi hosenband @ budni
+schmelzflocken @ rewe
+oralpaedon @ apotheke
+hipp rice cereal @ budni
+knollenselerie @ lidl
+fennel seeds @ rewe
+fennel @ lidl
+baby fruit glas @ budni
+kukident,coregatabs @ budni
+essigreiniger @ lidl
+folder, medium @ budni
+grill cheese @ lidl
+baby corn sticks @ budni
+baby rice crackers @ budni
+eisensaft @ budni
+dates with bacon @ rewe
+griesspudding @ rewe
+medjoul dates @ rewe
+rape oil @ lidl
+lars toothbrush @ budni
+chick peas @ rewe
+ @ 
+tahini @ rewe
+salty snacks @ rewe
+wet wipes @ lidl
+sponge @ lidl
+leeks @ lidl
+red pepper flakes @ rewe
+white beans @ rewe
+fresh herbs @ rewe
+old rolls @ lidl
+ground meat @ lidl
+corn can @ lidl
+toothpaste @ lidl
+fusilli @ lidl
+elmex gelee @ budni
+weleda butt cream @ budni
+tempo (tissues) @ lidl
+packing tape @ budni
+pampers size 4 @ budni
+potato dumpling mix @ rewe
+ziplock bags @ budni
+gallseife @ budni
+hummus @ rewe
+ground cloves @ lidl
+ground almonds @ lidl
+ready-made soup @ rewe
+raspberries @ rewe
+apfelmark @ lidl
+baby snacks @ budni
+cleaning vinegar @ lidl
+red cabbage pickled @ lidl
+corn starch @ lidl
+ready-made spaetzle @ rewe
+chestnuts @ rewe
+black face pencil @ rewe
+small wood pieces @ rewe
+joker @ lidl
+assorted cheese @ rewe
+oyster mushrooms @ rewe
+ritz crackers @ rewe
+ground ginger @ lidl
+cauliflower @ lidl
+orechiette @ lidl
+Easter stuff @ rewe
+orange juice @ rewe
+lingonberries @ lidl
+tissue box @ lidl
+green sanitary pads @ budni
+floss @ budni
+lars toothpaste @ budni
+blister bandaids @ budni
+oatly icecream @ rewe
+natron @ lidl
+cress @ lidl
+radishes @ lidl
+small diaper garbage bags @ budni
+puff pastry @ lidl
+red onion chutney @ rewe
+fresh goat cheese @ lidl
+schwarzkuemmel(nigella) @ rewe
+ras-el-hanout @ rewe
+gorgonzola @ rewe
+gerolsteiner @ rewe
+garlic paste @ rewe
+mixed nuts @ lidl
+apfelringe @ lidl
+frozen peas @ lidl
+anti-moth lavendar things @ budni
+pampers size 5 @ budni
+bagels @ rewe
+natron cleaner @ budni
+pancetta @ rewe
+Clotrimazole @ pharmacy
+wool detergent @ lidl
+anti-bacteria laundry detergent @ lidl
+breadcubes @ lidl
+baby carrots @ lidl

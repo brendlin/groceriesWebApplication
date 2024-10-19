@@ -1,0 +1,4 @@
+Property.cooktime_minutes: 15
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy
+Property.recipe_mealtimes: breakfast,lunch,dinner

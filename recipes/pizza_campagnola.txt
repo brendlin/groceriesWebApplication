@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: vetri pizza
+Property.recipe_tags: pizza,italian
+Property.recipe_mealtimes: dinner
+Ingredient.bread flour: 332 grams
+Ingredient.yeast: 2 grams
+Ingredient.buffola mozzarella: 2 units
+Ingredient.basil: 1 units
+Ingredient.garlic: 4 cloves
+Ingredient.tomatoes: 2 units
+Ingredient.tomato sauce: 1 units
+Ingredient.onion: 1 units
+Ingredient.oregano: 1 tablespoons

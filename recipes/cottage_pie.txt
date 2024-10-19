@@ -1,0 +1,21 @@
+Property.cooktime_minutes: 120
+Property.recipe_book: internet
+Property.recipe_url: https://www.bbcgoodfood.com/recipes/cottage-pie
+Property.recipe_tags: meat,guests
+Property.recipe_mealtimes: dinner
+Ingredient.olive oil: 1.5 tablespoons
+Ingredient.ground beef: 600 grams
+Ingredient.onion: 1 units
+Ingredient.carrots: 2 units
+Ingredient.garlic: 1 cloves
+Ingredient.tomato paste: 0.5 tablespoons
+Ingredient.beef broth: 3 tablespoons
+Ingredient.worcester sauce: 2 tablespoons
+Ingredient.thyme: 1 units
+Ingredient.bay leaves: 1 units
+Ingredient.potatoes: 900 grams
+Ingredient.sarah milk: 112 milliliters
+Ingredient.butter: 13 grams
+Ingredient.cheddar cheese: 100 grams
+Ingredient.nutmeg: 0.01 grams
+Ingredient.celery: 2 units

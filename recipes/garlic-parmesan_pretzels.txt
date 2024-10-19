@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 120
+Property.recipe_book: internet
+Property.recipe_url: https://gatherforbread.com/garlic-parmesan-soft-pretzels/
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.flour: 306 grams
+Ingredient.sarah milk: 237 milliliters
+Ingredient.yeast: 1 units
+Ingredient.brown sugar: 3 tablespoons
+Ingredient.butter: 70 grams
+Ingredient.baking powder: 1 units
+Ingredient.parmesan: 6 tablespoons
+Ingredient.garlic powder: 3 teaspoons
+Ingredient.oregano: 2 teaspoons

@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1022216-spaghetti-al-limone-with-shrimp
+Property.recipe_tags: seafood,italian,pasta
+Property.recipe_mealtimes: dinner
+Ingredient.white spaghetti: 250 grams
+Ingredient.shrimps, fresh: 250 grams
+Ingredient.olive oil: 0.125 cups
+Ingredient.lemon: 1 units
+Ingredient.estragon: 1 tablespoons
+Ingredient.white wine: 0.25 cups
+Ingredient.butter: 1.5 tablespoons
+Ingredient.parmesan: 40 grams

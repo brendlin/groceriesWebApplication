@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 50
+Property.recipe_book: internet
+Property.recipe_url: https://kuechenchaotin.de/thai-curry-kuerbissuppe/
+Property.recipe_tags: vegetarian,asian,soup
+Property.recipe_mealtimes: dinner
+Ingredient.hokkaido: 1 kilograms
+Ingredient.coconut milk: 800 milliliters
+Ingredient.lime: 1 units
+Ingredient.onion: 1 units
+Ingredient.ginger: 1 thumbs
+Ingredient.chili: 1 units
+Ingredient.thai curry paste: 3 tablespoons
+Ingredient.cilantro: 1 units

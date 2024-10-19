@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 80
+Property.recipe_book: internet
+Property.recipe_url: https://www.kochbar.de/rezept/404520/ELSAESSER-SPECKGUGELHOPF.html
+Property.recipe_tags: guests,meat,bread
+Property.recipe_mealtimes: breakfast,lunch,dinner,other
+Ingredient.flour: 500 grams
+Ingredient.yeast: 1 units
+Ingredient.sarah milk: 250 milliliters
+Ingredient.butter: 160 grams
+Ingredient.eggs: 1 units
+Ingredient.sugar: 1.5 tablespoons
+Ingredient.walnuts: 150 grams
+Ingredient.bacon: 250 grams

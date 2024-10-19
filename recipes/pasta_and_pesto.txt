@@ -1,0 +1,6 @@
+Property.cooktime_minutes: 20
+Property.recipe_book: no cookbook
+Property.recipe_tags: pasta,vegetarian,cheese
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.spaghetti: 250 grams
+Ingredient.pesto: 1 units

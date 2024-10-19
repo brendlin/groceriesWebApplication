@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: jamies ministry of food
+Property.recipe_tags: soup
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.carrots: 2 units
+Ingredient.celery: 2 units
+Ingredient.onion: 2 units
+Ingredient.garlic: 2 cloves
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.frozen peas: 800 grams
+Ingredient.mint: 1 units

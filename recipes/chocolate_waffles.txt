@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: waffle cookbook
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: breakfast,other
+Ingredient.dark chocolate: 50 grams
+Ingredient.butter: 150 grams
+Ingredient.sugar: 75 grams
+Ingredient.vanilla sugar: 0.5 units
+Ingredient.chili: 1 units
+Ingredient.eggs: 3 units
+Ingredient.flour: 250 grams
+Ingredient.baking powder: 1 units
+Ingredient.sarah milk: 125 milliliters

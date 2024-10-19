@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: yummy mami
+Property.recipe_tags: pasta
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.cauliflower: 200 grams
+Ingredient.brokkoli: 200 grams
+Ingredient.shallots: 2 units
+Ingredient.cooked ham: 200 grams
+Ingredient.vegetable broth: 1 tablespoons
+Ingredient.oat milk: 100 milliliters
+Ingredient.cream: 100 milliliters
+Ingredient.cilantro: 0.5 units
+Ingredient.orechiette: 400 grams
+Ingredient.parmesan: 30 grams

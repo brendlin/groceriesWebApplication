@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: internet
+Property.recipe_url: https://www.feastingathome.com/beet-salad-with-feta/
+Property.recipe_tags: vegetarian,salad
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.lettuce: 1 units
+Ingredient.red beets: 1 units
+Ingredient.feta or goat cheese: 1 units
+Ingredient.some bread: 1 units
+Ingredient.pistachios: 1 units
+Ingredient.cilantro: 1 units
+Ingredient.red onion: 1 units
+Ingredient.orange: 1 units

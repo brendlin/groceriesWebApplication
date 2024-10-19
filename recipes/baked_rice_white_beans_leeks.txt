@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1020273-baked-rice-with-white-beans-leeks-and-lemon
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.leeks: 4 units
+Ingredient.lemon: 1 units
+Ingredient.almonds: 0.25 cups
+Ingredient.red pepper flakes: 0.5 teaspoons
+Ingredient.rice: 1.5 cups
+Ingredient.white beans: 425 grams
+Ingredient.parmesan: 0.5 cups
+Ingredient.fresh herbs: 0.25 cups

@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: jamies ministry of food
+Property.recipe_tags: soup,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.carrots: 2 units
+Ingredient.celery: 2 units
+Ingredient.onion: 2 units
+Ingredient.garlic: 2 units
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.canned/pak whole tomatoes: 800 grams
+Ingredient.tomatoes: 6 units
+Ingredient.basil: 1 units

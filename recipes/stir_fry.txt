@@ -1,0 +1,17 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian,asian
+Property.recipe_mealtimes: dinner
+Ingredient.rice: 300 grams
+Ingredient.smoked tofu: 2 units
+Ingredient.mushrooms: 200 grams
+Ingredient.bell pepper: 2 units
+Ingredient.ginger: 1 thumbs
+Ingredient.garlic: 3 cloves
+Ingredient.spring onions: 3 units
+Ingredient.brown sugar: 2 tablespoons
+Ingredient.teriyaki sauce: 2 tablespoons
+Ingredient.hoisin sauce: 2 tablespoons
+Ingredient.soy sauce: 2 tablespoons
+Ingredient.sesame oil: 3 tablespoons
+Ingredient.onion: 1 units

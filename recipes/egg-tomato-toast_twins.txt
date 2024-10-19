@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.toast twins: 4 units
+Ingredient.tomatoes: 1 units
+Ingredient.eggs: 4 units
+Ingredient.spring onions: 2 units
+Ingredient.butter: 30 grams

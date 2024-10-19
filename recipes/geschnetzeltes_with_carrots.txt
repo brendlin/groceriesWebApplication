@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: Yummy Mami
+Property.recipe_tags: meat
+Property.recipe_mealtimes: dinner
+Ingredient.rice: 150 grams
+Ingredient.carrots: 700 grams
+Ingredient.shallots: 2 units
+Ingredient.parsley: 1 units
+Ingredient.chicken breasts: 400 grams
+Ingredient.flour: 2 tablespoons
+Ingredient.rape oil: 2 tablespoons
+Ingredient.cream: 100 milliliters
+Ingredient.sarah milk: 100 milliliters
+Ingredient.chicken broth: 1 tablespoons
+Ingredient.butter: 1 tablespoons

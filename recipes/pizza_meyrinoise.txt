@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: pizza,italian
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 232 grams
+Ingredient.yeast: 2 grams
+Ingredient.ricotta: 1 units
+Ingredient.eggplant: 1 units
+Ingredient.black forest ham: 1 units
+Ingredient.tomato sauce: 1 units
+Ingredient.onion: 1 units
+Ingredient.garlic: 3 cloves
+Ingredient.mozzarella, std: 2 units
+Ingredient.parmesan: 30 grams

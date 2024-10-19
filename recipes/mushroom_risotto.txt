@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 50
+Property.recipe_book: chris kochtute
+Property.recipe_tags: vegetarian,rice,italian
+Property.recipe_mealtimes: dinner
+Ingredient.risotto rice: 250 grams
+Ingredient.vegetable broth: 3 tablespoons
+Ingredient.dried mushrooms: 10 grams
+Ingredient.mushrooms: 200 grams
+Ingredient.toast bread: 1 units
+Ingredient.thyme: 1 units
+Ingredient.butter: 40 grams
+Ingredient.parmesan: 80 grams
+Ingredient.onion: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.white wine: 200 milliliters

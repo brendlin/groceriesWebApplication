@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/1139811220196117/Russischer-Streuselkuchen.html
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.flour: 500 units
+Ingredient.baking powder: 1 units
+Ingredient.butter: 325 grams
+Ingredient.sugar: 325 grams
+Ingredient.eggs: 5 units
+Ingredient.cocoa: 50 grams
+Ingredient.lemon: 1 units
+Ingredient.vanilla sugar: 1 units
+Ingredient.vanilla pudding powder: 1 units
+Ingredient.quark: 500 grams

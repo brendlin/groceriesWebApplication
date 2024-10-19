@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: jamies ministry of food
+Property.recipe_tags: soup
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.carrots: 2 units
+Ingredient.celery: 2 units
+Ingredient.onion: 2 units
+Ingredient.parsnips: 800 grams
+Ingredient.ginger: 1 thumbs
+Ingredient.garlic: 2 cloves
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.cilantro: 1 units

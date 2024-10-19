@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: meat,italian
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.ciabatta bread: 1 units
+Ingredient.taleggio cheese: 1 units
+Ingredient.bell pepper: 1 units
+Ingredient.sandwich meat: 1 units
+Ingredient.arugola: 1 units
+Ingredient.pesto: 1 units

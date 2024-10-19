@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: simple
+Property.recipe_tags: soup,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.onion: 1 units
+Ingredient.curry powder: 1 tablespoons
+Ingredient.chili: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.ginger: 1 thumbs
+Ingredient.red lentils: 150 grams
+Ingredient.pak chopped tomatoes: 400 grams
+Ingredient.cilantro: 1 units
+Ingredient.coconut milk: 400 milliliters

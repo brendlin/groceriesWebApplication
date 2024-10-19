@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: salad,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.lettuce: 1 units
+Ingredient.feta cheese: 1 units
+Ingredient.tomatoes: 2 units
+Ingredient.cucumber, small: 1 units
+Ingredient.some bread: 1 units
+Ingredient.red onion: 1 units
+Ingredient.pickled jalapeno: 4 units

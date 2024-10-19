@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/395561128288726/Alpenbrot.html
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.flour: 500 grams
+Ingredient.butter: 250 grams
+Ingredient.sugar: 250 grams
+Ingredient.eggs: 2 units
+Ingredient.baking powder: 1 teaspoons
+Ingredient.cocoa: 30 grams
+Ingredient.ground cinnamon: 1 messerspitze
+Ingredient.ground cloves: 1 messerspitze
+Ingredient.cardamom: 1 messerspitze

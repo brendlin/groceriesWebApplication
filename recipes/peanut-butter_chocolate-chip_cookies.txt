@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://handletheheat.com/peanut-butter-chocolate-chip-cookies/
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: other
+Ingredient.flour: 318 grams
+Ingredient.baking powder: 2 units
+Ingredient.butter: 113 grams
+Ingredient.peanut butter: 202 grams
+Ingredient.sugar: 100 grams
+Ingredient.brown sugar: 200 grams
+Ingredient.eggs: 3 units
+Ingredient.vanilla extract: 2 teaspoons
+Ingredient.dark chocolate: 340 grams

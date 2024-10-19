@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: mastering pasta
+Property.recipe_tags: pasta,vegetarian,cheese
+Property.recipe_mealtimes: dinner
+Ingredient.bread flour: 310 grams
+Ingredient.parmesan: 150 grams
+Ingredient.pecorino: 30 grams
+Ingredient.butter: 20 grams
+Ingredient.black pepper corns: 2 tablespoons

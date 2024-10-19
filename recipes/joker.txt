@@ -1,0 +1,5 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: no cookbook
+Property.recipe_tags: joker
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.joker: 1 units

@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: yummy mami
+Property.recipe_tags: meat,guests
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.potatoes: 500 grams
+Ingredient.eggs: 3 units
+Ingredient.old rolls: 2 units
+Ingredient.oat milk: 300 milliliters
+Ingredient.bell pepper: 1 units
+Ingredient.onion: 2 units
+Ingredient.parsley: 0.5 units
+Ingredient.ground meat: 600 grams
+Ingredient.corn can: 200 grams
+Ingredient.mustard: 1 tablespoons
+Ingredient.butter: 1 tablespoons
+Ingredient.breadcrumbs: 2 tablespoons

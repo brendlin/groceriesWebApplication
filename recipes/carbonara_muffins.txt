@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/2068801334506662/Spaghetti-Carbonara-Muffins.html
+Property.recipe_tags: meat,guests
+Property.recipe_mealtimes: lunch,dinner,other
+Ingredient.white spaghetti: 250 grams
+Ingredient.bacon: 70 grams
+Ingredient.shallots: 1 units
+Ingredient.parmesan: 100 grams
+Ingredient.eggs: 3 units
+Ingredient.cream: 200 milliliters

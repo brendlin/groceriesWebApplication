@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: Vetri Pizza
+Property.recipe_tags: italian,meat
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 330 grams
+Ingredient.yeast: 2 grams
+Ingredient.creme fraiche: 1 units
+Ingredient.arugola: 1 units
+Ingredient.bresaola: 1 units
+Ingredient.mozzarella, std: 2 units
+Ingredient.pine nuts: 1 units
+Ingredient.dried tomatoes: 10 units
+Ingredient.parmesan: 50 grams

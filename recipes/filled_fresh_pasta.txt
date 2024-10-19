@@ -1,0 +1,6 @@
+Property.cooktime_minutes: 10
+Property.recipe_book: no cookbook
+Property.recipe_tags: pasta,italian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.(filled) fresh pasta: 1 units
+Ingredient.tomatoes: 2 units

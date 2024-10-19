@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 50
+Property.recipe_book: jamie's italy
+Property.recipe_tags: vegetarian,pasta,italian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.eggplant: 2 units
+Ingredient.chili: 1 units
+Ingredient.basil: 1 units
+Ingredient.oregano: 1 tablespoons
+Ingredient.wine vinegar: 1 teaspoons
+Ingredient.pak chopped tomatoes: 800 grams
+Ingredient.ricotta: 150 grams
+Ingredient.spaghetti: 250 grams
+Ingredient.parmesan: 20 grams

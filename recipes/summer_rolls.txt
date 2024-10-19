@@ -1,0 +1,17 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/2817731433772466/Vietnamesische-Sommerrollen.html
+Property.recipe_tags: seafood,asian,easy
+Property.recipe_mealtimes: dinner
+Ingredient.rice plates: 8 units
+Ingredient.hoisin sauce: 4 tablespoons
+Ingredient.shrimps, frozen: 250 grams
+Ingredient.glass noodles: 100 grams
+Ingredient.lettuce: 100 grams
+Ingredient.garlic: 3 cloves
+Ingredient.sesame oil: 2 tablespoons
+Ingredient.teriyaki sauce: 2 tablespoons
+Ingredient.chives: 1 units
+Ingredient.mint: 1 units
+Ingredient.cilantro: 1 units
+Ingredient.cucumber, small: 1 units

@@ -1,0 +1,8 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian,bread
+Property.recipe_mealtimes: lunch,breakfast,dinner
+Ingredient.butter: 1 units
+Ingredient.basil: 1 units
+Ingredient.tomato paste: 140 grams
+Ingredient.garlic: 4 cloves

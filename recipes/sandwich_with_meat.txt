@@ -1,0 +1,8 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: bread
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.nice bread or rolls: 1 units
+Ingredient.meat(ham,sausg,balls,fake nugts): 1 units
+Ingredient.salad veg(avs,bellpepr,cucmbr): 1 units
+Ingredient.butter: 30 grams

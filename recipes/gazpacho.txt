@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1017577-best-gazpacho
+Property.recipe_tags: easy,vegetarian,italian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.canned/pak whole tomatoes: 1000 grams
+Ingredient.bell pepper long and green: 1 units
+Ingredient.cucumber big: 1 units
+Ingredient.onion: 1 units
+Ingredient.garlic: 1 cloves
+Ingredient.wine vinegar: 4 teaspoons
+Ingredient.olive oil: 125 milliliters

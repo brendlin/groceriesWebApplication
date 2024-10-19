@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: raclette cookbook
+Property.recipe_tags: meat,asian,guests
+Property.recipe_mealtimes: dinner,other
+Ingredient.chicken breasts: 600 grams
+Ingredient.lemon: 1 units
+Ingredient.ginger: 1 thumbs
+Ingredient.garlic: 2 cloves
+Ingredient.chili: 1 units
+Ingredient.cumin: 1 teaspoons
+Ingredient.coriander seeds: 1 teaspoons
+Ingredient.tumeric: 1 teaspoons
+Ingredient.chili powder: 0.5 teaspoons
+Ingredient.tomato paste: 2 teaspoons
+Ingredient.joghurt: 500 grams
+Ingredient.mint: 1 units

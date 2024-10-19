@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: jamie's america
+Property.recipe_tags: vegetarian,cheese
+Property.recipe_mealtimes: dinner
+Ingredient.butter: 45 grams
+Ingredient.flour: 3 tablespoons
+Ingredient.garlic: 10 cloves
+Ingredient.bay leaves: 6 units
+Ingredient.sarah milk: 1000 milliliters
+Ingredient.macaroni: 600 grams
+Ingredient.tomatoes: 8 units
+Ingredient.cheddar cheese: 150 grams
+Ingredient.parmesan: 100 grams
+Ingredient.thyme: 1 teaspoons
+Ingredient.breadcrumbs: 150 grams

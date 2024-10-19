@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1022085-spiced-salmon-with-sugar-snap-peas-and-red-onion
+Property.recipe_tags: seafood,guests,easy
+Property.recipe_mealtimes: dinner
+Ingredient.salmon: 400 grams
+Ingredient.green asparagus: 300 grams
+Ingredient.red onion: 1 units
+Ingredient.lime: 1 units
+Ingredient.cilantro: 1 units
+Ingredient.mint: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.garam masala: 1 teaspoons

@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 50
+Property.recipe_book: no cookbook
+Property.recipe_tags: pasta,vegetarian,cheese
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 400 grams
+Ingredient.eggs: 4 units
+Ingredient.spinach frozen: 200 units
+Ingredient.butter: 50 grams
+Ingredient.gruyere cheese, grated: 100 grams
+Ingredient.onion: 2 units

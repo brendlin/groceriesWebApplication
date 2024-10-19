@@ -1,0 +1,17 @@
+Property.cooktime_minutes: 180
+Property.recipe_book: internet
+Property.recipe_url: https://www.spoonforkbacon.com/braised-pork-ragu-over-pappardelle/
+Property.recipe_tags: italian,meat,pasta
+Property.recipe_mealtimes: dinner
+Ingredient.pork shoulder: 500 grams
+Ingredient.onion: 1 units
+Ingredient.carrots: 1 units
+Ingredient.celery: 1 units
+Ingredient.garlic: 1 cloves
+Ingredient.thyme: 1 tablespoons
+Ingredient.sage: 1 teaspoons
+Ingredient.rosemary: 1 teaspoons
+Ingredient.tomato paste: 1 tablespoons
+Ingredient.red wine: 150 milliliters
+Ingredient.canned/pak whole tomatoes: 400 milliliters
+Ingredient.parpadelle: 500 grams

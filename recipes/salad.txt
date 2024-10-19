@@ -1,0 +1,5 @@
+Property.cooktime_minutes: 15
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.salad: 1 units

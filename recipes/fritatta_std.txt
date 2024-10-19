@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.thekitchn.com/how-to-make-a-frittata-cooking-lessons-from-the-kitchn-170717
+Property.recipe_tags: easy,cheese
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.potatoes: 2 units
+Ingredient.eggs: 6 units
+Ingredient.cream: 60 milliliters
+Ingredient.bacon: 1 units
+Ingredient.baby spinach: 2 cups
+Ingredient.garlic: 2 cloves
+Ingredient.thyme: 2 teaspoons
+Ingredient.cheddar cheese: 1 cups

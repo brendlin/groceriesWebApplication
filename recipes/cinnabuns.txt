@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: no cookbook
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.flour: 500 grams
+Ingredient.butter: 113 grams
+Ingredient.sugar: 115 grams
+Ingredient.yeast: 1 units
+Ingredient.ground cinnamon: 1 tablespoons
+Ingredient.sarah milk: 250 milliliters

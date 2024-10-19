@@ -1,0 +1,18 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy
+Property.recipe_mealtimes: other
+Ingredient.banana: 5 units
+Ingredient.oat milk: 4 units
+Ingredient.sarah milk: 4 units
+Ingredient.elstar apples: 5 units
+Ingredient.joghurt: 1 units
+Ingredient.peanut butter: 1 units
+Ingredient.toast twins: 1 units
+Ingredient.brombeere acai: 2 units
+Ingredient.tomatoes: 6 units
+Ingredient.eggs: 6 units
+Ingredient.some bread: 1 units
+Ingredient.sarah chocolate: 5 units
+Ingredient.ganze mandel: 5 units
+Ingredient.toilet paper: 1 units

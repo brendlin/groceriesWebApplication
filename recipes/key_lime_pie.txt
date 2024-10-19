@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.bbcgoodfood.com/recipes/key-lime-pie-1
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.hobnobs or leibniz: 300 grams
+Ingredient.butter: 150 grams
+Ingredient.condensed milk: 397 grams
+Ingredient.eggs: 3 units
+Ingredient.lime: 4 units
+Ingredient.cream: 300 milliliters

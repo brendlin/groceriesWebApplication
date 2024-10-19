@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.theguardian.com/lifeandstyle/wordofmouth/2012/may/10/how-to-cook-perfect-spaghetti-carbonara
+Property.recipe_tags: pasta,italian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.garlic: 1 cloves
+Ingredient.spaghetti: 250 grams
+Ingredient.eggs: 3 units
+Ingredient.pecorino: 25 grams
+Ingredient.parmesan: 25 grams
+Ingredient.bacon: 100 grams

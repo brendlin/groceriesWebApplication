@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1019473-chocolate-cream-pie-with-oreo-crust
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.oreo cookies: 400 grams
+Ingredient.butter: 80 grams
+Ingredient.sugar: 100 grams
+Ingredient.corn starch: 3 tablespoons
+Ingredient.cocoa: 2 tablespoons
+Ingredient.sarah milk: 720 milliliters
+Ingredient.eggs: 6 units
+Ingredient.dark chocolate: 225 grams
+Ingredient.vanilla extract: 1 teaspoons
+Ingredient.cream: 240 milliliters
+Ingredient.powdered sugar: 1 tablespoons

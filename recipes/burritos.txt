@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian,mexican
+Property.recipe_mealtimes: dinner
+Ingredient.tortillas: 7 units
+Ingredient.sour creme: 1 units
+Ingredient.avocado: 1 units
+Ingredient.red onion: 2 units
+Ingredient.fake bbq chicken meat: 1 units
+Ingredient.cilantro: 1 units
+Ingredient.cheddar cheese: 100 grams
+Ingredient.rice: 200 grams
+Ingredient.black beans, dry: 100 grams
+Ingredient.tapatio: 4 tablespoons

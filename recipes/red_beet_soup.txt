@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: internet
+Property.recipe_url: https://www.fitforfun.de/rezepte/schnelle-rote-bete-suppe
+Property.recipe_tags: soup,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.onion: 1 units
+Ingredient.garlic: 1 cloves
+Ingredient.ginger: 0.5 thumbs
+Ingredient.potatoes: 150 grams
+Ingredient.red beets: 500 grams
+Ingredient.cream: 150 milliliters
+Ingredient.greek joghurt: 4 tablespoons
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.pistachios: 6 tablespoons

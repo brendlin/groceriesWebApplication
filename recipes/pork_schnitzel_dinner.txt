@@ -1,0 +1,7 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy
+Property.recipe_mealtimes: dinner
+Ingredient.pork schnitzel: 1 units
+Ingredient.breadcrumbs: 1 units
+Ingredient.french fries: 1 units

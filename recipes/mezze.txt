@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: chris kochtute
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.eggplant: 600 grams
+Ingredient.lemon: 1 units
+Ingredient.tahini: 60 grams
+Ingredient.garlic: 2 cloves
+Ingredient.bell pepper: 1 units
+Ingredient.walnuts: 50 grams
+Ingredient.breadcrumbs: 3 tablespoons
+Ingredient.pomegranate syrup: 30 milliliters
+Ingredient.harissa: 0.75 teaspoons
+Ingredient.flour: 300 grams
+Ingredient.yeast: 0.3 units
+Ingredient.baking powder: 0.3 units

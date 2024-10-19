@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: internet
+Property.recipe_url: https://www.allrecipes.com/recipe/21014/good-old-fashioned-pancakes/
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: breakfast
+Ingredient.flour: 1.5 cups
+Ingredient.baking powder: 3.5 teaspoons
+Ingredient.salt: 1 teaspoons
+Ingredient.sugar: 1 tablespoons
+Ingredient.sarah milk: 1.25 cups
+Ingredient.eggs: 1 units
+Ingredient.butter: 3 tablespoons

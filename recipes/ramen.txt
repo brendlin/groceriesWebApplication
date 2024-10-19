@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: meat,pasta,asian,guests
+Property.recipe_mealtimes: dinner
+Ingredient.ramen broth: 2 units
+Ingredient.curly pasta: 250 grams
+Ingredient.pork belly: 2 units
+Ingredient.shitake mushrooms: 200 grams
+Ingredient.spring onions: 2 units
+Ingredient.nori sheets: 2 units
+Ingredient.eggs: 2 units
+Ingredient.cilantro: 0.5 units
+Ingredient.dried mushrooms: 10 grams
+Ingredient.soy sauce: 5 tablespoons
+Ingredient.sesame oil: 2 tablespoons

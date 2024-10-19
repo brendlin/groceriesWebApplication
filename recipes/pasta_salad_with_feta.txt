@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: internet
+Property.recipe_url: https://www.chefkoch.de/rezepte/1186971224658128/Nudelsalat-mit-getrockneten-Tomaten-Pinienkernen-Schafskaese-und-Basilikum.html
+Property.recipe_tags: vegetarian,pasta,italian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.farfalle: 250 grams
+Ingredient.feta cheese: 100 grams
+Ingredient.pine nuts: 50 grams
+Ingredient.dried tomatoes: 100 grams
+Ingredient.basil: 15 grams
+Ingredient.olive oil: 25 milliliters
+Ingredient.garlic: 1 cloves

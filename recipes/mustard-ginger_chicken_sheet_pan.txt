@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 50
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1021476-sheet-pan-scallion-chicken-with-bok-choy
+Property.recipe_tags: meat, asian, guests
+Property.recipe_mealtimes: dinner
+Ingredient.spring onions: 4 units
+Ingredient.mustard: 3 tablespoons
+Ingredient.garlic: 2 cloves
+Ingredient.soy sauce: 1 tablespoons
+Ingredient.bok choi: 700 grams
+Ingredient.chicken legs: 4 units
+Ingredient.lemon: 1 units
+Ingredient.ginger: 1 thumbs
+Ingredient.brown sugar: 2 tablespoons

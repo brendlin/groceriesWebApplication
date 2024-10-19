@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: Ramsey Quick&Delicious
+Property.recipe_tags: vegetarian,guests
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.puff pastry: 600 grams
+Ingredient.cream cheese: 250 grams
+Ingredient.red onion chutney: 150 grams
+Ingredient.red beets: 400 grams
+Ingredient.thyme: 1 units
+Ingredient.fresh goat cheese: 120 grams
+Ingredient.honey: 1 tablespoons
+Ingredient.eggs: 1 units
+Ingredient.walnuts: 50 grams
+Ingredient.arugola: 120 grams
+Ingredient.pears: 1 units
+Ingredient.schwarzkuemmel(nigella): 1 teaspoons

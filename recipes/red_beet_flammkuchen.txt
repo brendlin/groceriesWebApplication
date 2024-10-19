@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: chris kochtute
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 300 grams
+Ingredient.creme fraiche: 150 grams
+Ingredient.walnuts: 100 grams
+Ingredient.goat cheese: 1 units
+Ingredient.red beets: 1 units
+Ingredient.sage: 1 units
+Ingredient.honey: 4 tablespoons

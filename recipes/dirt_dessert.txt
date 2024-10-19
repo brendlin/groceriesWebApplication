@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: sweet
+Property.recipe_mealtimes: other
+Ingredient.sarah milk: 2 tablespoons
+Ingredient.vanilla pudding powder: 2 units
+Ingredient.quark: 500 grams
+Ingredient.cream: 400 milliliters
+Ingredient.sugar: 2 tablespoons
+Ingredient.oreo cookies: 2 units

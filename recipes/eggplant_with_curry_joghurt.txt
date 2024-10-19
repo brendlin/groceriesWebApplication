@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: simple
+Property.recipe_tags: vegetarian,guests
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.eggplant: 1100 grams
+Ingredient.peanut oil: 6.5 tablespoons
+Ingredient.greek joghurt: 200 grams
+Ingredient.curry powder: 2 teaspoons
+Ingredient.tumeric: 0.25 teaspoons
+Ingredient.lime: 1 units
+Ingredient.onion: 1 units
+Ingredient.chopped almonds: 30 grams
+Ingredient.cumin: 0.5 teaspoons
+Ingredient.coriander seeds: 0.5 teaspoons
+Ingredient.pomegranate: 1 units

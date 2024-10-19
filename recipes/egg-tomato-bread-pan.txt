@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: vegetarian,easy
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.ciabatta bread: 1 units
+Ingredient.eggs: 4 units
+Ingredient.pak chopped tomatoes: 2 units
+Ingredient.garlic: 2 cloves
+Ingredient.onion: 1 units

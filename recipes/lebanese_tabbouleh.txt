@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1012585-lebanese-tabbouleh
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.bulgur: 0.25 cups
+Ingredient.garlic: 1 cloves
+Ingredient.lemon: 2 units
+Ingredient.mint: 0.25 cups
+Ingredient.tomatoes: 250 grams
+Ingredient.spring onions: 4 units
+Ingredient.cilantro: 3 units
+Ingredient.lettuce: 1 units

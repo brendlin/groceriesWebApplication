@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: no cookbook
+Property.recipe_tags: pasta,meat,cheese
+Property.recipe_mealtimes: dinner
+Ingredient.curly pasta, short: 500 grams
+Ingredient.cream: 200 milliliters
+Ingredient.eggs: 3 units
+Ingredient.tomatoes: 4 units
+Ingredient.bacon: 1 units
+Ingredient.mozzarella, std: 2 units
+Ingredient.parmesan: 50 grams
+Ingredient.garlic: 3 units

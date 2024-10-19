@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: chris kochtute
+Property.recipe_url: https://www.chriskochtuete.de/featured_item/hummus-champignons/
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.chick peas: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.lemon: 1 units
+Ingredient.tahini: 60 grams
+Ingredient.mushrooms: 250 grams
+Ingredient.thyme: 1 units
+Ingredient.onion: 1 units
+Ingredient.little flat bread: 3 units

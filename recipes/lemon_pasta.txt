@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 70
+Property.recipe_book: mastering pasta
+Property.recipe_tags: vegetarian,pasta,italian
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 300 grams
+Ingredient.eggs: 3 units
+Ingredient.lemon: 2 units
+Ingredient.butter: 150 grams
+Ingredient.mint: 1 units
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.parmesan: 30 grams

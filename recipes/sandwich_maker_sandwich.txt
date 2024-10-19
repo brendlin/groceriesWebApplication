@@ -1,0 +1,8 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: bread
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.toast bread: 1 units
+Ingredient.cheese slices: 1 units
+Ingredient.tomatoes: 1 units
+Ingredient.nice ham for breakfast: 1 units

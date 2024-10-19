@@ -1,0 +1,11 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: chris kochtute
+Property.recipe_tags: easy,vegetarian
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 280 grams
+Ingredient.creme fraiche: 1 units
+Ingredient.pears: 2 units
+Ingredient.sage: 1 units
+Ingredient.goat cheese: 1 units
+Ingredient.walnuts: 100 grams
+Ingredient.honey: 4 tablespoons

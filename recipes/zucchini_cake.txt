@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 120
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1023356-chocolate-zucchini-loaf-cake
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: breakfast,other
+Ingredient.zucchini: 2 units
+Ingredient.eggs: 2 units
+Ingredient.brown sugar: 330 grams
+Ingredient.rape oil: 180 milliliters
+Ingredient.vanilla extract: 2 teaspoons
+Ingredient.coarse salt: 1 teaspoons
+Ingredient.flour: 230 grams
+Ingredient.baking powder: 1 units
+Ingredient.dark chocolate: 180 grams
+Ingredient.cocoa: 65 grams

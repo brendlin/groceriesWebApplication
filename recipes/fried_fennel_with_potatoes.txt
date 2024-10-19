@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 75
+Property.recipe_book: yummy mami
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.potatoes: 500 grams
+Ingredient.sesame seeds: 30 grams
+Ingredient.fennel: 500 grams
+Ingredient.thyme: 5 units
+Ingredient.rosemary: 5 units
+Ingredient.garlic: 1 cloves
+Ingredient.vegetable broth: 2 tablespoons
+Ingredient.parmesan: 50 grams

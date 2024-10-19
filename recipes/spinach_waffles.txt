@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: breifrei
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.baby spinach: 200 grams
+Ingredient.olive oil: 50 milliliters
+Ingredient.eggs: 3 units
+Ingredient.flour: 300 grams
+Ingredient.natron: 1 tablespoons
+Ingredient.feta cheese: 1 units
+Ingredient.cress: 1 units
+Ingredient.radishes: 5 units

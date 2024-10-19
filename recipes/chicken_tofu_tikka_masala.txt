@@ -1,0 +1,18 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: jamies ministry of food
+Property.recipe_tags: asian,spicy,rice
+Property.recipe_mealtimes: dinner
+Ingredient.chicken breasts: 4 units
+Ingredient.onion: 2 units
+Ingredient.chili: 1 units
+Ingredient.ginger: 1 thumbs
+Ingredient.cilantro: 1 units
+Ingredient.olive oil: 2 tablespoons
+Ingredient.butter: 1 tablespoons
+Ingredient.red curry paste: 140 grams
+Ingredient.pak chopped tomatoes: 400 grams
+Ingredient.coconut milk: 400 milliliters
+Ingredient.joghurt: 200 grams
+Ingredient.almonds: 50 grams
+Ingredient.lemon: 1 units
+Ingredient.rice: 250 grams

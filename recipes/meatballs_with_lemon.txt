@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: simple
+Property.recipe_tags: meat,guests
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.ground beef: 400 grams
+Ingredient.onion: 1 units
+Ingredient.breadcrumbs: 120 grams
+Ingredient.parsley: 20 grams
+Ingredient.eggs: 1 units
+Ingredient.knollenselerie: 1 units
+Ingredient.garlic: 3 units
+Ingredient.chicken broth: 2 tablespoons
+Ingredient.lemon: 2 units
+Ingredient.tumeric: 0.5 teaspoons
+Ingredient.fennel seeds: 1.5 teaspoons
+Ingredient.paprika: 1 teaspoons

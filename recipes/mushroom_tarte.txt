@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1021832-wild-mushroom-tart
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.flour: 255 grams
+Ingredient.butter: 255 grams
+Ingredient.onion: 1 units
+Ingredient.mixed mushrooms: 300 grams
+Ingredient.thyme: 1 teaspoons
+Ingredient.garlic: 2 cloves
+Ingredient.creme fraiche: 0.5 units
+Ingredient.cilantro: 1 units
+Ingredient.parmesan: 1 tablespoons

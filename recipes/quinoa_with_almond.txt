@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: deliciously ella
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.quinoa: 240 grams
+Ingredient.lemon: 4 units
+Ingredient.hazelnuts: 160 grams
+Ingredient.cucumber, small: 2 units
+Ingredient.arugola: 1 units
+Ingredient.almond mus: 8 tablespoons
+Ingredient.olive oil: 8 tablespoons
+Ingredient.chili: 2 tablespoons

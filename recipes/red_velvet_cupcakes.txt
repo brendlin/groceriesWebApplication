@@ -1,0 +1,18 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1021896-red-velvet-cupcakes
+Property.recipe_tags: sweet,cake
+Property.recipe_mealtimes: other
+Ingredient.flour: 320 grams
+Ingredient.sugar: 300 grams
+Ingredient.baking powder: 1 units
+Ingredient.cocoa: 1 teaspoons
+Ingredient.vegetable oil: 360 milliliters
+Ingredient.buttermilk: 240 milliliters
+Ingredient.eggs: 3 units
+Ingredient.red food coloring: 2 teaspoons
+Ingredient.rice vinegar: 1 teaspoons
+Ingredient.vanilla extract: 2 teaspoons
+Ingredient.cream cheese: 400 grams
+Ingredient.powdered sugar: 150 grams
+Ingredient.butter: 200 grams

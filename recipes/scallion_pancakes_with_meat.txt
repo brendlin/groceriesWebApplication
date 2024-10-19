@@ -1,0 +1,13 @@
+Property.cooktime_minutes: 120
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1020411-grilled-lamb-with-scallion-pancakes
+Property.recipe_tags: asian,meat
+Property.recipe_mealtimes: dinner
+Ingredient.spring onions: 9 units
+Ingredient.flour: 180 grams
+Ingredient.sesame oil: 1 tablespoons
+Ingredient.cucumber, small: 2 units
+Ingredient.hoisin sauce: 0.5 cups
+Ingredient.soy sauce: 1 tablespoons
+Ingredient.five spice powder: 1 tablespoons
+Ingredient.lamb or duck meat: 350 grams

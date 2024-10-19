@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: chris kochtute
+Property.recipe_tags: easy,vegetarian
+Property.recipe_mealtimes: dinner
+Ingredient.ecken: 4 units
+Ingredient.joghurt: 1 units
+Ingredient.garlic: 2 cloves
+Ingredient.eggplant: 1 units
+Ingredient.tomatoes: 1 units
+Ingredient.avocado: 1 units
+Ingredient.teriyaki sauce: 8 tablespoons
+Ingredient.worcester sauce: 8 tablespoons

@@ -1,0 +1,18 @@
+Property.cooktime_minutes: 45
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1019763-korean-barbecue-style-meatballs
+Property.recipe_tags: meat,guests,easy
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.ground beef: 400 grams
+Ingredient.spring onions: 0.5 cups
+Ingredient.brown sugar: 1 tablespoons
+Ingredient.ritz crackers: 0.5 cups
+Ingredient.sesame oil: 5 tablespoons
+Ingredient.soy sauce: 4 tablespoons
+Ingredient.garlic: 5 cloves
+Ingredient.ground ginger: 1 teaspoons
+Ingredient.rice: 200 grams
+Ingredient.tomatoes: 2 units
+Ingredient.lettuce: 1 units
+Ingredient.cucumber, small: 1 units
+Ingredient.rice vinegar: 4 tablespoons

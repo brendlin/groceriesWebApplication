@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: nytimes
+Property.recipe_url: https://cooking.nytimes.com/recipes/1019759-spicy-peanut-and-pumpkin-soup
+Property.recipe_tags: soup,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.onion: 2 units
+Ingredient.garlic: 4 cloves
+Ingredient.ginger: 1 thumbs
+Ingredient.chili: 1 units
+Ingredient.hokkaido: 1 units
+Ingredient.coconut milk: 400 milliliters
+Ingredient.peanut butter: 0.25 cups
+Ingredient.chives: 1 units
+Ingredient.creme fraiche: 1 units
+Ingredient.vegetable broth: 2 tablespoons

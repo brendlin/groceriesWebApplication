@@ -1,0 +1,7 @@
+Property.cooktime_minutes: 20
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian,cheese
+Property.recipe_mealtimes: breakfast
+Ingredient.burrata: 1 units
+Ingredient.tomatoes: 2 units
+Ingredient.toast twins: 3 units

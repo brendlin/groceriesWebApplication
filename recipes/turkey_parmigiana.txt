@@ -1,0 +1,16 @@
+Property.cooktime_minutes: 90
+Property.recipe_book: jamie's america
+Property.recipe_tags: guests,italian,meat
+Property.recipe_mealtimes: dinner
+Ingredient.basil: 1 units
+Ingredient.garlic: 3 cloves
+Ingredient.chili: 1 units
+Ingredient.pak chopped tomatoes: 800 grams
+Ingredient.breadcrumbs: 200 grams
+Ingredient.thyme: 1 teaspoons
+Ingredient.parmesan: 30 grams
+Ingredient.lemon: 1 units
+Ingredient.flour: 150 grams
+Ingredient.eggs: 2 units
+Ingredient.turkey escalopes: 400 grams
+Ingredient.buffola mozzarella: 2 units

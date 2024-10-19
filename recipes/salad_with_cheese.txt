@@ -1,0 +1,9 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: no cookbook
+Property.recipe_tags: salad,vegetarian
+Property.recipe_mealtimes: lunch,dinner
+Ingredient.lettuce: 1 units
+Ingredient.salad veg(avs,bellpepr,cucmbr): 1 units
+Ingredient.tomatoes: 1 units
+Ingredient.cheese (blue,feta,burrata...): 1 units
+Ingredient.salad starch(brot,couscs,bulgr,rice): 1 units

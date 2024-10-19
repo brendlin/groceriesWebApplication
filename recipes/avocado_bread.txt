@@ -1,0 +1,7 @@
+Property.cooktime_minutes: 20
+Property.recipe_book: no cookbook
+Property.recipe_tags: easy,vegetarian
+Property.recipe_mealtimes: breakfast,lunch,dinner
+Ingredient.nice bread: 1 units
+Ingredient.avocado: 2 units
+Ingredient.parmesan: 40 grams

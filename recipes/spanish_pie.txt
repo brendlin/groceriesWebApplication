@@ -1,0 +1,12 @@
+Property.cooktime_minutes: 60
+Property.recipe_book: no cookbook
+Property.recipe_tags: meat
+Property.recipe_mealtimes: dinner
+Ingredient.yeast dough: 500 grams
+Ingredient.onion: 2 units
+Ingredient.chicken meat: 500 grams
+Ingredient.bell pepper: 2 units
+Ingredient.tomatoes: 250 grams
+Ingredient.black forest ham: 50 grams
+Ingredient.garlic: 1 cloves
+Ingredient.eggs: 1 units

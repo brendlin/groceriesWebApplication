@@ -1,0 +1,14 @@
+Property.cooktime_minutes: 80
+Property.recipe_book: vegetarian cooking
+Property.recipe_tags: vegetarian
+Property.recipe_mealtimes: dinner
+Ingredient.flour: 280 grams
+Ingredient.butter: 175 grams
+Ingredient.bell pepper: 1 units
+Ingredient.hokkaido: 1 units
+Ingredient.dried tomatoes: 7 units
+Ingredient.pine nuts: 25 grams
+Ingredient.sarah milk: 300 milliliters
+Ingredient.cheddar cheese: 125 grams
+Ingredient.eggs: 2 units
+Ingredient.onion: 1 units

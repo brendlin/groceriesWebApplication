@@ -1,0 +1,15 @@
+Property.cooktime_minutes: 40
+Property.recipe_book: jamie's america
+Property.recipe_tags: asian,vegetarian,easy
+Property.recipe_mealtimes: dinner
+Ingredient.whole-grain pasta: 250 grams
+Ingredient.fake meat: 500 grams
+Ingredient.honey: 2 tablespoons
+Ingredient.chicken broth: 2 tablespoons
+Ingredient.spring onions: 2 units
+Ingredient.lime: 1 units
+Ingredient.chinese cabbage: 1 units
+Ingredient.bok choi: 1 units
+Ingredient.garlic: 4 cloves
+Ingredient.soy sauce: 3 tablespoons
+Ingredient.chili: 2 units

@@ -1,0 +1,10 @@
+Property.cooktime_minutes: 30
+Property.recipe_book: internet
+Property.recipe_url: https://breifreibaby.de/bananenwaffeln-ohne-zucker/
+Property.recipe_tags: sweet,cake,baby
+Property.recipe_mealtimes: breakfast,other
+Ingredient.eggs: 1 units
+Ingredient.banana: 1 units
+Ingredient.flour: 100 grams
+Ingredient.oat milk: 50 milliliters
+Ingredient.baking powder: 0.5 teaspoons

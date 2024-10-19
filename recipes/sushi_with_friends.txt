@@ -1,0 +1,4 @@
+Property.cooktime_minutes: 0
+Property.recipe_book: takeout
+Property.recipe_tags: takeout
+Property.recipe_mealtimes: lunch,dinner
